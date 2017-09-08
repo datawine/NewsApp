@@ -23,6 +23,10 @@
         <activity
             android:name=".view.BriefInfoActivity"
             android:label="@string/title_activity_brief_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.SplashActivity"
+            android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
