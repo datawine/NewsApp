@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.newsapp.view.PageListFragment;
+import com.example.newsapp.view.Brief.PageListFragment;
 
 /**
  * Created by junxian on 9/7/2017.

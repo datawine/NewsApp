@@ -17,15 +17,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.DetailInfoActivity"
+            android:name=".view.Detail.DetailInfoActivity"
             android:label="@string/title_activity_detail_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.BriefInfoActivity"
+            android:name=".view.Brief.BriefInfoActivity"
             android:label="@string/title_activity_brief_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".view.Splash.SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

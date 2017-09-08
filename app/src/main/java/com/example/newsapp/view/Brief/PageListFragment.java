@@ -1,4 +1,4 @@
-package com.example.newsapp.view;
+package com.example.newsapp.view.Brief;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,18 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.ListViewAdapter;
 import com.example.newsapp.singleitem.SingleListItem;
+import com.example.newsapp.view.Detail.DetailInfoActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * Created by junxian on 9/7/2017.
@@ -86,13 +85,15 @@ public class PageListFragment extends Fragment {
        mPullRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                             Intent intent = new Intent(getActivity(), DetailInfoActivity.class);
                             Bundle bundle=new Bundle();
-                            bundle.putString("title", mListItems.get(position - 1).map.get("Content").toString());
+                            bundle.putString("Category", mCategory);
+                            bundle.putString("Title", mListItems.get(position - 1).map.get("Content").toString());
                             intent.putExtras(bundle);
-                            startActivity(intent);
 
+                            startActivity(intent);
+//                            int forDetailCode = 1000;
+//                            startActivityForResult(intent, forDetailCode);
                         }
                     });
 

@@ -1,13 +1,12 @@
-package com.example.newsapp.view;
+package com.example.newsapp.view.Splash;
 
 import android.os.Bundle;
 
-import com.example.newsapp.MainActivity;
 import com.example.newsapp.R;
+import com.example.newsapp.view.Brief.BriefInfoActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 

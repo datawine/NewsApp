@@ -1,5 +1,6 @@
-package com.example.newsapp.view;
+package com.example.newsapp.view.Brief;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -25,6 +26,8 @@ public class BriefInfoActivity extends FragmentActivity
     private TabLayout tabLayout;
     private NavigationView mNavigationView;
     private String selectTitle;
+    private String[] category;
+    private int len;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,8 +35,8 @@ public class BriefInfoActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brief_info);
 
-        String[] category = {"推荐", "历史", "科技", "房产", "613", "地球", "人文", "时尚", "娱乐"};
-        int len = category.length;
+        String[] tmpcat = {"推荐", "历史", "科技", "房产", "613", "地球", "人文", "时尚", "娱乐"};
+        getCategory(tmpcat);
 
         pgAdapter = new PageListAdapter(getSupportFragmentManager(), this, len, category);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -71,5 +74,35 @@ public class BriefInfoActivity extends FragmentActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+/*
+    public void goDetail(String mCategory, String mtitle) {
+        Intent intent = new Intent(BriefInfoActivity.this, DetailInfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("Category", mCategory);
+        bundle.putString("Title", mtitle);
+        intent.putExtras(bundle);
+
+        int forDetailCode = 1000;
+        startActivityForResult(intent, forDetailCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        viewPager.setCurrentItem(category2index(data.getStringExtra("Category")));
+    }
+*/
+    public void getCategory(String[] cat) {
+        category = cat;
+        len = category.length;
+    }
+
+    public int category2index(String category) {
+        for (int i = 0; i < len; i ++) {
+            if (this.category[i] == category) {
+                return i;
+            }
+        }
+        return 0;
     }
 }
