@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailInfoActivity"
+            android:name=".view.DetailInfoActivity"
             android:label="@string/title_activity_detail_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".BriefInfoActivity"
+            android:name=".view.BriefInfoActivity"
             android:label="@string/title_activity_brief_info"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

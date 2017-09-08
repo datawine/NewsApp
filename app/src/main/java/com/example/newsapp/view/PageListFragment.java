@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +12,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.newsapp.BriefInfoActivity;
-import com.example.newsapp.DetailInfoActivity;
 import com.example.newsapp.R;
+import com.example.newsapp.adapter.ListViewAdapter;
+import com.example.newsapp.singleitem.SingleListItem;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by junxian on 9/7/2017.
@@ -34,10 +30,11 @@ import java.util.List;
 public class PageListFragment extends Fragment {
     public static final String CATEGORY = "CATEGORY";
     private String mCategory;
-    private LinkedList<String> mListItems;
+    private ArrayList<SingleListItem> mListItems;
     private PullToRefreshListView mPullRefreshListView;
-    private ArrayAdapter<String> mAdapter;
+    private ListViewAdapter mAdapter;
     private int mItemCount = 9;
+    HashMap<String, Object> map;
 
     public static PageListFragment newInstance(String category) {
         Bundle args = new Bundle();
@@ -60,8 +57,7 @@ public class PageListFragment extends Fragment {
         mPullRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
 
         initDatas();
-        //设置适配器
-        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.info_item , mListItems);
+        mAdapter = new ListViewAdapter(getActivity(), mListItems);
         mPullRefreshListView.setAdapter(mAdapter);
         // 设置监听事件
         mPullRefreshListView
@@ -93,7 +89,7 @@ public class PageListFragment extends Fragment {
 
                             Intent intent = new Intent(getActivity(), DetailInfoActivity.class);
                             Bundle bundle=new Bundle();
-                            bundle.putString("title", mListItems.get(position - 1).toString());
+                            bundle.putString("title", mListItems.get(position - 1).map.get("Content").toString());
                             intent.putExtras(bundle);
                             startActivity(intent);
 
@@ -103,15 +99,26 @@ public class PageListFragment extends Fragment {
         return view;
     }
 
-    private void initDatas()
-    {
+    private void initDatas() {
         // 初始化数据和数据源
-        mListItems = new LinkedList<String>();
+        mListItems = new ArrayList<SingleListItem>();
 
         for (int i = 0; i < mItemCount; i++)
         {
-            mListItems.add(mCategory + " " + i);
+            map = new HashMap<String, Object>();
+            map.put("Content", mCategory + " " + i);
+            if (i != 2)
+                mListItems.add(new SingleListItem("normal", map));
+            else
+                mListItems.add(new SingleListItem("shit", map));
         }
+    }
+
+    private void updateDatas() {
+        mItemCount ++;
+        map = new HashMap<String, Object>();
+        map.put("Content", mCategory + " " + mItemCount);
+        mListItems.add(new SingleListItem("normal", map));
     }
 
     private class GetDataTask extends AsyncTask<Void, Void, String>
@@ -132,7 +139,12 @@ public class PageListFragment extends Fragment {
         @Override
         protected void onPostExecute(String result)
         {
-            mListItems.add(result);
+            map = new HashMap<String, Object>();
+            map.put("Content", mCategory + " " + result);
+            if (mItemCount % 4 != 0)
+                mListItems.add(new SingleListItem("normal", map));
+            else
+                mListItems.add(new SingleListItem("shit", map));
             mAdapter.notifyDataSetChanged();
             // Call onRefreshComplete when the list has been refreshed.
             mPullRefreshListView.onRefreshComplete();
