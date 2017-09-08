@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail_info">DetailInfoActivity</string>
+    <string name="title_activity_brief_info">BriefInfoActivity</string>
+</resources>
