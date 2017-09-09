@@ -1,4 +1,4 @@
-package com.example.newsapp.view.Splash;
+package com.example.newsapp.view.mysplash;
 
 import android.os.Bundle;
 

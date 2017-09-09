@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.newsapp.view.Splash.SplashActivity;
+import com.example.newsapp.view.mysplash.SplashActivity;
 
 /**
  * Created by junxian on 9/7/2017.

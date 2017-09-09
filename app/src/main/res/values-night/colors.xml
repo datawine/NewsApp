@@ -2,6 +2,7 @@
 <resources>
     <color name="text">@android:color/white</color>
     <color name="background">@android:color/black</color>
+    <color name="tab">@android:color/holo_orange_dark</color>
     <color name="buttonBackground">@android:color/darker_gray</color>
 
     <color name="colorPrimary">@android:color/darker_gray</color>
