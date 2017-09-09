@@ -1,4 +1,4 @@
-package com.example.newsapp.view.Brief;
+package com.example.newsapp.view.briefinfo;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,7 +15,7 @@ import android.widget.ListView;
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.ListViewAdapter;
 import com.example.newsapp.singleitem.SingleListItem;
-import com.example.newsapp.view.Detail.DetailInfoActivity;
+import com.example.newsapp.view.detailinfo.DetailInfoActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 

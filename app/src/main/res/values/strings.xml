@@ -6,4 +6,5 @@
     <string name="title_activity_detail_info">DetailInfoActivity</string>
     <string name="title_activity_brief_info">BriefInfoActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_my_settings">MySettingsActivity</string>
 </resources>

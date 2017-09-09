@@ -3,7 +3,7 @@ package com.example.newsapp.view.Splash;
 import android.os.Bundle;
 
 import com.example.newsapp.R;
-import com.example.newsapp.view.Brief.BriefInfoActivity;
+import com.example.newsapp.view.briefinfo.BriefInfoActivity;
 
 import android.app.Activity;
 import android.content.Intent;

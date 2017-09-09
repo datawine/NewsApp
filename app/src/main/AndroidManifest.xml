@@ -3,6 +3,7 @@
     package="com.example.newsapp">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,16 +18,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.Detail.DetailInfoActivity"
+            android:name=".view.detailinfo.DetailInfoActivity"
             android:label="@string/title_activity_detail_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.Brief.BriefInfoActivity"
+            android:name=".view.briefinfo.BriefInfoActivity"
             android:label="@string/title_activity_brief_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.Splash.SplashActivity"
             android:label="@string/title_activity_splash"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.settings.MySettingsActivity"
+            android:label="@string/title_activity_my_settings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

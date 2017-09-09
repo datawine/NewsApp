@@ -1,4 +1,4 @@
-package com.example.newsapp.view.Brief;
+package com.example.newsapp.view.briefinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.PageListAdapter;
+import com.example.newsapp.view.settings.MySettingsActivity;
 
 /**
  * Created by junxian on 9/7/2017.
@@ -58,8 +59,8 @@ public class BriefInfoActivity extends FragmentActivity
             Toast.makeText(getApplicationContext(), id,
                     Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(BriefInfoActivity.this, MySettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
             Toast.makeText(getApplicationContext(), id,
                     Toast.LENGTH_SHORT).show();
