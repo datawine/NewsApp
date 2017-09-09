@@ -1,5 +1,6 @@
 package com.example.newsapp.view.detailinfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.newsapp.R;
+import com.example.newsapp.view.settings.MySettingsActivity;
 
 public class DetailInfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -64,8 +66,8 @@ public class DetailInfoActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), id,
                     Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(DetailInfoActivity.this, MySettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
             Toast.makeText(getApplicationContext(), id,
                     Toast.LENGTH_SHORT).show();
