@@ -26,6 +26,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.zip.Inflater;
 
@@ -36,7 +37,7 @@ public class ChangeTagActivity extends AppCompatActivity {
     private HashMap<String, Boolean> mShowSelected = new HashMap<String, Boolean>();
     private TagAdapter<String> mTagAdapter, mShowTagAdapter;
     private TagFlowLayout mTagFlowLayout, mShowFlowLayout;
-    private Button btn_add, btn_delete, btn_clear;
+    private Button btn_add, btn_delete, btn_clear_show, btn_clear_all;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,8 @@ public class ChangeTagActivity extends AppCompatActivity {
 
         btn_add = (Button) findViewById(R.id.btn_add_tag);
         btn_delete = (Button) findViewById(R.id.btn_delete_tag);
-        btn_clear = (Button) findViewById(R.id.btn_clear_tag);
+        btn_clear_show = (Button) findViewById(R.id.btn_clear_tag_show);
+        btn_clear_all = (Button) findViewById(R.id.btn_clear_tag_all);
 
         //增加
         btn_add.setOnClickListener(
@@ -91,10 +93,16 @@ public class ChangeTagActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         for (String key : mShowVals) {
                             if (mShowSelected.get(key)) {
-                                mShowVals.remove(key);
+                                Iterator iter = mShowVals.iterator();
+                                while (iter.hasNext()) {
+                                    if (iter.next().equals(key)) {
+                                        iter.remove();
+                                    }
+                                }
                                 mShowSelected.remove(key);
                             }
-                            mShowSelected.put(key, false);
+                            else
+                                mShowSelected.put(key, false);
                         }
                         mTagAdapter.notifyDataChanged();
                         mShowTagAdapter.notifyDataChanged();
@@ -102,7 +110,7 @@ public class ChangeTagActivity extends AppCompatActivity {
                 }
         );
 
-        btn_clear.setOnClickListener(
+        btn_clear_all.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -111,6 +119,18 @@ public class ChangeTagActivity extends AppCompatActivity {
                             mSelected.put(key, false);
                         }
                         mTagAdapter.notifyDataChanged();
+                    }
+                }
+        );
+
+        btn_clear_show.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Set<String> hs = mShowSelected.keySet();
+                        for (String key : hs) {
+                            mShowSelected.put(key, false);
+                        }
                         mShowTagAdapter.notifyDataChanged();
                     }
                 }

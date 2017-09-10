@@ -92,6 +92,7 @@ public class PageListFragment extends Fragment {
                             intent.putExtras(bundle);
 
                             startActivity(intent);
+
 //                            int forDetailCode = 1000;
 //                            startActivityForResult(intent, forDetailCode);
                         }

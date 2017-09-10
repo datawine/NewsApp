@@ -82,23 +82,7 @@ public class BriefInfoActivity extends FragmentActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-/*
-    public void goDetail(String mCategory, String mtitle) {
-        Intent intent = new Intent(BriefInfoActivity.this, DetailInfoActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("Category", mCategory);
-        bundle.putString("Title", mtitle);
-        intent.putExtras(bundle);
 
-        int forDetailCode = 1000;
-        startActivityForResult(intent, forDetailCode);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        viewPager.setCurrentItem(category2index(data.getStringExtra("Category")));
-    }
-*/
     public void getCategory(String[] cat) {
         category = cat;
         len = category.length;
