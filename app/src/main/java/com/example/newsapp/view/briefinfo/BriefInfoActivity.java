@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.PageListAdapter;
+import com.example.newsapp.view.settings.ChangeTagActivity;
 import com.example.newsapp.view.settings.MySettingsActivity;
 
 /**
@@ -36,8 +37,13 @@ public class BriefInfoActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brief_info);
 
+        // 这里加载当前类别
+
         String[] tmpcat = {"推荐", "历史", "科技", "房产", "613", "地球", "人文", "时尚", "娱乐"};
         getCategory(tmpcat);
+
+        //
+
 
         pgAdapter = new PageListAdapter(getSupportFragmentManager(), this, len, category);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -56,8 +62,8 @@ public class BriefInfoActivity extends FragmentActivity
         item.setChecked(false);
 
         if (id == R.id.nav_collection) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(BriefInfoActivity.this, ChangeTagActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(BriefInfoActivity.this, MySettingsActivity.class);
             startActivity(intent);

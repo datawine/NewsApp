@@ -38,8 +38,13 @@ public class DetailInfoActivity extends AppCompatActivity
         rtnBtn = (Button) findViewById(R.id.detail_return);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 
+        //这里是数据加载
+
         setArticleTitle(title);
         setContent("This is Content");
+
+        //
+
 
         mNavigationView.setNavigationItemSelectedListener(this);
         rtnBtn.setOnClickListener(new View.OnClickListener() {

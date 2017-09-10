@@ -32,6 +32,10 @@
         <activity
             android:name=".view.settings.MySettingsActivity"
             android:label="@string/title_activity_my_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.settings.ChangeTagActivity"
+            android:label="@string/title_activity_change_tag"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
