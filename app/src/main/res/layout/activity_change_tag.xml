@@ -22,6 +22,69 @@
 
     </LinearLayout>
 
-    <include layout="@layout/content_change_tag" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/tab">
+
+        <Button
+            android:id="@+id/btn_add_tag"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="添加"
+             />
+
+        <Button
+            android:id="@+id/btn_clear_tag"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="清空选中"
+            />
+
+        <Button
+            android:id="@+id/btn_delete_tag"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="删除分类"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tab">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="现有分类"
+            android:textSize="30dp"
+            android:textColor="@color/text"
+            />
+
+        <include layout="@layout/cur_change_tag" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/tab">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="所有分类"
+            android:textSize="30dp"
+            android:textColor="@color/text"
+            />
+
+        <include layout="@layout/content_change_tag" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
