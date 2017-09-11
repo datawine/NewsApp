@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="I:\java\NewsApp\pullToRefresh\src\main\shaders"/></dataSet><dataSet config="release"><source path="I:\java\NewsApp\pullToRefresh\src\release\shaders"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="/Users/leavan/learn/android/NewsApp/pullToRefresh/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/leavan/learn/android/NewsApp/pullToRefresh/src/release/shaders"/></dataSet></merger>
+>>>>>>> leavan

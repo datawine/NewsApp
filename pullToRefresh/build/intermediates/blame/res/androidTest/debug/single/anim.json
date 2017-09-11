@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
         "source": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
@@ -10,20 +11,58 @@
     {
         "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
         "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+=======
+        "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_in_from_bottom.xml",
+        "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/anim/slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_bottom.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_top.xml",
+        "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_top.xml"
+    },
+    {
+        "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_in_from_top.xml",
+        "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/anim/slide_in_from_top.xml"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+>>>>>>> leavan
     },
     {
         "merged": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
         "source": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
         "source": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+=======
+        "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_bottom.xml",
+        "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_top.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_top.xml"
+>>>>>>> leavan
     },
     {
         "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
         "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
         "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
     },
@@ -46,5 +85,9 @@
     {
         "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
         "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+=======
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_in_from_bottom.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/anim/slide_in_from_bottom.xml"
+>>>>>>> leavan
     }
 ]

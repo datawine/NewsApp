@@ -1,7 +1,12 @@
 [
     {
+<<<<<<< HEAD
         "merged": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
         "source": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+=======
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+>>>>>>> leavan
     },
     {
         "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
@@ -12,6 +17,7 @@
         "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
         "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
@@ -22,5 +28,17 @@
     {
         "merged": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
         "source": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+=======
+        "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/layout/pull_to_refresh_header_vertical.xml",
+        "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/layout/pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+>>>>>>> leavan
     }
 ]
