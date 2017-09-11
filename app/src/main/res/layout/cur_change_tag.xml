@@ -2,6 +2,7 @@
 <com.zhy.view.flowlayout.TagFlowLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/id_cur_flowlayout"
+    android:background="@drawable/text_tag_border"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="20dp">

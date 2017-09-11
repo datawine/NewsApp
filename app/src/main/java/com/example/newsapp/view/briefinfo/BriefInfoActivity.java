@@ -8,7 +8,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.newsapp.R;
@@ -29,9 +33,12 @@ public class BriefInfoActivity extends FragmentActivity
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private NavigationView mNavigationView;
+    private SearchView mSearchView;
+    private ListView mListView;
     private String selectTitle;
     private String[] category;
     private int len;
+    private String[] mStrs = {"aaa", "bbb", "ccc", "airsaid"};
 
     private IBriefPresenter iBriefPresenter;
 
@@ -54,6 +61,23 @@ public class BriefInfoActivity extends FragmentActivity
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        mSearchView = (SearchView) findViewById(R.id.searchView);
+
+        // 设置搜索文本监听
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // 当点击搜索按钮时触发该方法
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            // 当搜索内容改变时触发该方法
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -10,36 +10,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/tab">
+        android:background="@color/primary">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="分类修改"
             android:textSize="30dp"
-            android:textColor="@color/text"
+            android:textColor="@color/icons"
             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
         android:orientation="horizontal"
-        android:background="@color/tab">
+        android:gravity="bottom"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:background="@color/icons">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_add_tag"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            android:text="添加"
-             />
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:background="@drawable/ic_playlist_add_black_48dp"
+            />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_delete_tag"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            android:text="删除分类"
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:background="@drawable/ic_delete_black_48dp"
             />
 
     </LinearLayout>
@@ -48,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/tab">
+        android:background="@color/icons">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -59,16 +63,17 @@
                 android:layout_height="match_parent"
                 android:text="现有分类"
                 android:textSize="30dp"
-                android:textColor="@color/text"
+                android:textColor="@color/primary_text"
                 android:layout_alignParentLeft="true"
                 />
 
-            <Button
+            <ImageButton
+                android:layout_margin="10dp"
                 android:id="@+id/btn_clear_tag_show"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:text="清空选中"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
                 android:layout_alignParentRight="true"
+                android:background="@drawable/ic_border_clear_black_48dp"
                 />
 
         </RelativeLayout>
@@ -81,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/tab">
+        android:background="@color/icons">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -92,16 +97,17 @@
                 android:layout_height="match_parent"
                 android:text="所有分类"
                 android:textSize="30dp"
-                android:textColor="@color/text"
+                android:textColor="@color/primary_text"
                 android:layout_alignParentLeft="true"
                 />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_clear_tag_all"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:text="清空选中"
+                android:layout_margin="10dp"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
                 android:layout_alignParentRight="true"
+                android:background="@drawable/ic_border_clear_black_48dp"
                 />
 
         </RelativeLayout>

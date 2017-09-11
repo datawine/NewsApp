@@ -4,19 +4,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_homepage"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_home_black_48dp"
             android:title="首页" />
         <item
             android:id="@+id/nav_collection"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_format_list_bulleted_black_48dp"
             android:title="分类" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_settings_black_48dp"
             android:title="设置" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="更多">
         <menu>
             <item
                 android:id="@+id/nav_share"
