@@ -32,4 +32,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.zhy:flowlayout-lib:1.0.3'
     testCompile 'junit:junit:4.12'
+    compile files('build/libs/sqlite-jdbc-3.20.0.jar')
 }
