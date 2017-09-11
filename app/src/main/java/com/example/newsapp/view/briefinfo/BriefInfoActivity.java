@@ -85,7 +85,6 @@ public class BriefInfoActivity extends FragmentActivity
 
     public void SetViewPager()
     {
-
         viewPager.setCurrentItem(0);
     }
 

@@ -24,6 +24,8 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -97,18 +99,17 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        for (String key : mShowVals) {
+                        ArrayList<String> tmpval = new ArrayList<String>();
+                        Collections.addAll(tmpval, new String[mShowVals.size()]);
+                        Collections.copy(tmpval, mShowVals);
+                        mShowVals.clear();
+                        for (String key : tmpval) {
                             if (mShowSelected.get(key)) {
-                                Iterator iter = mShowVals.iterator();
-                                while (iter.hasNext()) {
-                                    if (iter.next().equals(key)) {
-                                        iter.remove();
-                                    }
-                                }
                                 mShowSelected.remove(key);
                             }
-                            else
-                                mShowSelected.put(key, false);
+                            else {
+                                mShowVals.add(key);
+                            }
                         }
                         mTagAdapter.notifyDataChanged();
                         mShowTagAdapter.notifyDataChanged();

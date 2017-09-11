@@ -18,4 +18,5 @@ public interface IDetailView {
     public void SetTitle(String title);
 
     public void SetContent(String content);
+
 }
