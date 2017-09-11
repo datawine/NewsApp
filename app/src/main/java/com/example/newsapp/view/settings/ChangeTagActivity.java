@@ -30,7 +30,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.zip.Inflater;
 
-public class ChangeTagActivity extends AppCompatActivity {
+import com.example.newsapp.presenter.*;
+
+public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
     private ArrayList<String> mVals = new ArrayList<String>();
     private HashMap<String, Boolean> mSelected = new HashMap<String, Boolean>();
     private ArrayList<String> mShowVals = new ArrayList<String>();
@@ -39,17 +41,21 @@ public class ChangeTagActivity extends AppCompatActivity {
     private TagFlowLayout mTagFlowLayout, mShowFlowLayout;
     private Button btn_add, btn_delete, btn_clear_show, btn_clear_all;
 
+    private IChangePresenter iChangePresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_tag);
+
+        iChangePresenter = new IChangePresenterCompl(this);
 
         mShowFlowLayout = (TagFlowLayout) findViewById(R.id.id_cur_flowlayout);
         mTagFlowLayout = (TagFlowLayout) findViewById(R.id.id_flowlayout);
 
 
         //模拟读入数据
-        initData();
+        iChangePresenter.GetInitData();
 
         //
 
@@ -137,16 +143,22 @@ public class ChangeTagActivity extends AppCompatActivity {
         );
     }
 
-    public void initData() {
-        mVals.add("测试1");
-        mVals.add("测试2");
-        mVals.add("测试3");
-        mSelected.put("测试1", false);
-        mSelected.put("测试2", false);
-        mSelected.put("测试3", false);
-        mShowVals.add("显示测试1");
-        mShowSelected.put("显示测试1", false);
+    public void SetVals(String[] vals)
+    {
+        for(int i=0;i<vals.length;i++)
+        {
+            mVals.add(vals[i]);
+
+            mSelected.put(vals[i], false);
+        }
     }
+
+    public void SetShowVal(String showval)
+    {
+        mShowVals.add(showval);
+        mShowSelected.put(showval, false);
+    }
+
 
     public void initAdapter() {
         mTagAdapter = new TagAdapter<String>(mVals)

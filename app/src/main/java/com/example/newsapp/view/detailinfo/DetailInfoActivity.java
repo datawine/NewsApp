@@ -13,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.newsapp.R;
+import com.example.newsapp.presenter.IDetailPresenterCompl;
 import com.example.newsapp.view.settings.MySettingsActivity;
 
+import com.example.newsapp.presenter.*;
+
 public class DetailInfoActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,IDetailView {
 
     private String category;
     private NavigationView mNavigationView;
@@ -24,10 +27,14 @@ public class DetailInfoActivity extends AppCompatActivity
     private TextView articleTitle;
     private Button rtnBtn;
 
+    private IDetailPresenter iDetailPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_info);
+
+        iDetailPresenter = new IDetailPresenterCompl(this);
 
         Bundle bundle = this.getIntent().getExtras();
         String title = bundle.getString("Title");
@@ -40,8 +47,8 @@ public class DetailInfoActivity extends AppCompatActivity
 
         //这里是数据加载
 
-        setArticleTitle(title);
-        setContent("This is Content");
+        iDetailPresenter.GetTitle();
+        iDetailPresenter.GetContent();
 
         //
 
@@ -65,27 +72,38 @@ public class DetailInfoActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.nav_collection) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(DetailInfoActivity.this, MySettingsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_share) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_send) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_homepage) {
-            finish();
-        }
+        iDetailPresenter.CheckItemId(item,this);
 
         //关闭侧滑菜单
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
+    }
+
+    public void GetActivityStart(Intent intent)
+    {
+        startActivity(intent);
+    }
+
+    public void GetToast(int id)
+    {
+        Toast.makeText(getApplicationContext(), id,Toast.LENGTH_SHORT).show();
+    }
+
+    public void GetFinished()
+    {
+        finish();
+    }
+
+    public void SetTitle(String title)
+    {
+        setArticleTitle(title);
+    }
+
+    public void SetContent(String content)
+    {
+        setContent(content);
     }
 }
