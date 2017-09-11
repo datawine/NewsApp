@@ -24,6 +24,7 @@ import java.util.Map;
 public class NewsManager {
     private static final String TAG = "newsParser";
     private static final HashMap<String, Integer> tag2int = new HashMap<String, Integer>(){{
+        put("推荐", 0);
         put("科技", 1);
         put("教育", 2);
         put("军事", 3);
