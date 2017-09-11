@@ -16,12 +16,14 @@ import com.example.newsapp.adapter.PageListAdapter;
 import com.example.newsapp.view.settings.ChangeTagActivity;
 import com.example.newsapp.view.settings.MySettingsActivity;
 
+import com.example.newsapp.presenter.*;
+
 /**
  * Created by junxian on 9/7/2017.
  */
 
 public class BriefInfoActivity extends FragmentActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,IBriefView{
 
     private PageListAdapter pgAdapter;
     private ViewPager viewPager;
@@ -31,18 +33,17 @@ public class BriefInfoActivity extends FragmentActivity
     private String[] category;
     private int len;
 
+    private IBriefPresenter iBriefPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brief_info);
 
-        // 这里加载当前类别
 
-        String[] tmpcat = {"推荐", "历史", "科技", "房产", "613", "地球", "人文", "时尚", "娱乐"};
-        getCategory(tmpcat);
-
-        //
+        //初始化ui
+        iBriefPresenter = new IBriefPresenterCompl(this);
 
 
         pgAdapter = new PageListAdapter(getSupportFragmentManager(), this, len, category);
@@ -58,28 +59,13 @@ public class BriefInfoActivity extends FragmentActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        item.setChecked(false);
 
-        if (id == R.id.nav_collection) {
-            Intent intent = new Intent(BriefInfoActivity.this, ChangeTagActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(BriefInfoActivity.this, MySettingsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_share) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_send) {
-            Toast.makeText(getApplicationContext(), id,
-                    Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_homepage) {
-            viewPager.setCurrentItem(0);
-        }
+        iBriefPresenter.CheckItemId(item,this);
 
         //关闭侧滑菜单
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
@@ -95,5 +81,21 @@ public class BriefInfoActivity extends FragmentActivity
             }
         }
         return 0;
+    }
+
+    public void SetViewPager()
+    {
+
+        viewPager.setCurrentItem(0);
+    }
+
+    public void GetActivityStart(Intent intent)
+    {
+        startActivity(intent);
+    }
+
+    public void GetToast(int id)
+    {
+        Toast.makeText(getApplicationContext(), id,Toast.LENGTH_SHORT).show();
     }
 }

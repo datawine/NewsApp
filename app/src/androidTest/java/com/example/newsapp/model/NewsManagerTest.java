@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * Created by leavan on 2017/9/10.
  */
 public class NewsManagerTest {
-    private static final String TAG = "getNewstest";
+    private static final String TAG = "NewsManagerTest";
 
     @Test
     public void getPageTest() throws Exception {

@@ -14,6 +14,8 @@ import android.widget.ListView;
 
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.ListViewAdapter;
+import com.example.newsapp.presenter.IChangePresenter;
+import com.example.newsapp.presenter.IPageListPresenter;
 import com.example.newsapp.singleitem.SingleListItem;
 import com.example.newsapp.view.detailinfo.DetailInfoActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -21,12 +23,13 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.example.newsapp.presenter.*;
 
 /**
  * Created by junxian on 9/7/2017.
  */
 
-public class PageListFragment extends Fragment {
+public class PageListFragment extends Fragment implements IPageListView{
     public static final String CATEGORY = "CATEGORY";
     private String mCategory;
     private ArrayList<SingleListItem> mListItems;
@@ -34,6 +37,8 @@ public class PageListFragment extends Fragment {
     private ListViewAdapter mAdapter;
     private int mItemCount = 9;
     HashMap<String, Object> map;
+
+    private IPageListPresenter iPageListPresenter;
 
     public static PageListFragment newInstance(String category) {
         Bundle args = new Bundle();
@@ -43,10 +48,14 @@ public class PageListFragment extends Fragment {
         return pageListFragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCategory = getArguments().getString(CATEGORY);
+
+        iPageListPresenter = new IPageListPresenterCompl(this);
     }
 
     @Nullable
@@ -55,7 +64,9 @@ public class PageListFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_page_list, container, false);
         mPullRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
 
-        initDatas();
+        iPageListPresenter.GetInitDatas();
+
+
         mAdapter = new ListViewAdapter(getActivity(), mListItems);
         mPullRefreshListView.setAdapter(mAdapter);
         // 设置监听事件
@@ -101,14 +112,14 @@ public class PageListFragment extends Fragment {
         return view;
     }
 
-    private void initDatas() {
+    public void InitDatas(int count , String[] news) {
         // 初始化数据和数据源
         mListItems = new ArrayList<SingleListItem>();
 
-        for (int i = 0; i < mItemCount; i++)
+        for (int i = 0; i < count; i++)
         {
             map = new HashMap<String, Object>();
-            map.put("Content", mCategory + " " + i);
+            map.put("Content", mCategory + " " + news[i]);
             if (i != 2)
                 mListItems.add(new SingleListItem("normal", map));
             else

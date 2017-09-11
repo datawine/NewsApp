@@ -1,19 +1,31 @@
 [
     {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+    },
+    {
         "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_rotate.png",
         "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_rotate.png"
     },
     {
-        "merged": "/Users/leavan/learn/android/NewsApp/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
-        "source": "/Users/leavan/learn/android/NewsApp/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
     },
     {
-        "merged": "/Users/leavan/learn/android/NewsApp/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
-        "source": "/Users/leavan/learn/android/NewsApp/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_rotate.png",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_rotate.png"
     },
     {
-        "merged": "/Users/leavan/learn/android/NewsApp/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
-        "source": "/Users/leavan/learn/android/NewsApp/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/indicator_arrow.png",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/indicator_arrow.png"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_flip.png",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_flip.png"
+    },
+    {
+        "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
+        "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
     },
     {
         "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/indicator_arrow.png",
