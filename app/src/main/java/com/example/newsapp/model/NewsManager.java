@@ -81,6 +81,21 @@ public class NewsManager {
         return result;
     }
 
+    public Map<String, Object> simNewsParser(String jsonText) throws JSONException{
+        Map<String, Object> map = new HashMap<String, Object>();
+        JSONObject newsObj = new JSONObject(jsonText);
+        Iterator<String> keys = newsObj.keys();
+        String key = null;
+        String value = null;
+        while(keys.hasNext())
+        {
+            key = keys.next();
+            value = newsObj.getString(key);
+            map.put(key, value);
+        }
+        return map;
+    }
+
     public List<Map<String, Object>> newsListParser(String jsonText)
     {
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
