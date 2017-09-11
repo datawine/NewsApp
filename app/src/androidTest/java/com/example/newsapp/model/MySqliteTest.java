@@ -5,6 +5,8 @@ import android.util.Log;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -16,22 +18,33 @@ public class MySqliteTest {
 
     @Test
     public void initTest() throws Exception{
-        /*File file = new File("/data/data/com.example.newsapp/");
-        if(file.exists()){
-            Log.i(TAG, "initTest: " + "YES");
-            String[] strs = file.list();
-            for(int i = 0; i < strs.length; ++i)
-            {
-                Log.i(TAG, "initTest: " + strs[i]);
-            }
-        } else{
-            Log.i(TAG, "initTest: " + "NO");
-        }
-        Log.i(TAG, "initTest: " + "aaaaaaaaa");
-        */
         MySqlite mySqlite = new MySqlite();
         mySqlite.init();
-        mySqlite.insert();
-        Log.i(TAG, "initTest: " + mySqlite.query());
+        NewsManager manager = new NewsManager(mySqlite);
+        for(int i = 0; i < 4; ++i) {
+            List<Map<String, Object>> news1 = manager.getLatestNewsList();
+            for (int j = 0; j < news1.size(); ++j) {
+                Map<String, Object> news = news1.get(j);
+            }
+        }
+        Log.i(TAG, "initTest: " + mySqlite.count());
+        List<Map<String, Object>> query = mySqlite.getHistory("科技");
+        for(int i = 0; i < query.size(); ++i){
+            Log.i(TAG, "initTest: " + query.get(i).get("news_Title"));
+        }
+        mySqlite.delete();
+    }
+
+    @Test
+    public void allTest() throws Exception{
+        MySqlite mySqlite = new MySqlite();
+        mySqlite.init();
+        NewsManager manager = new NewsManager(mySqlite);
+        manager.getSearchedNewsList("苹果", 1);
+        List<Map<String, Object>> history = mySqlite.getHistory("科技");
+        for(int i = 0; i < history.size(); ++i){
+            Log.i(TAG, "allTest: " + history.get(i).get("news_Title"));
+        }
+        mySqlite.delete();
     }
 }
