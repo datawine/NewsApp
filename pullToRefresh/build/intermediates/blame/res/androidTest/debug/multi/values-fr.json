@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
+        "outputFile": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fr\\values-fr.xml",
+=======
         "outputFile": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-fr/values-fr.xml",
+>>>>>>> leavan
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 128
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+=======
                     "file": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 201
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+=======
                     "file": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 285
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+=======
                     "file": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -62,7 +78,7 @@
         ]
     },
     {
-        "outputFile": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-fr/values-fr.xml",
+        "outputFile": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fr\\values-fr.xml",
         "map": [
             {
                 "to": {
@@ -73,7 +89,7 @@
                     "endOffset": 128
                 },
                 "from": {
-                    "file": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -92,7 +108,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -111,7 +127,69 @@
                     "endOffset": 285
                 },
                 "from": {
-                    "file": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 206,
+                        "endColumn": 83,
+                        "endOffset": 285
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fr\\values-fr.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 77,
+                    "endOffset": 128
+                },
+                "from": {
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 77,
+                        "endOffset": 128
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 133,
+                    "endColumn": 72,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 133,
+                        "endColumn": 72,
+                        "endOffset": 201
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 206,
+                    "endColumn": 83,
+                    "endOffset": 285
+                },
+                "from": {
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

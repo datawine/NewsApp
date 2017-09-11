@@ -1,17 +1,34 @@
 [
     {
+<<<<<<< HEAD
+        "merged": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+=======
         "merged": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
         "source": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+>>>>>>> leavan
     },
     {
-        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_bottom.xml",
-        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml"
+        "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
-        "merged": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_top.xml",
-        "source": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/drawable/indicator_bg_top.xml"
+        "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+=======
         "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_bottom.xml",
         "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml"
     },
@@ -22,5 +39,6 @@
     {
         "merged": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_top.xml",
         "source": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/drawable/indicator_bg_top.xml"
+>>>>>>> leavan
     }
 ]

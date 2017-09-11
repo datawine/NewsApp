@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
+        "outputFile": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ja\\values-ja.xml",
+=======
         "outputFile": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ja\\values-ja.xml",
+>>>>>>> leavan
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 115
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 183
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 250
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/jzp1025/Desktop/NewsApp-master/I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -62,7 +78,11 @@
         ]
     },
     {
+<<<<<<< HEAD
+        "outputFile": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ja\\values-ja.xml",
+=======
         "outputFile": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-ja/values-ja.xml",
+>>>>>>> leavan
         "map": [
             {
                 "to": {
@@ -73,7 +93,11 @@
                     "endOffset": 115
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/values-ja/values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -92,7 +116,11 @@
                     "endOffset": 183
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/values-ja/values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -111,7 +139,11 @@
                     "endOffset": 250
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\Users\\jzp1025\\Desktop\\NewsApp-master\\I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/leavan/learn/android/NewsApp/pullToRefresh/build/intermediates/bundles/debug/res/values-ja/values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -124,7 +156,11 @@
         ]
     },
     {
+<<<<<<< HEAD
+        "outputFile": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ja\\values-ja.xml",
+=======
         "outputFile": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-ja/values-ja.xml",
+>>>>>>> leavan
         "map": [
             {
                 "to": {
@@ -135,7 +171,11 @@
                     "endOffset": 115
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/values-ja/values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -154,7 +194,11 @@
                     "endOffset": 183
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/values-ja/values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -173,7 +217,11 @@
                     "endOffset": 250
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "I:\\java\\NewsApp\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+=======
                     "file": "/Users/jzp1025/Desktop/NewsApp-master/pullToRefresh/build/intermediates/bundles/debug/res/values-ja/values-ja.xml",
+>>>>>>> leavan
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

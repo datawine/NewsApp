@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="text">@android:color/white</color>
-    <color name="background">@android:color/black</color>
-    <color name="tab">@android:color/holo_orange_dark</color>
-    <color name="buttonBackground">@android:color/darker_gray</color>
+    <color name="primary">#607D8B</color>
+    <color name="primary_dark">#455A64</color>
+    <color name="primary_light">#CFD8DC</color>
+    <color name="accent">#9E9E9E</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
 
-    <color name="colorPrimary">@android:color/darker_gray</color>
-    <color name="colorPrimaryDark">@android:color/black</color>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#455A64</color>
+    <color name="colorAccent">#9E9E9E</color>
+
 </resources>

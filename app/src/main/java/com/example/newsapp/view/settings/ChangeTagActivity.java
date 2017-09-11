@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,8 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -39,7 +42,7 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
     private HashMap<String, Boolean> mShowSelected = new HashMap<String, Boolean>();
     private TagAdapter<String> mTagAdapter, mShowTagAdapter;
     private TagFlowLayout mTagFlowLayout, mShowFlowLayout;
-    private Button btn_add, btn_delete, btn_clear_show, btn_clear_all;
+    private ImageButton btn_add, btn_delete, btn_clear_show, btn_clear_all;
 
     private IChangePresenter iChangePresenter;
 
@@ -67,10 +70,10 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
         mShowFlowLayout.setAdapter(mShowTagAdapter);
         setShowSelectListener();
 
-        btn_add = (Button) findViewById(R.id.btn_add_tag);
-        btn_delete = (Button) findViewById(R.id.btn_delete_tag);
-        btn_clear_show = (Button) findViewById(R.id.btn_clear_tag_show);
-        btn_clear_all = (Button) findViewById(R.id.btn_clear_tag_all);
+        btn_add = (ImageButton) findViewById(R.id.btn_add_tag);
+        btn_delete = (ImageButton) findViewById(R.id.btn_delete_tag);
+        btn_clear_show = (ImageButton) findViewById(R.id.btn_clear_tag_show);
+        btn_clear_all = (ImageButton) findViewById(R.id.btn_clear_tag_all);
 
         //增加
         btn_add.setOnClickListener(
@@ -97,18 +100,17 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        for (String key : mShowVals) {
+                        ArrayList<String> tmpval = new ArrayList<String>();
+                        Collections.addAll(tmpval, new String[mShowVals.size()]);
+                        Collections.copy(tmpval, mShowVals);
+                        mShowVals.clear();
+                        for (String key : tmpval) {
                             if (mShowSelected.get(key)) {
-                                Iterator iter = mShowVals.iterator();
-                                while (iter.hasNext()) {
-                                    if (iter.next().equals(key)) {
-                                        iter.remove();
-                                    }
-                                }
                                 mShowSelected.remove(key);
                             }
-                            else
-                                mShowSelected.put(key, false);
+                            else {
+                                mShowVals.add(key);
+                            }
                         }
                         mTagAdapter.notifyDataChanged();
                         mShowTagAdapter.notifyDataChanged();
@@ -170,12 +172,13 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                         .inflate(R.layout.tag_textview, mTagFlowLayout, false);
 
                 if (mSelected.get(s))
-                    rl.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_blue_dark));
+                    rl.setBackgroundColor(getResources().getColor(R.color.primary_light));
                 else
-                    rl.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_blue_light));
+                    rl.setBackgroundColor(getResources().getColor(R.color.primary));
 
                 TextView tv = (TextView) rl.findViewById(R.id.tag_text);
                 tv.setText(s);
+                tv.setTextColor(getResources().getColor(R.color.icons));
                 return rl;
             }
         };
@@ -205,12 +208,13 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                         .inflate(R.layout.tag_textview, mShowFlowLayout, false);
 
                 if (mShowSelected.get(s))
-                    rl.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_blue_dark));
+                    rl.setBackgroundColor(getResources().getColor(R.color.primary_light));
                 else
-                    rl.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_blue_light));
+                    rl.setBackgroundColor(getResources().getColor(R.color.primary));
 
                 TextView tv = (TextView) rl.findViewById(R.id.tag_text);
                 tv.setText(s);
+                tv.setTextColor(getResources().getColor(R.color.icons));
                 return rl;
             }
         };
