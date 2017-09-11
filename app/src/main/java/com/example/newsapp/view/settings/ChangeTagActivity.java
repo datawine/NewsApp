@@ -171,12 +171,12 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                 RelativeLayout rl = (RelativeLayout) LayoutInflater.from(ChangeTagActivity.this)
                         .inflate(R.layout.tag_textview, mTagFlowLayout, false);
 
-                if (mSelected.get(s))
-                    rl.setBackgroundColor(getResources().getColor(R.color.primary_light));
-                else
-                    rl.setBackgroundColor(getResources().getColor(R.color.primary));
-
                 TextView tv = (TextView) rl.findViewById(R.id.tag_text);
+                if (mSelected.get(s))
+                    tv.setBackgroundColor(getResources().getColor(R.color.primary_light));
+                else
+                    tv.setBackgroundColor(getResources().getColor(R.color.primary));
+
                 tv.setText(s);
                 tv.setTextColor(getResources().getColor(R.color.icons));
                 return rl;
@@ -207,12 +207,12 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                 RelativeLayout rl = (RelativeLayout) LayoutInflater.from(ChangeTagActivity.this)
                         .inflate(R.layout.tag_textview, mShowFlowLayout, false);
 
-                if (mShowSelected.get(s))
-                    rl.setBackgroundColor(getResources().getColor(R.color.primary_light));
-                else
-                    rl.setBackgroundColor(getResources().getColor(R.color.primary));
-
                 TextView tv = (TextView) rl.findViewById(R.id.tag_text);
+                if (mShowSelected.get(s))
+                    tv.setBackgroundColor(getResources().getColor(R.color.primary_light));
+                else
+                    tv.setBackgroundColor(getResources().getColor(R.color.primary));
+
                 tv.setText(s);
                 tv.setTextColor(getResources().getColor(R.color.icons));
                 return rl;
