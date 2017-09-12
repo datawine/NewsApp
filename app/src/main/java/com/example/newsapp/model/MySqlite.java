@@ -60,6 +60,19 @@ public class MySqlite {
         db.update("news", cValues, "id=?", new String[]{(String)newstosave.get("news_ID")});
     }
 
+    void star(String news_ID){
+        if(!exists(news_ID)){
+            return;
+        }
+        Map<String, Object> oldone = get(news_ID);
+        ContentValues cValues = new ContentValues();
+        cValues.put("id", (String)oldone.get("id"));
+        cValues.put("sim_json", (String)oldone.get("sim_json"));
+        cValues.put("com_json", (String)oldone.get("com_json"));
+        cValues.put("star", "YES");
+        db.update("news", cValues, "id=?", new String[]{news_ID});
+    }
+
     int count(){
         Cursor cursor = db.query("news", null, null, null, null, null, null);
         return cursor.getCount();
