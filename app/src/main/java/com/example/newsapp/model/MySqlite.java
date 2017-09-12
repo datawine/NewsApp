@@ -73,6 +73,19 @@ public class MySqlite {
         db.update("news", cValues, "id=?", new String[]{news_ID});
     }
 
+    void unstar(String news_ID){
+        if(!exists(news_ID)){
+            return;
+        }
+        Map<String, Object> oldone = get(news_ID);
+        ContentValues cValues = new ContentValues();
+        cValues.put("id", (String)oldone.get("id"));
+        cValues.put("sim_json", (String)oldone.get("sim_json"));
+        cValues.put("com_json", (String)oldone.get("com_json"));
+        cValues.put("star", "NO");
+        db.update("news", cValues, "id=?", new String[]{news_ID});
+    }
+
     int count(){
         Cursor cursor = db.query("news", null, null, null, null, null, null);
         return cursor.getCount();
@@ -86,6 +99,21 @@ public class MySqlite {
             result.put("sim_json", cursor.getString(cursor.getColumnIndex("sim_json")));
             result.put("com_json", cursor.getString(cursor.getColumnIndex("com_json")));
             result.put("star", cursor.getString(cursor.getColumnIndex("star")));
+        }
+        return result;
+    }
+
+    List<Map<String, Object>> getStaredNews(){
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "star=?", new String[]{"YES"}, null, null, null);
+        while(cursor.moveToNext()){
+            String jsonText = cursor.getString(cursor.getColumnIndex("com_json"));
+            try{
+                Map<String, Object> temp = NewsManager.newsParser(jsonText);
+                result.add(temp);
+            } catch (JSONException e){
+                Log.i(TAG, "getStaredNews: ", e);
+            }
         }
         return result;
     }
