@@ -32,19 +32,20 @@ public class MySqliteTest {
         for(int i = 0; i < query.size(); ++i){
             Log.i(TAG, "initTest: " + query.get(i).get("news_Title"));
         }
-        mySqlite.delete();
+        //mySqlite.delete();
     }
 
     @Test
-    public void allTest() throws Exception{
-            MySqlite mySqlite = new MySqlite();
-            mySqlite.init();
-            NewsManager manager = new NewsManager(mySqlite);
-            manager.getSearchedNewsList("苹果", 1);
-            List<Map<String, Object>> history = mySqlite.getHistory("科技");
-            for(int i = 0; i < history.size(); ++i){
-                Log.i(TAG, "allTest: " + history.get(i).get("news_Title"));
-            }
-        mySqlite.delete();
+    public void allTest() throws Exception {
+        MySqlite mySqlite = new MySqlite();
+        mySqlite.init();
+        NewsManager manager = new NewsManager(mySqlite);
+        manager.getSearchedNewsList("苹果", 1);
+        List<Map<String, Object>> history = mySqlite.getHistory("科技");
+        for (int i = 0; i < history.size(); ++i) {
+            Log.i(TAG, "allTest: " + history.get(i).get("news_Title"));
+            Map<String, Object> thenews = manager.getNews(history.get(i));
+            Log.i(TAG, "allTest: " + i + thenews.get("news_Content"));
+        }
     }
 }
