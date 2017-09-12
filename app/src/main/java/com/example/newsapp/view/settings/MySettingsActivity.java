@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.newsapp.MyApplication;
@@ -33,10 +34,12 @@ public class MySettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (parentApplication.getDayMode()) {
+                    Log.i("change mode", "change to night");
                     mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_YES);
                     parentApplication.setDayMode(false);
                 }
                 else {
+                    Log.i("change mode", "change to day");
                     mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_NO);
                     parentApplication.setDayMode(true);
                 }
