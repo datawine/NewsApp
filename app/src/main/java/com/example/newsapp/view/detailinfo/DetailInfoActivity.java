@@ -1,6 +1,7 @@
 package com.example.newsapp.view.detailinfo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +68,7 @@ public class DetailInfoActivity extends AppCompatActivity
         mAuthor.setTextColor(getResources().getColor(R.color.secondary_text));
         mTime.setTextColor(getResources().getColor(R.color.secondary_text));
 
+
         //这里是数据加载
 
         Id = bundle.getString("ID");
@@ -78,7 +81,7 @@ public class DetailInfoActivity extends AppCompatActivity
         catch(InterruptedException e){}
         //
 
-        /*
+
         //超链接测试
         link = (TextView) findViewById(R.id.test_link);
         String html = "<a href='http://www.baidu.com'>百度一下</a> 测试";
@@ -103,7 +106,7 @@ public class DetailInfoActivity extends AppCompatActivity
         link.setLinksClickable(true);
         link.setMovementMethod(LinkMovementMethod.getInstance());
         link.setText(charSequence);        //
-        */
+
 
         mNavigationView.setNavigationItemSelectedListener(this);
         rtnBtn.setOnClickListener(new View.OnClickListener() {
