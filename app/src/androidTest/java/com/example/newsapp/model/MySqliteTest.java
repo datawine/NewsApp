@@ -5,6 +5,7 @@ import android.util.Log;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,5 +70,18 @@ public class MySqliteTest {
         mySqlite.unstar("201512280710cb9195663cd348198f7909eb91fc0156");
         newslist = mySqlite.getStaredNews();
         Log.i(TAG, "starTestNum: " + newslist.size());
+        mySqlite.delete();
+    }
+
+    @Test
+    public void tagTest() throws Exception{
+        MySqlite mySqlite = new MySqlite();
+        mySqlite.init();
+        Log.i(TAG, "tagTest: 0 " + mySqlite.getTags().size());
+        mySqlite.addTag("科技"); mySqlite.addTag("教育");
+        Log.i(TAG, "tagTest: 2 " + mySqlite.getTags().size());
+        mySqlite.delTag("教育");
+        Log.i(TAG, "tagTest: 1 " + mySqlite.getTags().size());
+        mySqlite.delete();
     }
 }
