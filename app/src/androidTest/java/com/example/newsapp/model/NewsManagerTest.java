@@ -4,6 +4,7 @@ import android.util.Log;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,28 @@ public class NewsManagerTest {
             Map<String, Object> detailed_news = manager.getNews((String)news.get("news_ID"));
             Log.i(TAG, "getSearchedNewsTest: " + j + news.get("news_Title"));
             Log.i(TAG, "getSearchedNewsTest: " + detailed_news.get("news_Content"));
+        }
+    }
+
+    @Test
+    public void getPicNumTest() throws Exception{
+        NewsManager manager = new NewsManager();
+        Map<String, Object> news = manager.getNews("201509210711832206078244433fae36f4cdb1c24fbb");
+        Log.i(TAG, "getPicNumTest: " + (Integer)news.get("pic_Num"));
+    }
+
+    @Test
+    public void getFileTest() throws Exception{
+        File file = new File("/data/");
+        if(file.exists()){
+            Log.i(TAG, "getFileTest: " + "YES");
+            String[] files = file.list();
+            Log.i(TAG, "getFileTest: " + files);
+            //for(int i = 0; i < files.length; ++i){
+             //   Log.i(TAG, "getFileTest: " + files[i]);
+            //}
+        } else {
+            Log.i(TAG, "getFileTest: " + "NO");
         }
     }
 }

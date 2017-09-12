@@ -26,7 +26,7 @@ public class MySqlite {
     public void init(){
         db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.example.newsapp/news.db", null);
         try {
-            db.execSQL("create table news(id text primary key, tag text, sim_json text, com_json text)");
+            db.execSQL("create table news(id text primary key, tag text, sim_json text, com_json text, star text)");
         } catch (Exception e){
             //Log.i(TAG, "init: ", e);
         }
@@ -42,12 +42,13 @@ public class MySqlite {
         cValue.put("tag", (String)newstosave.get("newsClassTag"));
         cValue.put("sim_json", jsonText);
         cValue.put("com_json", "");
+        cValue.put("star", "NO");
         db.insert("news", null, cValue);
     }
 
     void insertCom(String jsonText) throws JSONException{
         Map<String, Object> newstosave = NewsManager.newsParser(jsonText);
-        if(exists((String)newstosave.get("news_ID"))){
+        if(!exists((String)newstosave.get("news_ID"))){
             return;
         }
         Map<String, Object> oldone = get((String)newstosave.get("news_ID"));
@@ -55,6 +56,7 @@ public class MySqlite {
         cValues.put("id", (String)oldone.get("id"));
         cValues.put("sim_json", (String)oldone.get("sim_json"));
         cValues.put("com_json", jsonText);
+        cValues.put("star", "NO");
         db.update("news", cValues, "id=?", new String[]{(String)newstosave.get("news_ID")});
     }
 
@@ -65,11 +67,12 @@ public class MySqlite {
 
     Map<String, Object> get(String news_ID){
         Map<String, Object> result = new HashMap<String, Object>();
-        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json"}, "id=?", new String[]{news_ID}, null, null, null);
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
         while(cursor.moveToNext()){
             result.put("id", cursor.getString(cursor.getColumnIndex("id")));
             result.put("sim_json", cursor.getString(cursor.getColumnIndex("sim_json")));
             result.put("com_json", cursor.getString(cursor.getColumnIndex("com_json")));
+            result.put("star", cursor.getString(cursor.getColumnIndex("star")));
         }
         return result;
     }
@@ -92,7 +95,7 @@ public class MySqlite {
             result.add(temp);
         }
         return result;
-    }
+   }
 
     void delete(){
         db.execSQL("drop table news");

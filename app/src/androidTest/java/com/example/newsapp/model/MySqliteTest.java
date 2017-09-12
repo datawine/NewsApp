@@ -32,7 +32,7 @@ public class MySqliteTest {
         for(int i = 0; i < query.size(); ++i){
             Log.i(TAG, "initTest: " + query.get(i).get("news_Title"));
         }
-        //mySqlite.delete();
+        mySqlite.delete();
     }
 
     @Test
@@ -43,9 +43,12 @@ public class MySqliteTest {
         manager.getSearchedNewsList("苹果", 1);
         List<Map<String, Object>> history = mySqlite.getHistory("科技");
         for (int i = 0; i < history.size(); ++i) {
-            Log.i(TAG, "allTest: " + history.get(i).get("news_Title"));
+            Log.i(TAG, "getNewsallTest: " + history.get(i).get("news_Title"));
             Map<String, Object> thenews = manager.getNews(history.get(i));
-            Log.i(TAG, "allTest: " + i + thenews.get("news_Content"));
+            Log.i(TAG, "getNewsallTest: " + i + thenews.get("news_Content"));
+            thenews = manager.getNews(history.get(i));
+            Log.i(TAG, "getNewsallTest: " + i + thenews.get("news_Content"));
         }
+        mySqlite.delete();
     }
 }

@@ -125,6 +125,9 @@ public class NewsManager {
             }
             result.put(keyWord, templist);
         }
+        String pic_String = (String)result.get("news_Pictures");
+        String[] pics_String = pic_String.split(" ");
+        result.put("pic_Num", new Integer(pics_String.length));
         return result;
     }
     public static Map<String, Object> simNewsParser(String jsonText) throws JSONException{
@@ -139,6 +142,9 @@ public class NewsManager {
             value = newsObj.getString(key);
             map.put(key, value);
         }
+        String pic_String = (String)map.get("news_Pictures");
+        String[] pics_String = pic_String.split(" ");
+        map.put("pic_Num", new Integer(pics_String.length));
         return map;
     }
     public List<Map<String, Object>> newsListParser(String jsonText) {
@@ -166,6 +172,9 @@ public class NewsManager {
                     value = newsObj.getString(key);
                     map.put(key, value);
                 }
+                String pic_String = (String)map.get("news_Pictures");
+                String[] pics_String = pic_String.split(" ");
+                map.put("pic_Num", new Integer(pics_String.length));
                 result.add(map);
             }
         } catch (Exception e)
