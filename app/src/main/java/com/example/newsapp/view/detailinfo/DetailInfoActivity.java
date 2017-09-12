@@ -6,9 +6,15 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +31,8 @@ public class DetailInfoActivity extends AppCompatActivity
     private NavigationView mNavigationView;
     private TextView content;
     private TextView articleTitle;
-    private Button rtnBtn;
+    private ImageButton rtnBtn;
+    private TextView link;
 
     private IDetailPresenter iDetailPresenter;
 
@@ -42,7 +49,7 @@ public class DetailInfoActivity extends AppCompatActivity
 
         articleTitle = (TextView) findViewById(R.id.detail_bar_title);
         content = (TextView) findViewById(R.id.news_content);
-        rtnBtn = (Button) findViewById(R.id.detail_return);
+        rtnBtn = (ImageButton) findViewById(R.id.detail_return);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 
         //这里是数据加载
@@ -51,6 +58,31 @@ public class DetailInfoActivity extends AppCompatActivity
         iDetailPresenter.GetContent();
 
         //
+
+        //超链接测试
+        link = (TextView) findViewById(R.id.test_link);
+        String html = "<a href='http://www.baidu.com'>百度一下</a> 测试";
+        CharSequence charSequence = Html.fromHtml(html);
+        SpannableStringBuilder builder = new SpannableStringBuilder(
+                charSequence);
+        URLSpan[] urlSpans = builder.getSpans(0, charSequence.length(),
+                URLSpan.class);
+        for (URLSpan span : urlSpans) {
+            int start = builder.getSpanStart(span);
+            int end = builder.getSpanEnd(span);
+            int flag = builder.getSpanFlags(span);
+            final String link = span.getURL();
+            builder.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    // 捕获<a>标签点击事件，及对应超链接link
+                }
+            }, start, end, flag);
+            builder.removeSpan(span);
+        }
+        link.setLinksClickable(true);
+        link.setMovementMethod(LinkMovementMethod.getInstance());
+        link.setText(charSequence);        //
 
 
         mNavigationView.setNavigationItemSelectedListener(this);

@@ -63,7 +63,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         viewHolder.content = (TextView) convertView.findViewById(R.id.text_item);
         viewHolder.content.setText(listItem.map.get("Content").toString());
-        viewHolder.content.setBackgroundColor(viewHolder.content.getResources().getColor(R.color.icons));
+        viewHolder.content.setBackgroundColor(viewHolder.content.getResources().getColor(R.color.primary_light));
         viewHolder.content.setTextColor(viewHolder.content.getResources().getColor(R.color.primary_text));
 
         return convertView;

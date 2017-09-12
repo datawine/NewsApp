@@ -80,6 +80,11 @@ public class BriefInfoActivity extends FragmentActivity
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

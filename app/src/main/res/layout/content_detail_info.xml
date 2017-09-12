@@ -13,6 +13,8 @@
         android:orientation="horizontal" >
 
         <ImageButton
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/detail_return"
@@ -27,7 +29,9 @@
             android:layout_centerInParent="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-        <Button
+        <ImageButton
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/detail_share"
@@ -48,6 +52,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/news_content" />
+
+        <TextView
+            android:textColor="@color/primary_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/test_link" />
 
     </RelativeLayout>
 

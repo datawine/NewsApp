@@ -198,6 +198,7 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
         });
     }
 
+
     public void initShowAdapter() {
         mShowTagAdapter = new TagAdapter<String>(mShowVals)
         {
