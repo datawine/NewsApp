@@ -36,6 +36,8 @@ public class DetailInfoActivity extends AppCompatActivity
     private ImageButton rtnBtn;
     private TextView link;
     private String Id;
+    private TextView mAuthor, mTime;
+    private String Author, Time;
 
     private IDetailPresenter iDetailPresenter;
 
@@ -49,11 +51,20 @@ public class DetailInfoActivity extends AppCompatActivity
         Bundle bundle = this.getIntent().getExtras();
         String title = bundle.getString("Title");
         category = bundle.getString("Category");
+        Author = bundle.getString("Author");
+        Time = bundle.getString("Time");
 
         articleTitle = (TextView) findViewById(R.id.detail_bar_title);
         content = (TextView) findViewById(R.id.news_content);
+        mAuthor = (TextView) findViewById(R.id.detail_author);
+        mTime = (TextView) findViewById(R.id.detail_time);
         rtnBtn = (ImageButton) findViewById(R.id.detail_return);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        mAuthor.setText(Author);
+        mTime.setText(Time);
+        mAuthor.setTextColor(getResources().getColor(R.color.secondary_text));
+        mTime.setTextColor(getResources().getColor(R.color.secondary_text));
 
         //这里是数据加载
 

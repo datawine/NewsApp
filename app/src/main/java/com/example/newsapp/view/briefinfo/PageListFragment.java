@@ -103,6 +103,8 @@ public class PageListFragment extends Fragment implements IPageListView{
                             bundle.putString("Category", mCategory);
                             bundle.putString("Title", mListItems.get(position - 1).map.get("Content").toString());
                             bundle.putString("ID",mListItems.get(position - 1).map.get("ID").toString());
+                            bundle.putString("Author", mListItems.get(position - 1).map.get("Author").toString());
+                            bundle.putString("Time", mListItems.get(position - 1).map.get("Time").toString());
                             intent.putExtras(bundle);
 
                             startActivity(intent);
@@ -129,9 +131,9 @@ public class PageListFragment extends Fragment implements IPageListView{
                 map.put("ID",simplenews.get(i).get("news_ID"));
 
                 if (i != 2)
-                mListItems.add(new SingleListItem("normal", map));
-            else
-                mListItems.add(new SingleListItem("shit", map));
+                    mListItems.add(new SingleListItem("normal", map));
+                else
+                    mListItems.add(new SingleListItem("shit", map));
         }
     }
 
