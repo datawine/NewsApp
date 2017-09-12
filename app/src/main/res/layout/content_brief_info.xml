@@ -13,25 +13,47 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:background="@color/primary"
         tools:context="com.airsaid.searchviewdemo.MainActivity">
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:textColor="@color/icons"
+            android:text="ATiptips"
+            android:background="@color/primary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+        </TextView>
 
-            android:iconifiedByDefault="false"
-            android:queryHint="请输入搜索内容" />
+        <LinearLayout
+            android:padding="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <SearchView
+                android:background="@color/icons"
+                android:maxWidth="250dp"
+                android:id="@+id/searchView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:iconifiedByDefault="false"
+                android:queryHint="请输入搜索内容" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@color/primary"
         app:tabTextColor="@color/icons"
         app:tabSelectedTextColor="@color/accent"
