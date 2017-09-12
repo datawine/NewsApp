@@ -37,10 +37,10 @@ public class NewsManager {
     private String jsonText = null;
     MySqlite mydb = null;
 
-    NewsManager(MySqlite db){
+    public NewsManager(MySqlite db){
         this.mydb = db;
     }
-    NewsManager(){
+    public NewsManager(){
 
     }
 

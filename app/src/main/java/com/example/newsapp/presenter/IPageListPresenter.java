@@ -6,5 +6,5 @@ package com.example.newsapp.presenter;
 
 public interface IPageListPresenter {
 
-    public void GetInitDatas();
+    public void GetInitDatas(String cat);
 }

@@ -24,6 +24,8 @@ import com.example.newsapp.view.settings.MySettingsActivity;
 
 import com.example.newsapp.presenter.*;
 
+import org.json.JSONException;
+
 public class DetailInfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,IDetailView {
 
@@ -33,6 +35,7 @@ public class DetailInfoActivity extends AppCompatActivity
     private TextView articleTitle;
     private ImageButton rtnBtn;
     private TextView link;
+    private String Id;
 
     private IDetailPresenter iDetailPresenter;
 
@@ -54,9 +57,14 @@ public class DetailInfoActivity extends AppCompatActivity
 
         //这里是数据加载
 
-        iDetailPresenter.GetTitle();
-        iDetailPresenter.GetContent();
+        Id = bundle.getString("ID");
 
+        try {
+            iDetailPresenter.GetTitle(Id);
+            iDetailPresenter.GetContent(Id);
+        }
+        catch(JSONException e){}
+        catch(InterruptedException e){}
         //
 
         //超链接测试

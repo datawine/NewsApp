@@ -1,15 +1,23 @@
 package com.example.newsapp.presenter;
 
+
+
 import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
 import com.example.newsapp.view.detailinfo.DetailInfoActivity;
 import com.example.newsapp.view.detailinfo.DetailInfoActivity;
 import com.example.newsapp.view.detailinfo.IDetailView;
 import com.example.newsapp.view.settings.ChangeTagActivity;
 import com.example.newsapp.view.settings.MySettingsActivity;
+
+
+import org.json.JSONException;
+
+import java.util.Map;
 
 /**
  * Created by jzp1025 on 17/9/11.
@@ -18,6 +26,7 @@ import com.example.newsapp.view.settings.MySettingsActivity;
 public class IDetailPresenterCompl implements IDetailPresenter {
 
     private IDetailView iDetailView;
+    private MyApplication app;
 
     public IDetailPresenterCompl(IDetailView iDetailView)
     {
@@ -46,17 +55,26 @@ public class IDetailPresenterCompl implements IDetailPresenter {
 
     }
 
-    public void GetTitle()
+    public void GetTitle(String ID) throws InterruptedException,JSONException
     {
-        String title = "title";//从数据库获取title
+        app = MyApplication.getInstance();
 
-        iDetailView.SetTitle(title);
+        Map<String, Object> news = app.GetNews(ID);
+
+        //从数据库获取title
+
+
+
+        iDetailView.SetTitle((String)news.get("news_Title"));
     }
 
-    public void GetContent()
+    public void GetContent(String ID) throws InterruptedException,JSONException
     {
-        String content = "this is content.";//从数据库获取content
+        app = MyApplication.getInstance();
 
-        iDetailView.SetContent(content);
+        Map<String, Object> news = app.GetNews(ID);
+        //从数据库获取content
+
+        iDetailView.SetContent(news.get("news_Content").toString());
     }
 }
