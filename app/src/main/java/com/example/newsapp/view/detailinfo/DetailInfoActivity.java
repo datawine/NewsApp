@@ -67,6 +67,7 @@ public class DetailInfoActivity extends AppCompatActivity
         catch(InterruptedException e){}
         //
 
+        /*
         //超链接测试
         link = (TextView) findViewById(R.id.test_link);
         String html = "<a href='http://www.baidu.com'>百度一下</a> 测试";
@@ -91,7 +92,7 @@ public class DetailInfoActivity extends AppCompatActivity
         link.setLinksClickable(true);
         link.setMovementMethod(LinkMovementMethod.getInstance());
         link.setText(charSequence);        //
-
+        */
 
         mNavigationView.setNavigationItemSelectedListener(this);
         rtnBtn.setOnClickListener(new View.OnClickListener() {

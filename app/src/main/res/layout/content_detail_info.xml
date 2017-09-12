@@ -22,13 +22,6 @@
             android:background="@drawable/ic_arrow_back_black_48dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/detail_bar_title"
-            android:layout_centerInParent="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
         <ImageButton
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
@@ -41,24 +34,47 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/icons"
-        android:orientation="horizontal">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical">
 
-        <TextView
-            android:textColor="@color/primary_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/news_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/icons"
+            android:orientation="vertical">
 
-        <TextView
-            android:textColor="@color/primary_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/test_link" />
+            <TextView
+                android:textSize="30dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_bar_title"
+                android:layout_centerInParent="true" />
 
-    </LinearLayout>
+            <TextView
+                android:textSize="16dp"
+                android:paddingTop="30dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="@color/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/news_content" />
 
+            <TextView
+                android:textColor="@color/primary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/test_link" />
+
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

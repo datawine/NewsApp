@@ -122,6 +122,9 @@ public class PageListFragment extends Fragment implements IPageListView{
             for (int i = 0; i < count; i++)
             {
                 map = new HashMap<String, Object>();
+                map.put("Title", simplenews.get(i).get("news_Title"));
+                map.put("Author", simplenews.get(i).get("news_Author"));
+                map.put("Time", simplenews.get(i).get("news_Time"));
                 map.put("Content", simplenews.get(i).get("news_Title")+"\n"+simplenews.get(i).get("news_Author")+"\n"+simplenews.get(i).get("news_Time"));
                 map.put("ID",simplenews.get(i).get("news_ID"));
 
