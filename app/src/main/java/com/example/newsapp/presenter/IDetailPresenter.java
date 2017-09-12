@@ -17,4 +17,6 @@ public interface IDetailPresenter {
     public void GetTitle(String ID) throws InterruptedException, JSONException;
 
     public void GetContent(String ID) throws InterruptedException, JSONException;
+
+    public void GetKeyWords(String ID) throws JSONException, InterruptedException;
 }

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
 import com.example.newsapp.presenter.IDetailPresenterCompl;
 import com.example.newsapp.view.settings.MySettingsActivity;
@@ -82,30 +83,32 @@ public class DetailInfoActivity extends AppCompatActivity
         //
 
 
+        MyApplication app = MyApplication.getInstance();
+
         //超链接测试
-        link = (TextView) findViewById(R.id.test_link);
-        String html = "<a href='http://www.baidu.com'>百度一下</a> 测试";
-        CharSequence charSequence = Html.fromHtml(html);
-        SpannableStringBuilder builder = new SpannableStringBuilder(
-                charSequence);
-        URLSpan[] urlSpans = builder.getSpans(0, charSequence.length(),
-                URLSpan.class);
-        for (URLSpan span : urlSpans) {
-            int start = builder.getSpanStart(span);
-            int end = builder.getSpanEnd(span);
-            int flag = builder.getSpanFlags(span);
-            final String link = span.getURL();
-            builder.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(View widget) {
-                    // 捕获<a>标签点击事件，及对应超链接link
-                }
-            }, start, end, flag);
-            builder.removeSpan(span);
-        }
-        link.setLinksClickable(true);
-        link.setMovementMethod(LinkMovementMethod.getInstance());
-        link.setText(charSequence);        //
+
+        iDetailPresenter.GetKeyWords(Id);
+
+//        SpannableStringBuilder builder = new SpannableStringBuilder(
+//                charSequence);
+//        URLSpan[] urlSpans = builder.getSpans(0, charSequence.length(),
+//                URLSpan.class);
+//        for (URLSpan span : urlSpans) {
+//            int start = builder.getSpanStart(span);
+//            int end = builder.getSpanEnd(span);
+//            int flag = builder.getSpanFlags(span);
+//            final String link = span.getURL();
+//            builder.setSpan(new ClickableSpan() {
+//                @Override
+//                public void onClick(View widget) {
+//                    // 捕获<a>标签点击事件，及对应超链接link
+//                }
+//            }, start, end, flag);
+//            builder.removeSpan(span);
+//        } //
+
+
+
 
 
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -160,5 +163,15 @@ public class DetailInfoActivity extends AppCompatActivity
     public void SetContent(String content)
     {
         setContent(content);
+    }
+
+    public void SetKeyWords(String[] keyWords)
+    {
+        String html = "<a href='"+"https://baike.baidu.com/item/"+keyWords[0]+"'>"+keyWords[0]+"</a> ";
+        CharSequence charSequence = Html.fromHtml(html);
+        link = (TextView) findViewById(R.id.test_link);
+        link.setLinksClickable(true);
+        link.setMovementMethod(LinkMovementMethod.getInstance());
+        link.setText(charSequence);
     }
 }

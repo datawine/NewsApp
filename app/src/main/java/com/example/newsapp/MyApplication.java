@@ -85,4 +85,14 @@ public class MyApplication extends Application {
     {
         return newsManager.getNews(ID);
     }
+
+    public List<Map<String, Object>> GetStarNews()
+    {
+        return mySqlite.getStaredNews();
+    }
+
+    public List<Map<String, Object>> GetKeyWords(String ID) throws InterruptedException, JSONException
+    {
+        return (List<Map<String, Object>>) newsManager.getNews(ID).get("Keywords");
+    }
 }

@@ -36,37 +36,46 @@ public class IPageListPresenterCompl extends Activity implements IPageListPresen
         ArrayList<Map<String, Object>> simplenews = new ArrayList<Map<String, Object>>();
         int count = 0;
 
-        if(cat == "推荐")
-        {
-            try {
-                list = app.GetLatestNewsList();
-            }catch(InterruptedException e)
-            {}
 
-            for(int i=0;i<list.size();i++)
-            {
-                count ++;
+        if(cat == "收藏夹")
+        {
+
+            list = app.GetStarNews();
+
+            for (int i = 0; i < list.size(); i++) {
+                count++;
 
                 simplenews.add(list.get(i));
 
             }
         }
-        else
-        {
-            try {
-                list = app.GetSearchNewsList(cat);
-            }catch(InterruptedException e)
-            {}
+        else {
+            if (cat == "推荐") {
+                try {
+                    list = app.GetLatestNewsList();
+                } catch (InterruptedException e) {
+                }
 
-            for(int i=0;i<list.size();i++)
-            {
-                count ++;
+                for (int i = 0; i < list.size(); i++) {
+                    count++;
 
-                simplenews.add(list.get(i));
+                    simplenews.add(list.get(i));
 
+                }
+            } else {
+                try {
+                    list = app.GetSearchNewsList(cat);
+                } catch (InterruptedException e) {
+                }
+
+                for (int i = 0; i < list.size(); i++) {
+                    count++;
+
+                    simplenews.add(list.get(i));
+
+                }
             }
         }
-
         iPageListView.InitDatas(count,simplenews);
     }
 }

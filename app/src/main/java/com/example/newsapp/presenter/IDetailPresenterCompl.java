@@ -17,6 +17,7 @@ import com.example.newsapp.view.settings.MySettingsActivity;
 
 import org.json.JSONException;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -76,5 +77,18 @@ public class IDetailPresenterCompl implements IDetailPresenter {
         //从数据库获取content
 
         iDetailView.SetContent(news.get("news_Content").toString());
+    }
+
+    public void GetKeyWords(String ID) throws JSONException, InterruptedException {
+        app = MyApplication.getInstance();
+
+        List<Map<String,Object>> keys = (List<Map<String, Object>>)app.GetKeyWords(ID);
+
+        for(int i=0;i<keys.size();i++)
+        {
+            Map<String,Object> key = keys.get(i);
+
+            key.keySet();
+        }
     }
 }
