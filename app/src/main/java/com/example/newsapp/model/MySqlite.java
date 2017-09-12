@@ -111,7 +111,7 @@ public class MySqlite {
             try{
                 Map<String, Object> temp = NewsManager.newsParser(jsonText);
                 result.add(temp);
-            } catch (JSONException e){ 
+            } catch (JSONException e){
                 Log.i(TAG, "getStaredNews: ", e);
             }
         }

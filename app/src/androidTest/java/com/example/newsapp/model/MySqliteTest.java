@@ -51,4 +51,23 @@ public class MySqliteTest {
         }
         mySqlite.delete();
     }
+
+    @Test
+    public void starTest() throws Exception{
+        MySqlite mySqlite = new MySqlite();
+        mySqlite.init();
+        NewsManager manager = new NewsManager(mySqlite);
+        List<Map<String, Object>> newslist = manager.getSearchedNewsList("北京", 1);
+        for(int i = 0; i < newslist.size(); ++i){
+            manager.getNews(newslist.get(i));
+        }
+        newslist = mySqlite.getStaredNews();
+        Log.i(TAG, "starTestNum: " + newslist.size());
+        mySqlite.star("201512280710cb9195663cd348198f7909eb91fc0156");
+        newslist = mySqlite.getStaredNews();
+        Log.i(TAG, "starTestNum: " + newslist.size());
+        mySqlite.unstar("201512280710cb9195663cd348198f7909eb91fc0156");
+        newslist = mySqlite.getStaredNews();
+        Log.i(TAG, "starTestNum: " + newslist.size());
+    }
 }
