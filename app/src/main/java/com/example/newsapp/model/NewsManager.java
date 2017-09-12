@@ -62,16 +62,33 @@ public class NewsManager {
         return newsListParser(getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10"));
     }
     public Map<String, Object> getNews(String newsId) throws InterruptedException, JSONException {
-        String jsonText = getPage(baseUrl + "/detail?newsId=" + newsId);
+        String jsonText = null;
         if(mydb != null){
-            mydb.insertCom(jsonText);
+            if(mydb.exists(newsId)){
+                jsonText = (String)mydb.get(newsId).get("com_json");
+            }
+        }
+        if(jsonText == null || jsonText.equals("")){
+            jsonText = getPage(baseUrl + "/detail?newsId=" + newsId);
+            if(mydb != null){
+                mydb.insertCom(jsonText);
+            }
         }
         return newsParser(jsonText);
     }
     public Map<String, Object> getNews(Map<String, Object> news) throws InterruptedException, JSONException {
-        String jsonText = getPage(baseUrl + "/detail?newsId=" + (String)news.get("news_ID"));
+        String jsonText = null;
+        String newsId = (String)news.get("news_ID");
         if(mydb != null){
-            mydb.insertCom(jsonText);
+            if(mydb.exists(newsId)){
+                jsonText = (String)mydb.get(newsId).get("com_json");
+            }
+        }
+        if(jsonText == null || jsonText.equals("")){
+            jsonText = getPage(baseUrl + "/detail?newsId=" + newsId);
+            if(mydb != null){
+                mydb.insertCom(jsonText);
+            }
         }
         return newsParser(jsonText);
     }
