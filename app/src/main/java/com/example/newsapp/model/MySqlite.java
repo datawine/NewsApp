@@ -30,6 +30,39 @@ public class MySqlite {
         } catch (Exception e){
             //Log.i(TAG, "init: ", e);
         }
+        try{
+            db.execSQL("create table tags(id text primary key)");
+        } catch (Exception e){
+            //Log.i(TAG, "init: ", e);
+        }
+    }
+
+    void addTag(String tag){
+        ContentValues cValue = new ContentValues();
+        cValue.put("id", tag);
+        try{
+            db.insert("tags", null, cValue);
+        } catch (Exception e){
+            Log.i(TAG, "addTag: ", e);
+        }
+    }
+
+    void delTag(String tag){
+        try{
+            db.delete("tags", "id=?", new String[]{tag});
+        } catch (Exception e){
+            Log.i(TAG, "delTag: ", e);
+        }
+    }
+
+    List<String> getTags(){
+        List<String> result = new ArrayList<String>();
+        Cursor cursor = db.query("tags", null, null, null, null, null, null);
+        while(cursor.moveToNext()){
+            String tag = cursor.getString(0);
+            result.add(tag);
+        }
+        return result;
     }
 
     void insert(String jsonText) throws JSONException {
@@ -111,7 +144,7 @@ public class MySqlite {
             try{
                 Map<String, Object> temp = NewsManager.newsParser(jsonText);
                 result.add(temp);
-            } catch (JSONException e){ 
+            } catch (JSONException e){
                 Log.i(TAG, "getStaredNews: ", e);
             }
         }
@@ -140,5 +173,7 @@ public class MySqlite {
 
     void delete(){
         db.execSQL("drop table news");
+        db.execSQL("drop table tags");
+        db.close();
     }
 }
