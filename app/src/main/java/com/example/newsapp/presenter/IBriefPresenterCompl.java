@@ -30,15 +30,15 @@ public class IBriefPresenterCompl implements IBriefPresenter {
 
         this.iBriefView = iBriefView;
 
-        //初始化数据
-        // 这里加载当前类别  ****从model层获得
-        String[] tmpcat = {"推荐", "历史", "科技", "房产", "613", "地球", "人文", "时尚", "娱乐"};
+    //初始化数据
+    // 这里加载当前类别  ****从model层获得
+    String[] tmpcat = {"推荐","科技","教育","军事","国内","社会", "文化", "汽车","国际","体育","财经","健康","娱乐"};
 
 
         iBriefView.getCategory(tmpcat);
 
 
-    }
+}
 
     public void CheckItemId(MenuItem item,BriefInfoActivity ac)
     {

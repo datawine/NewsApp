@@ -20,10 +20,10 @@ public class MySqlite {
     private static final String TAG = "MySqlite";
     SQLiteDatabase db = null;
 
-    MySqlite(){
+    public MySqlite(){
     }
 
-    void init(){
+    public void init(){
         db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.example.newsapp/news.db", null);
         try {
             db.execSQL("create table news(id text primary key, tag text, sim_json text, com_json text)");

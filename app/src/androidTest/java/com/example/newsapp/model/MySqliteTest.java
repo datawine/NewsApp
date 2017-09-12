@@ -37,14 +37,14 @@ public class MySqliteTest {
 
     @Test
     public void allTest() throws Exception{
-        MySqlite mySqlite = new MySqlite();
-        mySqlite.init();
-        NewsManager manager = new NewsManager(mySqlite);
-        manager.getSearchedNewsList("苹果", 1);
-        List<Map<String, Object>> history = mySqlite.getHistory("科技");
-        for(int i = 0; i < history.size(); ++i){
-            Log.i(TAG, "allTest: " + history.get(i).get("news_Title"));
-        }
+            MySqlite mySqlite = new MySqlite();
+            mySqlite.init();
+            NewsManager manager = new NewsManager(mySqlite);
+            manager.getSearchedNewsList("苹果", 1);
+            List<Map<String, Object>> history = mySqlite.getHistory("科技");
+            for(int i = 0; i < history.size(); ++i){
+                Log.i(TAG, "allTest: " + history.get(i).get("news_Title"));
+            }
         mySqlite.delete();
     }
 }

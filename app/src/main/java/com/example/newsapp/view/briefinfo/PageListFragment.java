@@ -23,6 +23,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import com.example.newsapp.presenter.*;
 
 /**
@@ -64,7 +66,7 @@ public class PageListFragment extends Fragment implements IPageListView{
         final View view = inflater.inflate(R.layout.fragment_page_list, container, false);
         mPullRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
 
-        iPageListPresenter.GetInitDatas();
+        iPageListPresenter.GetInitDatas(mCategory);
 
 
         mAdapter = new ListViewAdapter(getActivity(), mListItems);
@@ -100,6 +102,7 @@ public class PageListFragment extends Fragment implements IPageListView{
                             Bundle bundle=new Bundle();
                             bundle.putString("Category", mCategory);
                             bundle.putString("Title", mListItems.get(position - 1).map.get("Content").toString());
+                            bundle.putString("ID",mListItems.get(position - 1).map.get("ID").toString());
                             intent.putExtras(bundle);
 
                             startActivity(intent);
@@ -112,15 +115,17 @@ public class PageListFragment extends Fragment implements IPageListView{
         return view;
     }
 
-    public void InitDatas(int count , String[] news) {
+    public void InitDatas(int count , ArrayList<Map<String, Object>> simplenews) {
         // 初始化数据和数据源
-        mListItems = new ArrayList<SingleListItem>();
+                mListItems = new ArrayList<SingleListItem>();
 
-        for (int i = 0; i < count; i++)
-        {
-            map = new HashMap<String, Object>();
-            map.put("Content", mCategory + " " + news[i]);
-            if (i != 2)
+            for (int i = 0; i < count; i++)
+            {
+                map = new HashMap<String, Object>();
+                map.put("Content", simplenews.get(i).get("news_Title")+"\n"+simplenews.get(i).get("news_Author")+"\n"+simplenews.get(i).get("news_Time"));
+                map.put("ID",simplenews.get(i).get("news_ID"));
+
+                if (i != 2)
                 mListItems.add(new SingleListItem("normal", map));
             else
                 mListItems.add(new SingleListItem("shit", map));
