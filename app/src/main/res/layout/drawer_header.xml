@@ -16,12 +16,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        app:srcCompat="@drawable/ic_launcher_round" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
+        android:gravity="right"
+        android:textSize="30dp"
         android:text="设置"
         android:textColor="@color/icons"
         android:background="@color/primary_dark" />

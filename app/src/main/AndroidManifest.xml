@@ -40,6 +40,10 @@
             android:name=".view.settings.ChangeTagActivity"
             android:label="@string/title_activity_change_tag"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.settings.NotInterestActivity"
+            android:label="@string/title_activity_not_interest"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import com.example.newsapp.adapter.PageListAdapter;
 import com.example.newsapp.view.briefinfo.*;
 import com.example.newsapp.view.settings.ChangeTagActivity;
 import com.example.newsapp.view.settings.MySettingsActivity;
+import com.example.newsapp.view.settings.NotInterestActivity;
 
 
 /**
@@ -66,8 +67,10 @@ public class IBriefPresenterCompl implements IBriefPresenter {
 
         } else if (id == R.id.nav_homepage) {
             iBriefView.SetViewPager();
+        } else if (id == R.id.nav_ban) {
+            Intent intent = new Intent(ac, NotInterestActivity.class);
+            iBriefView.GetActivityStart(intent);
         }
-
 
     }
 }
