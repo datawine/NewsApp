@@ -44,6 +44,16 @@ public class MySqlite {
         }
     }
 
+    public void addBlack(String word){
+        ContentValues cValue = new ContentValues();
+        cValue.put("word", word);
+        try{
+            db.insert("blacklist", null, cValue);
+        } catch (Exception e){
+            Log.i(TAG, "addBlack: ", e);
+        }
+    }
+
     public void addTag(String tag){
         ContentValues cValue = new ContentValues();
         cValue.put("id", tag);
@@ -62,12 +72,30 @@ public class MySqlite {
         }
     }
 
+    public void delBlack(String word){
+        try{
+            db.delete("blacklist", "word=?", new String[]{word});
+        } catch (Exception e){
+            Log.i(TAG, "delBlack: ", e);
+        }
+    }
+
     public List<String> getTags(){
         List<String> result = new ArrayList<String>();
         Cursor cursor = db.query("tags", null, null, null, null, null, null);
         while(cursor.moveToNext()){
             String tag = cursor.getString(0);
             result.add(tag);
+        }
+        return result;
+    }
+
+    public List<String> getBlack(){
+        List<String> result = new ArrayList<String>();
+        Cursor cursor = db.query("blacklist", null, null, null, null, null, null);
+        while(cursor.moveToNext()){
+            String word = cursor.getString(0);
+            result.add(word);
         }
         return result;
     }
@@ -258,9 +286,12 @@ public class MySqlite {
 
 
     void delete(){
-        db.execSQL("drop table news");
-        db.execSQL("drop table tags");
-        db.execSQL("drop table blacklist");
-        db.close();
+        try{
+            db.execSQL("drop table news");
+            db.execSQL("drop table tags");
+            db.execSQL("drop table blacklist");
+        } catch (Exception e){
+            Log.i(TAG, "delete: ", e);
+        }
     }
 }

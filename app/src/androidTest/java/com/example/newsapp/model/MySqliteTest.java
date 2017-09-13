@@ -109,4 +109,17 @@ public class MySqliteTest {
         List<Map<String, Object>> newslist = manager.getSearchedNewsList("tfboys", 1);
         Log.i(TAG, "pictureTest: " + mySqlite.getPicture("2016010607122c5799f8e0ae43019b4f1887717ec63e"));
     }
+
+    @Test
+    public void blackListTest() throws Exception{
+        MySqlite mySqlite = new MySqlite();
+        mySqlite.init();
+        Log.i(TAG, "blackListTest:  0 " + mySqlite.getBlack().size());
+        mySqlite.addBlack("good");
+        mySqlite.addBlack("bad");
+        Log.i(TAG, "blackListTest:  2 " + mySqlite.getBlack().size());
+        mySqlite.delBlack("good");
+        Log.i(TAG, "blackListTest:  1 " + mySqlite.getBlack().size());
+        mySqlite.delete();
+    }
 }
