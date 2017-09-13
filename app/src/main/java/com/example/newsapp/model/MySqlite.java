@@ -160,6 +160,36 @@ public class MySqlite {
         }
     }
 
+    boolean hasRead(String news_ID){
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
+        if(cursor.getCount() < 1){
+            return false;
+        }
+        while(cursor.moveToNext()){
+            String jsonText = cursor.getString(cursor.getColumnIndex("com_json"));
+            if(jsonText.equals("")){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    boolean isStared(String news_ID){
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
+        if(cursor.getCount() < 1){
+            return false;
+        }
+        while(cursor.moveToNext()){
+            String jsonText = cursor.getString(cursor.getColumnIndex("star"));
+            if(jsonText.equals("YES")){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
     public List<Map<String, Object>> getHistory(String tag) throws JSONException {
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         Cursor cursor = db.query("news", new String[]{"sim_json"}, "tag=?", new String[]{tag}, null, null, null);

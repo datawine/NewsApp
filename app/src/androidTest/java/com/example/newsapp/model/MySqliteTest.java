@@ -64,12 +64,27 @@ public class MySqliteTest {
         }
         newslist = mySqlite.getStaredNews();
         Log.i(TAG, "starTestNum: " + newslist.size());
+        Log.i(TAG, "starTest: " + mySqlite.isStared("201512280710cb9195663cd348198f7909eb91fc0156"));
         mySqlite.star("201512280710cb9195663cd348198f7909eb91fc0156");
         newslist = mySqlite.getStaredNews();
         Log.i(TAG, "starTestNum: " + newslist.size());
+        Log.i(TAG, "starTest: " + mySqlite.isStared("201512280710cb9195663cd348198f7909eb91fc0156"));
         mySqlite.unstar("201512280710cb9195663cd348198f7909eb91fc0156");
         newslist = mySqlite.getStaredNews();
+        Log.i(TAG, "starTest: " + mySqlite.isStared("201512280710cb9195663cd348198f7909eb91fc0156"));
         Log.i(TAG, "starTestNum: " + newslist.size());
+        mySqlite.delete();
+    }
+
+    @Test
+    public void hasReadTest() throws Exception{
+        MySqlite mySqlite = new MySqlite();
+        mySqlite.init();
+        NewsManager manager = new NewsManager(mySqlite);
+        List<Map<String, Object>> newslist = manager.getSearchedNewsList("北京", 1);
+        Log.i(TAG, "hasReadTest: " + mySqlite.hasRead("201512280710cb9195663cd348198f7909eb91fc0156"));
+        manager.getNews("201512280710cb9195663cd348198f7909eb91fc0156");
+        Log.i(TAG, "hasReadTest: " + mySqlite.hasRead("201512280710cb9195663cd348198f7909eb91fc0156"));
         mySqlite.delete();
     }
 
