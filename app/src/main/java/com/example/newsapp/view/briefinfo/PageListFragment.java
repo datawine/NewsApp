@@ -79,8 +79,7 @@ public class PageListFragment extends Fragment implements IPageListView{
         iPageListPresenter.GetInitDatas(mCategory);
 
 
-        mAdapter = new ListViewAdapter(getActivity(), mListItems);
-        mPullRefreshListView.setAdapter(mAdapter);
+
 
         // 设置监听事件
         mPullRefreshListView
@@ -146,6 +145,8 @@ public class PageListFragment extends Fragment implements IPageListView{
                 else
                     mListItems.add(new SingleListItem("shit", map));
         }
+        mAdapter = new ListViewAdapter(getActivity(), mListItems);
+        mPullRefreshListView.setAdapter(mAdapter);
     }
     private class GetDataTask extends AsyncTask<Void, Void, String>
     {
@@ -196,7 +197,7 @@ public class PageListFragment extends Fragment implements IPageListView{
                         mListItems.add(new SingleListItem("shit", map));
 
                 }
-            }
+            }   
             else
             {
                 if(mCategory == "推荐")
@@ -224,6 +225,9 @@ public class PageListFragment extends Fragment implements IPageListView{
                     }
                 }
             }
+            mAdapter = new ListViewAdapter(getActivity(), mListItems);
+            mPullRefreshListView.setAdapter(mAdapter);
+
                 mAdapter.notifyDataSetChanged();
                 // Call onRefreshComplete when the list has been refreshed.
                 mPullRefreshListView.onRefreshComplete();
