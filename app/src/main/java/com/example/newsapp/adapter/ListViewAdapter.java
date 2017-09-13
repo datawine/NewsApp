@@ -96,6 +96,9 @@ public class ListViewAdapter extends BaseAdapter {
         if (type == "pic"  && listItem.map.get("Pic").toString() != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(listItem.map.get("Pic").toString());
 
+            if(bitmap == null){
+                return convertView;
+            }
             float w = bitmap.getWidth(); // 得到图片的宽，高
             float h = bitmap.getHeight();
 
@@ -124,7 +127,13 @@ public class ListViewAdapter extends BaseAdapter {
             Matrix matrix = new Matrix();
             matrix.postScale(scalex, scaley);
             Bitmap bmp = Bitmap.createBitmap(bitmap, (int)cropx, (int)cropy, (int)towidth, (int)toheight, matrix, false);
+            if(bmp == null){
+                return convertView;
+            }
             viewHolder.Image = (ImageView) convertView.findViewById(R.id.detail_info_image);
+            if(viewHolder.Image == null){
+                return convertView;
+            }
             viewHolder.Image.setImageBitmap(bmp);
         }
 

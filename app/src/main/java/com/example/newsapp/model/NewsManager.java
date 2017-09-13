@@ -57,14 +57,14 @@ public class NewsManager {
     }
 
     public List<Map<String, Object>> getSearchedNewsList(String keyWord, int pageNum) throws InterruptedException {
-        String url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=10";
+        String url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=100";
         List<Map<String, Object>> result;
         if(url.equals(goodUrl)) {
             result = newsListParser(goodJson);
         } else {
-            result = newsListParser(getPage(baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=10"));
+            result = newsListParser(getPage(baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=100"));
         }
-        goodUrl = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=10";
+        goodUrl = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=100";
         goodJson = getPage(goodUrl);
         newsListParserWithoutBlock(goodJson);
         return result;
@@ -73,7 +73,7 @@ public class NewsManager {
         List<Map<String, Object>> result;
         int tagInt = tag2int.get(tag);
         tagPageNum[tagInt] += 1;
-        String url = baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10&category=" + tagInt;
+        String url = baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100&category=" + tagInt;
         String jsonText = null;
         if(url.equals(goodUrl)){
             jsonText = goodJson;
@@ -84,10 +84,10 @@ public class NewsManager {
         }
         if(jsonText == null){
             tagPageNum[tagInt] = 1;
-            jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10&category=" + tagInt);
+            jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100&category=" + tagInt);
             result = newsListParser(jsonText);
         }
-        goodUrl = baseUrl + "/latest?pageNo=" + (tagPageNum[tagInt] + 1) + "&pageSize=10&category=" + tagInt;
+        goodUrl = baseUrl + "/latest?pageNo=" + (tagPageNum[tagInt] + 1) + "&pageSize=100&category=" + tagInt;
         goodJson = getPage(goodUrl);
         newsListParserWithoutBlock(goodJson);
         return result;
@@ -96,7 +96,8 @@ public class NewsManager {
         List<Map<String, Object>> result;
         int tagInt = 0;
         tagPageNum[tagInt] += 1;
-        String url = baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10";
+        String url = baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100";
+        Log.i(TAG, "getLatestNewsList: !!!" + url);
         String jsonText = null;
         if(url.equals(goodUrl)){
             jsonText = goodJson;
@@ -105,14 +106,16 @@ public class NewsManager {
             jsonText = getPage(url);
             result = newsListParser(jsonText);
         }
+        Log.i(TAG, "getLatestNewsList: !!!" + jsonText);
         if(jsonText == null){
             tagPageNum[tagInt] = 1;
-            jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10");
+            jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100");
             result = newsListParser(jsonText);
         }
-        goodUrl = baseUrl + "/latest?pageNo=" + (tagPageNum[tagInt] + 1) + "&pageSize=10";
+        goodUrl = baseUrl + "/latest?pageNo=" + (tagPageNum[tagInt] + 1) + "&pageSize=100";
         goodJson = getPage(goodUrl);
         newsListParserWithoutBlock(goodJson);
+        Log.i(TAG, "getLatestNewsList: !!!" + "success");
         return result;
     }
     public Map<String, Object> getNews(String newsId) throws InterruptedException, JSONException {
@@ -232,6 +235,8 @@ public class NewsManager {
                     }
                 }
                 result.add(map);
+                if(result.size() >= 10)
+                    break;
             }
         } catch (Exception e)
         {
@@ -285,6 +290,9 @@ public class NewsManager {
                     }
                 }
                 result.add(map);
+                if(result.size() >= 10){
+                    break;
+                }
             }
         } catch (Exception e)
         {
