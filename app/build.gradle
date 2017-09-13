@@ -33,6 +33,7 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.zhy:flowlayout-lib:1.0.3'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     testCompile 'junit:junit:4.12'
     compile files('libs/Msc.jar')
     compile files('libs/Sunflower.jar')
