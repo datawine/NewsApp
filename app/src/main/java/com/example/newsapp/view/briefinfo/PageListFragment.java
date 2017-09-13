@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.ListViewAdapter;
 import com.example.newsapp.presenter.IChangePresenter;
@@ -42,6 +43,8 @@ public class PageListFragment extends Fragment implements IPageListView{
 
     private IPageListPresenter iPageListPresenter;
 
+    private static PageListFragment instance;
+
     public static PageListFragment newInstance(String category) {
         Bundle args = new Bundle();
         args.putString(CATEGORY, category);
@@ -50,7 +53,11 @@ public class PageListFragment extends Fragment implements IPageListView{
         return pageListFragment;
     }
 
+    public static PageListFragment getInstance() {
 
+        return instance;
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,8 @@ public class PageListFragment extends Fragment implements IPageListView{
         mCategory = getArguments().getString(CATEGORY);
 
         iPageListPresenter = new IPageListPresenterCompl(this);
+
+        instance = this;
     }
 
     @Nullable
@@ -172,5 +181,11 @@ public class PageListFragment extends Fragment implements IPageListView{
             // Call onRefreshComplete when the list has been refreshed.
             mPullRefreshListView.onRefreshComplete();
         }
+    }
+
+    public void Refresh()
+    {
+        mAdapter.notifyDataSetChanged();
+        mPullRefreshListView.onRefreshComplete();
     }
 }

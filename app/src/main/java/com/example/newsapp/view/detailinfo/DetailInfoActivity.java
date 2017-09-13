@@ -29,6 +29,8 @@ import com.example.newsapp.presenter.*;
 
 import org.json.JSONException;
 
+import java.util.List;
+
 public class DetailInfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,IDetailView {
 
@@ -38,6 +40,7 @@ public class DetailInfoActivity extends AppCompatActivity
     private TextView articleTitle;
     private ImageButton rtnBtn;
     private TextView link;
+    private TextView link2;
     private String Id;
     private TextView mAuthor, mTime;
     private String Author, Time;
@@ -87,7 +90,13 @@ public class DetailInfoActivity extends AppCompatActivity
 
         //超链接测试
 
-        iDetailPresenter.GetKeyWords(Id);
+        try {
+            iDetailPresenter.GetKeyWords(Id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 //        SpannableStringBuilder builder = new SpannableStringBuilder(
 //                charSequence);
@@ -165,13 +174,20 @@ public class DetailInfoActivity extends AppCompatActivity
         setContent(content);
     }
 
-    public void SetKeyWords(String[] keyWords)
+    public void SetKeyWords(List<String> keyWords)
     {
-        String html = "<a href='"+"https://baike.baidu.com/item/"+keyWords[0]+"'>"+keyWords[0]+"</a> ";
+        String html = "<a href='"+"https://baike.baidu.com/item/"+keyWords.get(0)+"'>"+keyWords.get(0)+"</a> ";
         CharSequence charSequence = Html.fromHtml(html);
         link = (TextView) findViewById(R.id.test_link);
         link.setLinksClickable(true);
         link.setMovementMethod(LinkMovementMethod.getInstance());
         link.setText(charSequence);
+
+        String html2 = "<a href='"+"https://baike.baidu.com/item/"+keyWords.get(1)+"'>"+keyWords.get(1)+"</a> ";
+        CharSequence charSequence2 = Html.fromHtml(html2);
+        link2 = (TextView) findViewById(R.id.test_link);
+        link2.setLinksClickable(true);
+        link2.setMovementMethod(LinkMovementMethod.getInstance());
+        link2.setText(charSequence2);
     }
 }

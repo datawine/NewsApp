@@ -17,6 +17,7 @@ import com.example.newsapp.view.settings.MySettingsActivity;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -84,11 +85,13 @@ public class IDetailPresenterCompl implements IDetailPresenter {
 
         List<Map<String,Object>> keys = (List<Map<String, Object>>)app.GetKeyWords(ID);
 
-        for(int i=0;i<keys.size();i++)
-        {
-            Map<String,Object> key = keys.get(i);
+        List<String> key = new ArrayList<String>();
 
-            key.keySet();
+        for(int i=0;i<3;i++)
+        {
+            key.add((String)keys.get(i).get("word"));
         }
+
+        iDetailView.SetKeyWords(key);
     }
 }

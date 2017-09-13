@@ -42,12 +42,21 @@ public class BriefInfoActivity extends FragmentActivity
 
     private IBriefPresenter iBriefPresenter;
 
+    private static BriefInfoActivity instance;
+
+    public static BriefInfoActivity getInstance()
+    {
+        return instance;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brief_info);
 
+
+        instance = this;
 
         //初始化ui
         iBriefPresenter = new IBriefPresenterCompl(this);
@@ -83,6 +92,14 @@ public class BriefInfoActivity extends FragmentActivity
     @Override
     public void onResume() {
         super.onResume();
+
+        iBriefPresenter = new IBriefPresenterCompl(this);
+        pgAdapter = new PageListAdapter(getSupportFragmentManager(), this, len, category);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(pgAdapter);
+        tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

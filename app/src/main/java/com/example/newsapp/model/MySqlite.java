@@ -37,7 +37,7 @@ public class MySqlite {
         }
     }
 
-    void addTag(String tag){
+    public void addTag(String tag){
         ContentValues cValue = new ContentValues();
         cValue.put("id", tag);
         try{
@@ -47,7 +47,7 @@ public class MySqlite {
         }
     }
 
-    void delTag(String tag){
+    public void delTag(String tag){
         try{
             db.delete("tags", "id=?", new String[]{tag});
         } catch (Exception e){
@@ -55,7 +55,7 @@ public class MySqlite {
         }
     }
 
-    List<String> getTags(){
+    public List<String> getTags(){
         List<String> result = new ArrayList<String>();
         Cursor cursor = db.query("tags", null, null, null, null, null, null);
         while(cursor.moveToNext()){
@@ -136,7 +136,7 @@ public class MySqlite {
         return result;
     }
 
-    List<Map<String, Object>> getStaredNews(){
+    public List<Map<String, Object>> getStaredNews(){
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "star=?", new String[]{"YES"}, null, null, null);
         while(cursor.moveToNext()){
@@ -160,7 +160,7 @@ public class MySqlite {
         }
     }
 
-    List<Map<String, Object>> getHistory(String tag) throws JSONException {
+    public List<Map<String, Object>> getHistory(String tag) throws JSONException {
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         Cursor cursor = db.query("news", new String[]{"sim_json"}, "tag=?", new String[]{tag}, null, null, null);
         while(cursor.moveToNext()){

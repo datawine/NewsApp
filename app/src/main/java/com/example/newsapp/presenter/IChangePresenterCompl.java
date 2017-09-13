@@ -1,5 +1,6 @@
 package com.example.newsapp.presenter;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.view.settings.IChangeView;
 
 /**
@@ -9,6 +10,7 @@ import com.example.newsapp.view.settings.IChangeView;
 public class IChangePresenterCompl implements IChangePresenter{
 
     private IChangeView iChangeView;
+    private MyApplication app;
 
     public IChangePresenterCompl(IChangeView iChangeView)
     {
@@ -20,9 +22,11 @@ public class IChangePresenterCompl implements IChangePresenter{
     public void GetInitData()
     {
 
-        String[] vals = {"测试1","测试2","测试3"};
+        app = MyApplication.getInstance();
 
-        String showval = "显示测试";
+        String[] vals ={"科技","教育","军事","国内","社会", "文化", "汽车","国际","体育","财经","健康","娱乐"};
+
+        String[] showval = app.GetTags();
 
         iChangeView.SetVals(vals);
 

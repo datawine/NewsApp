@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by jzp1025 on 17/9/11.
  */
 
-public class IPageListPresenterCompl extends Activity implements IPageListPresenter {
+public class    IPageListPresenterCompl extends Activity implements IPageListPresenter {
 
     private IPageListView iPageListView;
     private MyApplication app;
