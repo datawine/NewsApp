@@ -281,4 +281,12 @@ public class MyApplication extends Application {
         mTts.startSpeaking(content, mSynListener);
 
     }
+    public boolean isSpeaking()
+    {
+        return mTts.isSpeaking();
+    }
+    public void StopVoice()
+    {
+        mTts.stopSpeaking();
+    }
 }
