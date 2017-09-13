@@ -63,12 +63,28 @@ public class NewsManager {
     public List<Map<String, Object>> getLatestNewsList(String tag) throws InterruptedException {
         int tagInt = tag2int.get(tag);
         tagPageNum[tagInt] += 1;
-        return newsListParser(getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10&category=" + tagInt));
+        String jsonText = getPage(getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10&category=" + tagInt));
+        if(jsonText == null){
+            tagPageNum[tagInt] = 1;
+            jsonText = getPage(getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10&category=" + tagInt));
+        }
+        Log.i(TAG, "getLatestNewsList: !!!!" + jsonText);
+        List<Map<String, Object>> result = newsListParser(jsonText);
+        Log.i(TAG, "getLatestNewsList: !!!!" + "success!");
+        return result;
     }
     public List<Map<String, Object>> getLatestNewsList() throws InterruptedException{
         int tagInt = 0;
         tagPageNum[tagInt] += 1;
-        return newsListParser(getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10"));
+        String jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10");
+        if(jsonText == null){
+            tagPageNum[tagInt] = 1;
+            jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=10");
+        }
+        Log.i(TAG, "getLatestNewsList: !!!!" + jsonText);
+        List<Map<String, Object>> result = newsListParser(jsonText);
+        Log.i(TAG, "getLatestNewsList: !!!!" + "success!");
+        return result;
     }
     public Map<String, Object> getNews(String newsId) throws InterruptedException, JSONException {
         String jsonText = null;
