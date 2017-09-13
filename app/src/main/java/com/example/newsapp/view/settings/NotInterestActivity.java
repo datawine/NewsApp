@@ -16,6 +16,7 @@ import com.example.newsapp.R;
 import com.example.newsapp.adapter.NoInterestAdapter;
 
 import java.util.ArrayList;
+import java.util.*;
 
 public class NotInterestActivity extends AppCompatActivity {
     private ArrayList<String> mBanVal;
@@ -34,10 +35,10 @@ public class NotInterestActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //--------------初始化数据
-        mBanVal = new ArrayList<String>();
-        // mBanVal = app.GetBanList();
+        app = MyApplication.getInstance();
 
+        //--------------初始化数据
+        mBanVal = app.GetBanList();
         //
 
         mAddBtn = (ImageButton) findViewById(R.id.btn_nointerest_add);
@@ -55,7 +56,9 @@ public class NotInterestActivity extends AppCompatActivity {
                 //--------------添加屏蔽关键词
                 mBanVal.add(addcontent);
 
-                //app.AddBanWord(addcontent);
+
+                app = MyApplication.getInstance();
+                app.AddBanWord(addcontent);
 
                 mAdapter.notifyDataSetChanged();
 
@@ -69,8 +72,14 @@ public class NotInterestActivity extends AppCompatActivity {
                 Snackbar.make(view, "删除！" + mBanVal.get(position), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
+
+                app = MyApplication.getInstance();
                 //------------删除关键词
-                //app.DelBanWord(mBanVal.get(position));
+                app.DelBanWord(mBanVal.get(position));
+
+
+                mBanVal.remove(position);
+                mAdapter.notifyDataSetChanged();
 
                 return false;
             }

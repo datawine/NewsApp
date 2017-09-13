@@ -192,7 +192,7 @@ public class PageListFragment extends Fragment implements IPageListView{
 
 
         for (int i = 0; i < count; i++)
-        // if(CheckBanNews((String)simplenews.get(i).get("news_ID")))
+         if(CheckBanNews((String)simplenews.get(i).get("news_ID")))
         {
             map = new HashMap<String, Object>();
             map.put("Title", simplenews.get(i).get("news_Title"));
@@ -224,26 +224,24 @@ public class PageListFragment extends Fragment implements IPageListView{
 
 
         MyApplication app = MyApplication.getInstance();
-        List<Map<String,Object>> keywordslist = new ArrayList<Map<String,Object>>();
 
-        banList = app.GetBanList();
-
+        String title ="";
         try {
-            keywordslist = app.GetKeyWords(ID);
-
-
-            for(int i=0;i<banList.size();i++)
-                for(int j=0;j<keywordslist.size();j++)
-                    if(banList.get(i) == keywordslist.get(j).get("Word"))
-                        return false;
-
-            return true;
+            title = (String) app.GetNews(ID).get("news_Title");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return false;
+
+        banList = app.GetBanList();
+
+
+        for(int i=0;i<banList.size();i++)
+            if(title.indexOf(banList.get(i))!= -1)
+                return false;
+
+        return true;
 
 
     }
@@ -289,7 +287,7 @@ public class PageListFragment extends Fragment implements IPageListView{
                 List<Map<String, Object>> mapList = app.GetNewList();
 
                 for (int i = 0; i < mapList.size(); i++)
-                //    if(CheckBanNews((String)mapList.get(i).get("news_ID")))
+                    if(CheckBanNews((String)mapList.get(i).get("news_ID")))
                 {
 
                     map = new HashMap<String, Object>();
@@ -325,7 +323,7 @@ public class PageListFragment extends Fragment implements IPageListView{
                     List<Map<String, Object>> mapList = app.GetNewList();
 
                     for (int i = 0; i < mapList.size(); i++)
-                    //          if(CheckBanNews((String)mapList.get(i).get("news_ID")))
+                        if(CheckBanNews((String)mapList.get(i).get("news_ID")))
                     {
 
                         map = new HashMap<String, Object>();

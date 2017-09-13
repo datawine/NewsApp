@@ -312,9 +312,7 @@ public class MyApplication extends Application {
     {
         ArrayList<String> list;
 
-        list = new ArrayList<String>();
-
-        //list = mySqlite.GetBanList();
+        list = (ArrayList<String>) mySqlite.getBlack();
 
 
         return list;
@@ -322,14 +320,14 @@ public class MyApplication extends Application {
 
     public void AddBanWord(String word)
     {
-        //mySqlite.AddBanWord(word);
+        mySqlite.addBlack(word);
 
 
     }
 
     public void DelBanWord(String word)
     {
-//        mySqlite.DelBanWord(word);
+        mySqlite.delBlack(word);
     }
 
     public boolean getPicMode() {
