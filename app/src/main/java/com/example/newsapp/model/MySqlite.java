@@ -26,7 +26,7 @@ public class MySqlite {
     }
 
     public void init(){
-        db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.example.newsapp/news.db", null);
+        db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.example.newsapp/newss.db", null);
         try {
             db.execSQL("create table news(id text primary key, tag text, sim_json text, com_json text, star text, read text)");
         } catch (Exception e){
