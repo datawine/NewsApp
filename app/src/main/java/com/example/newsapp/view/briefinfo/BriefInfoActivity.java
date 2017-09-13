@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.PageListAdapter;
 import com.example.newsapp.view.settings.ChangeTagActivity;
@@ -41,6 +42,8 @@ public class BriefInfoActivity extends FragmentActivity
     private String[] mStrs = {"aaa", "bbb", "ccc", "airsaid"};
 
     private IBriefPresenter iBriefPresenter;
+
+    private MyApplication app;
 
     private static BriefInfoActivity instance;
 
@@ -74,10 +77,29 @@ public class BriefInfoActivity extends FragmentActivity
         mSearchView = (SearchView) findViewById(R.id.searchView);
 
         // 设置搜索文本监听
+
+        mSearchView.setSubmitButtonEnabled(true);
+
+        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+
+            @Override
+            public boolean onClose() {
+                return true;
+            }
+        });
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                app = MyApplication.getInstance();
+
+                app.SetSearchText(query);
+
+                BriefInfoActivity bri = BriefInfoActivity.getInstance();
+
+                bri.onResume();
+
                 return false;
             }
 

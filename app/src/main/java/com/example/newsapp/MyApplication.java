@@ -31,6 +31,8 @@ public class MyApplication extends Application {
     private
     static MyApplication instance;
 
+    private String query;
+
     public
     static MyApplication getInstance() {
 
@@ -46,6 +48,8 @@ public class MyApplication extends Application {
         mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         instance = this;
+
+        query = "";
 
 
                 mySqlite = new MySqlite();
@@ -96,6 +100,7 @@ public class MyApplication extends Application {
 
         tags.add("推荐");
         tags.add("收藏夹");
+        tags.add("搜索");
 
         List<String> tmp = mySqlite.getTags();
 
@@ -123,5 +128,15 @@ public class MyApplication extends Application {
         BriefInfoActivity bri = BriefInfoActivity.getInstance();
 
         bri.onResume();
+    }
+
+    public void SetSearchText(String query)
+    {
+        this.query = query;
+    }
+
+    public String GetQuery()
+    {
+        return this.query;
     }
 }
