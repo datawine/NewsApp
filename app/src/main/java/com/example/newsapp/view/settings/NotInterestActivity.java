@@ -36,7 +36,7 @@ public class NotInterestActivity extends AppCompatActivity {
 
         //--------------初始化数据
         mBanVal = new ArrayList<String>();
-       // mBanVal = app.GetBanList();
+        // mBanVal = app.GetBanList();
 
         //
 
@@ -69,7 +69,7 @@ public class NotInterestActivity extends AppCompatActivity {
                 Snackbar.make(view, "删除！" + mBanVal.get(position), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-               //------------删除关键词
+                //------------删除关键词
                 //app.DelBanWord(mBanVal.get(position));
 
                 return false;

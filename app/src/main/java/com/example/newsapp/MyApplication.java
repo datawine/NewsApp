@@ -332,7 +332,9 @@ public class MyApplication extends Application {
 //        mySqlite.DelBanWord(word);
     }
 
-    public boolean getPicMode() {return picMode;
+    public boolean getPicMode() {
+
+        return picMode;
     }
 
     public void setPicMode(boolean b) {picMode = b;
