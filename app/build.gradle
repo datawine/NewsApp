@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
+
+
     defaultConfig {
         applicationId "com.example.newsapp"
         minSdkVersion 16
@@ -32,4 +34,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.zhy:flowlayout-lib:1.0.3'
     testCompile 'junit:junit:4.12'
+    compile files('libs/Msc.jar')
+    compile files('libs/Sunflower.jar')
 }

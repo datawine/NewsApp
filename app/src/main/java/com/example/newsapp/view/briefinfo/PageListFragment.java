@@ -101,11 +101,21 @@ public class PageListFragment extends Fragment implements IPageListView{
                                 .setLastUpdatedLabel(label);
 
                         if (mPullRefreshListView.isHeaderShown()) {
+
+                            MyApplication app = MyApplication.getInstance();
+
+                            app.SetHeaderorFooter(false);
+
                             // 模拟加载任务
                             new GetDataTask().execute();
 
+
                         }
                         else if (mPullRefreshListView.isFooterShown()){
+                            MyApplication app = MyApplication.getInstance();
+
+                            app.SetHeaderorFooter(true);
+
                             new GetDataTask().execute();
 
                         }
@@ -149,6 +159,11 @@ public class PageListFragment extends Fragment implements IPageListView{
                 map.put("Content", simplenews.get(i).get("news_Title")+"\n"+simplenews.get(i).get("news_Author")+"\n"+simplenews.get(i).get("news_Time"));
                 map.put("ID",simplenews.get(i).get("news_ID"));
 
+                MyApplication app = MyApplication.getInstance();
+                map.put("IsRead",app.IsRead((String)simplenews.get(i).get("news_ID")));
+
+
+
                 if (i != 2)
                     mListItems.add(new SingleListItem("normal", map));
                 else
@@ -185,9 +200,12 @@ public class PageListFragment extends Fragment implements IPageListView{
         @Override
         protected void onPostExecute(String result)
         {
+            MyApplication app = MyApplication.getInstance();
 
-            if(mCategory != "推荐" && mCategory != "收藏夹") {
-                MyApplication app = MyApplication.getInstance();
+            boolean flag = app.GetFlag();
+
+            if(mCategory != "推荐" && mCategory != "收藏夹" && flag) {
+                app = MyApplication.getInstance();
 
                 List<Map<String, Object>> mapList = app.GetNewList();
 
@@ -200,6 +218,9 @@ public class PageListFragment extends Fragment implements IPageListView{
                     map.put("Content", mapList.get(i).get("news_Title") + "\n" + mapList.get(i).get("news_Author") + "\n" + mapList.get(i).get("news_Time"));
                     map.put("ID", mapList.get(i).get("news_ID"));
 
+                    app = MyApplication.getInstance();
+                    map.put("IsRead",app.IsRead((String)mapList.get(i).get("news_ID")));
+
                     if (mItemCount % 4 != 0)
                         mListItems.add(new SingleListItem("normal", map));
                     else
@@ -209,11 +230,11 @@ public class PageListFragment extends Fragment implements IPageListView{
             }   
             else
             {
-                if(mCategory == "推荐")
+                if(mCategory != "收藏夹" && !flag )
                 {
                     mListItems = new ArrayList<SingleListItem>();
 
-                    MyApplication app = MyApplication.getInstance();
+                    app = MyApplication.getInstance();
 
                     List<Map<String, Object>> mapList = app.GetNewList();
 
@@ -225,6 +246,9 @@ public class PageListFragment extends Fragment implements IPageListView{
                         map.put("Time", mapList.get(i).get("news_Time"));
                         map.put("Content", mapList.get(i).get("news_Title") + "\n" + mapList.get(i).get("news_Author") + "\n" + mapList.get(i).get("news_Time"));
                         map.put("ID", mapList.get(i).get("news_ID"));
+
+                        app = MyApplication.getInstance();
+                        map.put("IsRead",app.IsRead((String)mapList.get(i).get("news_ID")));
 
                         if (mItemCount % 4 != 0)
                             mListItems.add(new SingleListItem("normal", map));

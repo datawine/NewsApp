@@ -110,8 +110,22 @@ public class DetailInfoActivity extends AppCompatActivity
         fab_mac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                app = MyApplication.getInstance();
+
+                if(app.isSpeaking())
+                {
+                    Snackbar.make(view, "停止语音播报", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                    app.StopVoice();
+                }
+                else {
+                    Snackbar.make(view, "开始语音播报", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                    iDetailPresenter.GetVoice(Id);
+                }
             }
         });
         //
