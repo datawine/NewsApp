@@ -8,4 +8,5 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_my_settings">MySettingsActivity</string>
     <string name="title_activity_change_tag">ChangeTagActivity</string>
+    <string name="title_activity_test">test</string>
 </resources>

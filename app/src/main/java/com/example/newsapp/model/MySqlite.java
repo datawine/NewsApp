@@ -136,7 +136,7 @@ public class MySqlite {
         return result;
     }
 
-    List<Map<String, Object>> getStaredNews(){
+    public List<Map<String, Object>> getStaredNews(){
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "star=?", new String[]{"YES"}, null, null, null);
         while(cursor.moveToNext()){

@@ -3,7 +3,9 @@ package com.example.newsapp.view.detailinfo;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -69,14 +71,35 @@ public class DetailInfoActivity extends AppCompatActivity
         mAuthor.setTextColor(getResources().getColor(R.color.secondary_text));
         mTime.setTextColor(getResources().getColor(R.color.secondary_text));
 
+        //浮动按钮
+        FloatingActionButton fab_mac = (FloatingActionButton) findViewById(R.id.fab_mac);
+        FloatingActionButton fab_star = (FloatingActionButton) findViewById(R.id.fab_star);
+        fab_mac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
-        //这里是数据加载
+        fab_star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        //
+
+
+                //这里是数据加载
 
         Id = bundle.getString("ID");
 
         try {
             iDetailPresenter.GetTitle(Id);
             iDetailPresenter.GetContent(Id);
+            iDetailPresenter.GetKeyWords(Id);
         }
         catch(JSONException e){}
         catch(InterruptedException e){}
@@ -87,7 +110,6 @@ public class DetailInfoActivity extends AppCompatActivity
 
         //超链接测试
 
-        iDetailPresenter.GetKeyWords(Id);
 
 //        SpannableStringBuilder builder = new SpannableStringBuilder(
 //                charSequence);

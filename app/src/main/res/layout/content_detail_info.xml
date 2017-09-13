@@ -34,76 +34,90 @@
 
     </RelativeLayout>
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/background"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbars="vertical"
-        android:fadingEdge="vertical">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:text="wfawefafawe"
-                android:textSize="30dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/detail_bar_title"
-                android:layout_centerInParent="true" />
+        <ScrollView
+            android:id="@+id/detail_scroll"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:background="@color/background"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:fadingEdge="vertical">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:text="wfawefafawe"
-                    android:textSize="10dp"
+                    android:textSize="30dp"
                     android:paddingLeft="20dp"
-                    android:paddingTop="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/detail_author" />
-
-                <TextView
-                    android:text="wfawefafawe"
-                    android:textSize="10dp"
-                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
                     android:paddingTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/detail_time" />
+                    android:id="@+id/detail_bar_title"
+                    android:layout_centerInParent="true" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="wfawefafawe"
+                        android:textSize="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_author" />
+
+                    <TextView
+                        android:text="wfawefafawe"
+                        android:textSize="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_time" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:text="aewtaetawetaetawetaeawetawetawetatawtawetaw"
+                    android:textSize="16dp"
+                    android:paddingTop="30dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/primary_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/news_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:id="@+id/padding"/>
+
+                <TextView
+                    android:textColor="@color/primary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/test_link" />
 
             </LinearLayout>
 
+        </ScrollView>
 
+    </LinearLayout>
 
-            <TextView
-                android:text="aewtaetawetaetawetaeawetawetawetatawtawetaw"
-                android:textSize="16dp"
-                android:paddingTop="30dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textColor="@color/primary_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/news_content" />
-
-            <TextView
-                android:textColor="@color/primary_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/test_link" />
-
-        </LinearLayout>
-
-    </ScrollView>
 </LinearLayout>
+
+
