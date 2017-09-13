@@ -37,6 +37,11 @@ public class MySqlite {
         } catch (Exception e){
             //Log.i(TAG, "init: ", e);
         }
+        try{
+            db.execSQL("create table blacklist(word text primary key)");
+        } catch (Exception e){
+
+        }
     }
 
     public void addTag(String tag){
@@ -255,6 +260,7 @@ public class MySqlite {
     void delete(){
         db.execSQL("drop table news");
         db.execSQL("drop table tags");
+        db.execSQL("drop table blacklist");
         db.close();
     }
 }
