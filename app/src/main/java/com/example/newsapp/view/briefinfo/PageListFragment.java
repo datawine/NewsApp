@@ -19,6 +19,7 @@ import com.example.newsapp.presenter.IChangePresenter;
 import com.example.newsapp.presenter.IPageListPresenter;
 import com.example.newsapp.singleitem.SingleListItem;
 import com.example.newsapp.view.detailinfo.DetailInfoActivity;
+import com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -79,7 +80,7 @@ public class PageListFragment extends Fragment implements IPageListView{
         iPageListPresenter.GetInitDatas(mCategory);
 
 
-
+        mPullRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
 
         // 设置监听事件
         mPullRefreshListView
@@ -99,8 +100,16 @@ public class PageListFragment extends Fragment implements IPageListView{
                         refreshView.getLoadingLayoutProxy()
                                 .setLastUpdatedLabel(label);
 
-                        // 模拟加载任务
-                        new GetDataTask().execute();
+                        if (mPullRefreshListView.isHeaderShown()) {
+                            // 模拟加载任务
+                            new GetDataTask().execute();
+
+                        }
+                        else if (mPullRefreshListView.isFooterShown()){
+                            new GetDataTask().execute();
+
+                        }
+
                     }
                 });
 
