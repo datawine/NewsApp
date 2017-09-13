@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import java.util.Map;
 
 import com.example.newsapp.presenter.*;
 
+import org.json.JSONException;
+
 /**
  * Created by junxian on 9/7/2017.
  */
@@ -44,6 +47,8 @@ public class PageListFragment extends Fragment implements IPageListView{
     HashMap<String, Object> map;
 
     private IPageListPresenter iPageListPresenter;
+
+    private List<String> banList;
 
     private static PageListFragment instance;
 
@@ -101,11 +106,21 @@ public class PageListFragment extends Fragment implements IPageListView{
                                 .setLastUpdatedLabel(label);
 
                         if (mPullRefreshListView.isHeaderShown()) {
+
+                            MyApplication app = MyApplication.getInstance();
+
+                            app.SetHeaderorFooter(false);
+
                             // 模拟加载任务
                             new GetDataTask().execute();
 
+
                         }
                         else if (mPullRefreshListView.isFooterShown()){
+                            MyApplication app = MyApplication.getInstance();
+
+                            app.SetHeaderorFooter(true);
+
                             new GetDataTask().execute();
 
                         }
@@ -114,49 +129,92 @@ public class PageListFragment extends Fragment implements IPageListView{
                 });
 
         //设置点击事件
-       mPullRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(getActivity(), DetailInfoActivity.class);
-                            Bundle bundle=new Bundle();
-                            bundle.putString("Category", mCategory);
-                            bundle.putString("Title", mListItems.get(position - 1).map.get("Content").toString());
-                            bundle.putString("ID",mListItems.get(position - 1).map.get("ID").toString());
-                            bundle.putString("Author", mListItems.get(position - 1).map.get("Author").toString());
-                            bundle.putString("Time", mListItems.get(position - 1).map.get("Time").toString());
-                            intent.putExtras(bundle);
+        mPullRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), DetailInfoActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("Category", mCategory);
+                bundle.putString("Title", mListItems.get(position - 1).map.get("Content").toString());
+                bundle.putString("ID",mListItems.get(position - 1).map.get("ID").toString());
+                bundle.putString("Author", mListItems.get(position - 1).map.get("Author").toString());
+                bundle.putString("Time", mListItems.get(position - 1).map.get("Time").toString());
+                intent.putExtras(bundle);
 
-                            startActivity(intent);
+                startActivity(intent);
 
 //                            int forDetailCode = 1000;
 //                            startActivityForResult(intent, forDetailCode);
-                        }
-                    });
+            }
+        });
 
         return view;
     }
 
     public void InitDatas(int count , ArrayList<Map<String, Object>> simplenews) {
         // 初始化数据和数据源
-                mListItems = new ArrayList<SingleListItem>();
+        mListItems = new ArrayList<SingleListItem>();
 
-            for (int i = 0; i < count; i++)
-            {
-                map = new HashMap<String, Object>();
-                map.put("Title", simplenews.get(i).get("news_Title"));
-                map.put("Author", simplenews.get(i).get("news_Author"));
-                map.put("Time", simplenews.get(i).get("news_Time"));
-                map.put("Content", simplenews.get(i).get("news_Title")+"\n"+simplenews.get(i).get("news_Author")+"\n"+simplenews.get(i).get("news_Time"));
-                map.put("ID",simplenews.get(i).get("news_ID"));
+        MyApplication app;
 
-                if (i != 2)
-                    mListItems.add(new SingleListItem("normal", map));
-                else
-                    mListItems.add(new SingleListItem("shit", map));
+
+
+        for (int i = 0; i < count; i++)
+         // if(CheckBanNews((String)simplenews.get(i).get("news_ID")))
+        {
+            map = new HashMap<String, Object>();
+            map.put("Title", simplenews.get(i).get("news_Title"));
+            map.put("Author", simplenews.get(i).get("news_Author"));
+            map.put("Time", simplenews.get(i).get("news_Time"));
+            map.put("Content", simplenews.get(i).get("news_Title")+"\n"+simplenews.get(i).get("news_Author")+"\n"+simplenews.get(i).get("news_Time"));
+            map.put("ID",simplenews.get(i).get("news_ID"));
+
+            app = MyApplication.getInstance();
+            map.put("IsRead",app.IsRead((String)simplenews.get(i).get("news_ID")));
+
+            if(app.IsRead((String)simplenews.get(i).get("news_ID")))Log.i("change mode","Read");
+
+
+            // || simplenews.get(i).get("getPicture")==null;
+            if (!app.getPicMode())
+                mListItems.add(new SingleListItem("normal", map));
+            else
+                mListItems.add(new SingleListItem("shit", map));
         }
         mAdapter = new ListViewAdapter(getActivity(), mListItems);
         mPullRefreshListView.setAdapter(mAdapter);
     }
+
+    private boolean CheckBanNews(String ID) {
+
+
+
+
+        MyApplication app = MyApplication.getInstance();
+        List<Map<String,Object>> keywordslist = new ArrayList<Map<String,Object>>();
+
+        banList = app.GetBanList();
+
+        try {
+            keywordslist = app.GetKeyWords(ID);
+
+
+            for(int i=0;i<banList.size();i++)
+                for(int j=0;j<keywordslist.size();j++)
+                    if(banList.get(i) == keywordslist.get(j).get("Word"))
+                        return false;
+
+            return true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+
+    }
+
     private class GetDataTask extends AsyncTask<Void, Void, String>
     {
 
@@ -185,13 +243,18 @@ public class PageListFragment extends Fragment implements IPageListView{
         @Override
         protected void onPostExecute(String result)
         {
+            MyApplication app = MyApplication.getInstance();
 
-            if(mCategory != "推荐" && mCategory != "收藏夹") {
-                MyApplication app = MyApplication.getInstance();
+            boolean flag = app.GetFlag();
+
+            if(mCategory != "推荐" && mCategory != "收藏夹" && flag) {
+                app = MyApplication.getInstance();
 
                 List<Map<String, Object>> mapList = app.GetNewList();
 
-                for (int i = 0; i < mapList.size(); i++) {
+                for (int i = 0; i < mapList.size(); i++)
+                //    if(CheckBanNews((String)mapList.get(i).get("news_ID")))
+                {
 
                     map = new HashMap<String, Object>();
                     map.put("Title", mapList.get(i).get("news_Title"));
@@ -200,24 +263,31 @@ public class PageListFragment extends Fragment implements IPageListView{
                     map.put("Content", mapList.get(i).get("news_Title") + "\n" + mapList.get(i).get("news_Author") + "\n" + mapList.get(i).get("news_Time"));
                     map.put("ID", mapList.get(i).get("news_ID"));
 
-                    if (mItemCount % 4 != 0)
+                    app = MyApplication.getInstance();
+                    map.put("IsRead",app.IsRead((String)mapList.get(i).get("news_ID")));
+
+
+                    // || mapList.get(i).get("getPicture")==null;
+                    if (!app.getPicMode())
                         mListItems.add(new SingleListItem("normal", map));
                     else
-                        mListItems.add(new SingleListItem("shit", map));
+                        mListItems.add(new SingleListItem("pic", map));
 
                 }
-            }   
+            }
             else
             {
-                if(mCategory == "推荐")
+                if(mCategory != "收藏夹" && !flag )
                 {
                     mListItems = new ArrayList<SingleListItem>();
 
-                    MyApplication app = MyApplication.getInstance();
+                    app = MyApplication.getInstance();
 
                     List<Map<String, Object>> mapList = app.GetNewList();
 
-                    for (int i = 0; i < mapList.size(); i++) {
+                    for (int i = 0; i < mapList.size(); i++)
+                    //          if(CheckBanNews((String)mapList.get(i).get("news_ID")))
+                    {
 
                         map = new HashMap<String, Object>();
                         map.put("Title", mapList.get(i).get("news_Title"));
@@ -226,7 +296,11 @@ public class PageListFragment extends Fragment implements IPageListView{
                         map.put("Content", mapList.get(i).get("news_Title") + "\n" + mapList.get(i).get("news_Author") + "\n" + mapList.get(i).get("news_Time"));
                         map.put("ID", mapList.get(i).get("news_ID"));
 
-                        if (mItemCount % 4 != 0)
+                        app = MyApplication.getInstance();
+                        map.put("IsRead",app.IsRead((String)mapList.get(i).get("news_ID")));
+
+                        // || mapList.get(i).get("getPicture")==null;
+                        if (!app.getPicMode())
                             mListItems.add(new SingleListItem("normal", map));
                         else
                             mListItems.add(new SingleListItem("shit", map));
@@ -237,9 +311,9 @@ public class PageListFragment extends Fragment implements IPageListView{
             mAdapter = new ListViewAdapter(getActivity(), mListItems);
             mPullRefreshListView.setAdapter(mAdapter);
 
-                mAdapter.notifyDataSetChanged();
-                // Call onRefreshComplete when the list has been refreshed.
-                mPullRefreshListView.onRefreshComplete();
+            mAdapter.notifyDataSetChanged();
+            // Call onRefreshComplete when the list has been refreshed.
+            mPullRefreshListView.onRefreshComplete();
 
         }
     }

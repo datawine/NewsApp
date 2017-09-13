@@ -162,7 +162,7 @@ public class MySqlite {
         }
     }
 
-    boolean hasRead(String news_ID){
+    public boolean hasRead(String news_ID){
         Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
         if(cursor.getCount() < 1){
             return false;

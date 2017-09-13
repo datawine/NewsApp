@@ -46,6 +46,26 @@ public class MySettingsActivity extends AppCompatActivity {
             }
         });
 
+
+        boolean picMode = parentApplication.getPicMode();
+        SwitchButton picButton = (SwitchButton) findViewById(R.id.switch_button_pic);
+
+        picButton.setChecked(picMode);
+        picButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                if (parentApplication.getPicMode()) {
+                    Log.i("change mode", "change to pic");
+
+                    parentApplication.setPicMode(false);
+                }
+                else {
+                    Log.i("change mode", "change to no_pic");
+
+                    parentApplication.setPicMode(true);
+                }
+            }
+        });
     }
 
 }
