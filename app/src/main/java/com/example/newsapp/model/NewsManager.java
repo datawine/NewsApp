@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -91,7 +92,6 @@ public class NewsManager {
         if(mydb != null){
             if(mydb.exists(newsId)){
                 jsonText = (String)mydb.get(newsId).get("com_json");
-                mydb.read(newsId);
             }
         }
         if(jsonText == null || jsonText.equals("")){
@@ -250,6 +250,10 @@ public class NewsManager {
         }
         public void run(){
             if(tarUrl.equals("") || tarFile.equals("")){
+                return;
+            }
+            File file = new File(tarFile);
+            if(file.exists()){
                 return;
             }
             try {
