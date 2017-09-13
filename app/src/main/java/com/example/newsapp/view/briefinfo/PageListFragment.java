@@ -160,6 +160,13 @@ public class PageListFragment extends Fragment implements IPageListView{
 
                 app.SetNewList(mCategory);
             }
+            else
+            {
+                if(mCategory == "推荐")
+                {
+                    app.SetNewList(mCategory);
+                }
+            }
 
             return "Done";
 
@@ -188,6 +195,33 @@ public class PageListFragment extends Fragment implements IPageListView{
                     else
                         mListItems.add(new SingleListItem("shit", map));
 
+                }
+            }
+            else
+            {
+                if(mCategory == "推荐")
+                {
+                    mListItems = new ArrayList<SingleListItem>();
+
+                    MyApplication app = MyApplication.getInstance();
+
+                    List<Map<String, Object>> mapList = app.GetNewList();
+
+                    for (int i = 0; i < mapList.size(); i++) {
+
+                        map = new HashMap<String, Object>();
+                        map.put("Title", mapList.get(i).get("news_Title"));
+                        map.put("Author", mapList.get(i).get("news_Author"));
+                        map.put("Time", mapList.get(i).get("news_Time"));
+                        map.put("Content", mapList.get(i).get("news_Title") + "\n" + mapList.get(i).get("news_Author") + "\n" + mapList.get(i).get("news_Time"));
+                        map.put("ID", mapList.get(i).get("news_ID"));
+
+                        if (mItemCount % 4 != 0)
+                            mListItems.add(new SingleListItem("normal", map));
+                        else
+                            mListItems.add(new SingleListItem("shit", map));
+
+                    }
                 }
             }
                 mAdapter.notifyDataSetChanged();

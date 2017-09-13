@@ -182,10 +182,21 @@ public class MyApplication extends Application {
 
     public void SetNewList(String mCategory) {
 
-        try {
-            newList = newsManager.getSearchedNewsList(mCategory,PageNum.get(mCategory));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(mCategory == "推荐")
+        {
+            try {
+                newList = newsManager.getLatestNewsList();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else {
+            try {
+                newList = newsManager.getSearchedNewsList(mCategory, PageNum.get(mCategory));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
