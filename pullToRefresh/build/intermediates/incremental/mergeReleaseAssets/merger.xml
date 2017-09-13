@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="I:\java\NewsApp\pullToRefresh\src\main\assets"/><source path="I:\java\NewsApp\pullToRefresh\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="I:\java\NewsApp\pullToRefresh\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/jzp1025/Desktop/NewsApp/pullToRefresh/src/main/assets"/><source path="/Users/jzp1025/Desktop/NewsApp/pullToRefresh/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/jzp1025/Desktop/NewsApp/pullToRefresh/src/release/assets"/></dataSet></merger>
