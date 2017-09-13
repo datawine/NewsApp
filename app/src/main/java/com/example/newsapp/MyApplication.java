@@ -45,6 +45,8 @@ public class MyApplication extends Application {
 
     private String query;
 
+    private boolean headerfooterflag;
+
     private List<Map<String,Object>> newList;
 
     private Map<String , Integer>PageNum;
@@ -288,5 +290,20 @@ public class MyApplication extends Application {
     public void StopVoice()
     {
         mTts.stopSpeaking();
+    }
+
+    public void SetHeaderorFooter(boolean i) {
+
+        this.headerfooterflag = i;
+    }
+
+    public boolean GetFlag()
+    {
+        return this.headerfooterflag;
+    }
+
+    public boolean IsRead(String ID) {
+
+        return mySqlite.hasRead(ID);
     }
 }
