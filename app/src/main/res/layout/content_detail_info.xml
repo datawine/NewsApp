@@ -101,16 +101,35 @@
                     android:layout_height="match_parent"
                     android:id="@+id/news_content" />
 
-                <TextView
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:id="@+id/padding"/>
+                    android:layout_height="100dp"
+                    android:id="@+id/padding">
 
-                <TextView
-                    android:textColor="@color/primary_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/test_link" />
+                    <TextView
+                        android:layout_margin="20dp"
+                        android:textColor="@color/primary_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test_link_0" />
+
+                    <TextView
+                        android:layout_margin="20dp"
+                        android:textColor="@color/primary_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test_link_1" />
+
+                    <TextView
+                        android:layout_margin="20dp"
+                        android:textColor="@color/primary_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test_link_2" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

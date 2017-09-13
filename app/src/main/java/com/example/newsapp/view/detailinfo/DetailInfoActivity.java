@@ -43,6 +43,7 @@ public class DetailInfoActivity extends AppCompatActivity
     private ImageButton rtnBtn;
     private TextView link;
     private TextView link2;
+    private TextView link3;
     private String Id;
     private TextView mAuthor, mTime;
     private String Author, Time;
@@ -102,7 +103,6 @@ public class DetailInfoActivity extends AppCompatActivity
         try {
             iDetailPresenter.GetTitle(Id);
             iDetailPresenter.GetContent(Id);
-            iDetailPresenter.GetKeyWords(Id);
         }
         catch(JSONException e){}
         catch(InterruptedException e){}
@@ -201,16 +201,23 @@ public class DetailInfoActivity extends AppCompatActivity
     {
         String html = "<a href='"+"https://baike.baidu.com/item/"+keyWords.get(0)+"'>"+keyWords.get(0)+"</a> ";
         CharSequence charSequence = Html.fromHtml(html);
-        link = (TextView) findViewById(R.id.test_link);
+        link = (TextView) findViewById(R.id.test_link_0);
         link.setLinksClickable(true);
         link.setMovementMethod(LinkMovementMethod.getInstance());
         link.setText(charSequence);
 
         String html2 = "<a href='"+"https://baike.baidu.com/item/"+keyWords.get(1)+"'>"+keyWords.get(1)+"</a> ";
         CharSequence charSequence2 = Html.fromHtml(html2);
-        link2 = (TextView) findViewById(R.id.test_link);
+        link2 = (TextView) findViewById(R.id.test_link_1);
         link2.setLinksClickable(true);
         link2.setMovementMethod(LinkMovementMethod.getInstance());
         link2.setText(charSequence2);
+
+        String html3 = "<a href='"+"https://baike.baidu.com/item/"+keyWords.get(2)+"'>"+keyWords.get(2)+"</a> ";
+        CharSequence charSequence3 = Html.fromHtml(html3);
+        link3 = (TextView) findViewById(R.id.test_link_2);
+        link3.setLinksClickable(true);
+        link3.setMovementMethod(LinkMovementMethod.getInstance());
+        link3.setText(charSequence3);
     }
 }
