@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.PageListAdapter;
 import com.example.newsapp.view.briefinfo.*;
@@ -23,6 +24,7 @@ import com.example.newsapp.view.settings.MySettingsActivity;
 public class IBriefPresenterCompl implements IBriefPresenter {
 
     private IBriefView iBriefView;
+    private MyApplication app;
 
 
     public IBriefPresenterCompl(IBriefView iBriefView) {
@@ -32,8 +34,13 @@ public class IBriefPresenterCompl implements IBriefPresenter {
 
     //初始化数据
     // 这里加载当前类别  ****从model层获得
-    String[] tmpcat = {"收藏夹","推荐","科技","教育","军事","国内","社会", "文化", "汽车","国际","体育","财经","健康","娱乐"};
 
+        app = MyApplication.getInstance();
+
+
+
+        String[] tmpcat;
+        tmpcat = app.GetTags();
 
         iBriefView.getCategory(tmpcat);
 

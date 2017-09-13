@@ -8,5 +8,5 @@ public interface IChangeView {
 
     public void SetVals(String[] vals);
 
-    public void SetShowVal(String showval);
+    public void SetShowVal(String[] showval);
 }

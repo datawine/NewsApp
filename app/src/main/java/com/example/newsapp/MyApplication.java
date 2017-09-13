@@ -6,9 +6,12 @@ import android.content.Context;
 
 import com.example.newsapp.model.MySqlite;
 import com.example.newsapp.model.NewsManager;
+import com.example.newsapp.view.briefinfo.BriefInfoActivity;
+import com.example.newsapp.view.briefinfo.PageListFragment;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +31,8 @@ public class MyApplication extends Application {
     private
     static MyApplication instance;
 
+    private String query;
+
     public
     static MyApplication getInstance() {
 
@@ -44,6 +49,8 @@ public class MyApplication extends Application {
 
         instance = this;
 
+        query = "";
+
 
                 mySqlite = new MySqlite();
                 mySqlite.init();
@@ -51,16 +58,7 @@ public class MyApplication extends Application {
                 newsManager = new NewsManager(mySqlite);
 
 
-                for(int i=0;i<tags.length;i++)
-                {
-                    for(int j=0;j<2;j++) {
-                try {
-                    newsManager.getSearchedNewsList(tags[i], j);
-                }catch(Exception e)
-                {}
 
-            }
-        }
     }
 
     public boolean getDayMode() {
@@ -94,5 +92,51 @@ public class MyApplication extends Application {
     public List<Map<String, Object>> GetKeyWords(String ID) throws InterruptedException, JSONException
     {
         return (List<Map<String, Object>>) newsManager.getNews(ID).get("Keywords");
+    }
+
+    public String[] GetTags()
+    {
+        List<String> tags = new ArrayList<String>();
+
+        tags.add("推荐");
+        tags.add("收藏夹");
+        tags.add("搜索");
+
+        List<String> tmp = mySqlite.getTags();
+
+        for(int i=0;i<tmp.size();i++)
+        tags.add(tmp.get(i));
+
+        String[] tagstring = tags.toArray(new String[tags.size()]);
+
+        return tagstring;
+    }
+
+    public void AddTag(String key)
+    {
+        mySqlite.addTag(key);
+
+        BriefInfoActivity bri = BriefInfoActivity.getInstance();
+
+        bri.onResume();
+    }
+
+    public void DelTag(String key)
+    {
+        mySqlite.delTag(key);
+
+        BriefInfoActivity bri = BriefInfoActivity.getInstance();
+
+        bri.onResume();
+    }
+
+    public void SetSearchText(String query)
+    {
+        this.query = query;
+    }
+
+    public String GetQuery()
+    {
+        return this.query;
     }
 }

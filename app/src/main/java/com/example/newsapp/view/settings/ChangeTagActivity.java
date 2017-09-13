@@ -17,7 +17,10 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
+import com.example.newsapp.view.briefinfo.BriefInfoActivity;
+import com.example.newsapp.view.briefinfo.PageListFragment;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -34,6 +37,7 @@ import java.util.Set;
 import java.util.zip.Inflater;
 
 import com.example.newsapp.presenter.*;
+import com.example.newsapp.view.briefinfo.PageListFragment;
 
 public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
     private ArrayList<String> mVals = new ArrayList<String>();
@@ -45,6 +49,10 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
     private ImageButton btn_add, btn_delete, btn_clear_show, btn_clear_all;
 
     private IChangePresenter iChangePresenter;
+
+    private MyApplication app;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +83,8 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
         btn_clear_show = (ImageButton) findViewById(R.id.btn_clear_tag_show);
         btn_clear_all = (ImageButton) findViewById(R.id.btn_clear_tag_all);
 
+        app = MyApplication.getInstance();
+
         //增加
         btn_add.setOnClickListener(
                 new View.OnClickListener() {
@@ -82,10 +92,13 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                     public void onClick(View view) {
                         Set<String> hs = mSelected.keySet();
                         Set<String> showSet = mShowSelected.keySet();
+
                         for (String key : hs) {
                             if (!showSet.contains(key) && mSelected.get(key)) {
                                 mShowVals.add(key);
                                 mShowSelected.put(key, false);
+
+                                app.AddTag(key);
                             }
                             mSelected.put(key, false);
                         }
@@ -107,6 +120,9 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                         for (String key : tmpval) {
                             if (mShowSelected.get(key)) {
                                 mShowSelected.remove(key);
+
+                                app.DelTag(key);
+
                             }
                             else {
                                 mShowVals.add(key);
@@ -143,6 +159,11 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                     }
                 }
         );
+
+
+        //刷新主界面
+
+
     }
 
     public void SetVals(String[] vals)
@@ -155,10 +176,15 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
         }
     }
 
-    public void SetShowVal(String showval)
+    public void SetShowVal(String[] showval)
     {
-        mShowVals.add(showval);
-        mShowSelected.put(showval, false);
+        for(int i=0;i<showval.length;i++)
+        {
+            mShowVals.add(showval[i]);
+
+            mShowSelected.put(showval[i], false);
+        }
+
     }
 
 
@@ -233,6 +259,16 @@ public class ChangeTagActivity extends AppCompatActivity implements IChangeView{
                 mShowTagAdapter.notifyDataChanged();
             }
         });
+    }
+
+    @Override
+    public void finish()
+    {
+        BriefInfoActivity bri = BriefInfoActivity.getInstance();
+
+        bri.onResume();
+
+        super.finish();
     }
 
 }
