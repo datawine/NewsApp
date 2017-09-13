@@ -351,4 +351,9 @@ public class MyApplication extends Application {
         return tmp;
 
     }
+
+    public void SetRead(String id) {
+
+        mySqlite.read(id);
+    }
 }

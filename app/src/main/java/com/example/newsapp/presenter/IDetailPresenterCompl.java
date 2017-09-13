@@ -78,6 +78,8 @@ public class IDetailPresenterCompl implements IDetailPresenter {
         Map<String, Object> news = app.GetNews(ID);
         //从数据库获取content
 
+        app.SetRead(ID);
+
         iDetailView.SetContent(news.get("news_Content").toString());
     }
 
