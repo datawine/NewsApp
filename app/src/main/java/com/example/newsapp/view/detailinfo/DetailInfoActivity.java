@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
+import com.example.newsapp.WeiXinShareUtil;
 import com.example.newsapp.presenter.IDetailPresenterCompl;
 import com.example.newsapp.view.settings.MySettingsActivity;
 
@@ -41,7 +42,7 @@ public class DetailInfoActivity extends AppCompatActivity
     private NavigationView mNavigationView;
     private TextView content;
     private TextView articleTitle;
-    private ImageButton rtnBtn;
+    private ImageButton rtnBtn, shareBtn;
     private TextView link;
     private TextView link2;
     private TextView link3;
@@ -61,7 +62,7 @@ public class DetailInfoActivity extends AppCompatActivity
         iDetailPresenter = new IDetailPresenterCompl(this);
 
         Bundle bundle = this.getIntent().getExtras();
-        String title = bundle.getString("Title");
+        final String title = bundle.getString("Title");
         category = bundle.getString("Category");
         Author = bundle.getString("Author");
         Time = bundle.getString("Time");
@@ -73,6 +74,7 @@ public class DetailInfoActivity extends AppCompatActivity
         mAuthor = (TextView) findViewById(R.id.detail_author);
         mTime = (TextView) findViewById(R.id.detail_time);
         rtnBtn = (ImageButton) findViewById(R.id.detail_return);
+        shareBtn = (ImageButton) findViewById(R.id.detail_share);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 
         mAuthor.setText(Author);
@@ -87,8 +89,6 @@ public class DetailInfoActivity extends AppCompatActivity
         fab_star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 app = MyApplication.getInstance();
 
                 if(app.IsStared(Id))
@@ -156,13 +156,16 @@ public class DetailInfoActivity extends AppCompatActivity
         }
 
 
-
-
-
         mNavigationView.setNavigationItemSelectedListener(this);
         rtnBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
+            }
+        });
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WeiXinShareUtil.sharePhotoToWX(DetailInfoActivity.this, title, "");
             }
         });
     }

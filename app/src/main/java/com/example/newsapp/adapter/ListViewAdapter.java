@@ -5,13 +5,18 @@ package com.example.newsapp.adapter;
  */
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -60,7 +65,12 @@ public class ListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             viewHolder = new ItemViewHolder();
-            convertView = mLayoutInflater.inflate(R.layout.info_item, null);
+            if (type == "normal") {
+                convertView = mLayoutInflater.inflate(R.layout.info_item, null);
+            } else if (type == "pic" && listItem.map.get("Pic").toString() != null){
+                convertView = mLayoutInflater.inflate(R.layout.info_item_with_image, null);
+                Log.i("image", listItem.map.get("Pic").toString());
+            }
         }
 
         viewHolder.ll = (LinearLayout) convertView.findViewById(R.id.info_item_layout);
@@ -83,17 +93,42 @@ public class ListViewAdapter extends BaseAdapter {
         viewHolder.Time.setText(listItem.map.get("Time").toString());
         viewHolder.Time.setTextColor(viewHolder.Time.getResources().getColor(R.color.secondary_text));
 
+        if (type == "pic"  && listItem.map.get("Pic").toString() != null) {
+            Bitmap bitmap = BitmapFactory.decodeFile(listItem.map.get("Pic").toString());
+
+            float w = bitmap.getWidth(); // 得到图片的宽，高
+            float h = bitmap.getHeight();
+
+            float centerw = w / 2;
+            float centery = h / 3;
+            float cropx, cropy;
+            float towidth, toheight;
+            float scalex, scaley;
+
+            if (w / h > (float) 340 / 210) {
+                towidth = h / 210 * 340;
+                toheight = h;
+            } else {
+                toheight = w / 340 * 210;
+                towidth = w;
+            }
+
+            cropx = centerw - towidth / 2;
+            cropy = centery - toheight / 2;
+            if (cropy < 0)
+                cropy = 0;
+
+            scalex = 340 / towidth;
+            scaley = 210 / toheight;
+
+            Matrix matrix = new Matrix();
+            matrix.postScale(scalex, scaley);
+            Bitmap bmp = Bitmap.createBitmap(bitmap, (int)cropx, (int)cropy, (int)towidth, (int)toheight, matrix, false);
+            viewHolder.Image = (ImageView) convertView.findViewById(R.id.detail_info_image);
+            viewHolder.Image.setImageBitmap(bmp);
+        }
 
         return convertView;
-    }
-
-    public String type2Color(String type) {
-        if (type == "normal") {
-            return "#7fa87f";
-        }
-        else {
-            return "#00ff00";
-        }
     }
 
     class ItemViewHolder {
@@ -101,6 +136,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView Title;
         TextView Time;
         TextView Author;
+        ImageView Image;
     }
 
 }
