@@ -339,4 +339,16 @@ public class MyApplication extends Application {
 
     public void setPicMode(boolean b) {picMode = b;
     }
+
+    public String GetPic(String ID) {
+        String tmp = null;
+        try {
+            tmp = mySqlite.getPicture(ID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return tmp;
+
+    }
 }

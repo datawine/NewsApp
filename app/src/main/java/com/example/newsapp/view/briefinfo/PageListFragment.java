@@ -143,8 +143,8 @@ public class PageListFragment extends Fragment implements IPageListView{
 
                 startActivity(intent);
 
-//                            int forDetailCode = 1000;
-//                            startActivityForResult(intent, forDetailCode);
+                //                            int forDetailCode = 1000;
+                //                            startActivityForResult(intent, forDetailCode);
             }
         });
 
@@ -160,7 +160,7 @@ public class PageListFragment extends Fragment implements IPageListView{
 
 
         for (int i = 0; i < count; i++)
-         // if(CheckBanNews((String)simplenews.get(i).get("news_ID")))
+        // if(CheckBanNews((String)simplenews.get(i).get("news_ID")))
         {
             map = new HashMap<String, Object>();
             map.put("Title", simplenews.get(i).get("news_Title"));
@@ -172,14 +172,15 @@ public class PageListFragment extends Fragment implements IPageListView{
             app = MyApplication.getInstance();
             map.put("IsRead",app.IsRead((String)simplenews.get(i).get("news_ID")));
 
-            if(app.IsRead((String)simplenews.get(i).get("news_ID")))Log.i("change mode","Read");
+            if (app.GetPic((String)simplenews.get(i).get("news_ID"))!=null)
+                map.put("Pic",app.GetPic((String)simplenews.get(i).get("news_ID")));
 
 
             // || simplenews.get(i).get("getPicture")==null;
-            if (!app.getPicMode())
+            if (!app.getPicMode() || (app.GetPic((String)simplenews.get(i).get("news_ID"))==null))
                 mListItems.add(new SingleListItem("normal", map));
             else
-                mListItems.add(new SingleListItem("shit", map));
+                mListItems.add(new SingleListItem("pic", map));
         }
         mAdapter = new ListViewAdapter(getActivity(), mListItems);
         mPullRefreshListView.setAdapter(mAdapter);
@@ -266,9 +267,12 @@ public class PageListFragment extends Fragment implements IPageListView{
                     app = MyApplication.getInstance();
                     map.put("IsRead",app.IsRead((String)mapList.get(i).get("news_ID")));
 
+                    if (app.GetPic((String)mapList.get(i).get("news_ID"))!=null)
+                        map.put("Pic",app.GetPic((String)mapList.get(i).get("news_ID")));
 
-                    // || mapList.get(i).get("getPicture")==null;
-                    if (!app.getPicMode())
+
+                    // || simplenews.get(i).get("getPicture")==null;
+                    if (!app.getPicMode() || (app.GetPic((String)mapList.get(i).get("news_ID"))==null))
                         mListItems.add(new SingleListItem("normal", map));
                     else
                         mListItems.add(new SingleListItem("pic", map));
@@ -299,11 +303,15 @@ public class PageListFragment extends Fragment implements IPageListView{
                         app = MyApplication.getInstance();
                         map.put("IsRead",app.IsRead((String)mapList.get(i).get("news_ID")));
 
-                        // || mapList.get(i).get("getPicture")==null;
-                        if (!app.getPicMode())
+                        if (app.GetPic((String)mapList.get(i).get("news_ID"))!=null)
+                            map.put("Pic",app.GetPic((String)mapList.get(i).get("news_ID")));
+
+
+                        // || simplenews.get(i).get("getPicture")==null;
+                        if (!app.getPicMode() || (app.GetPic((String)mapList.get(i).get("news_ID"))==null))
                             mListItems.add(new SingleListItem("normal", map));
                         else
-                            mListItems.add(new SingleListItem("shit", map));
+                            mListItems.add(new SingleListItem("pic", map));
 
                     }
                 }
@@ -324,3 +332,4 @@ public class PageListFragment extends Fragment implements IPageListView{
         mPullRefreshListView.onRefreshComplete();
     }
 }
+
