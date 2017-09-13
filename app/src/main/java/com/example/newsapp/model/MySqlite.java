@@ -26,9 +26,9 @@ public class MySqlite {
     }
 
     public void init(){
-        db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.example.newsapp/news.db", null);
+        db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.example.newsapp/newss.db", null);
         try {
-            db.execSQL("create table news(id text primary key, tag text, sim_json text, com_json text, star text)");
+            db.execSQL("create table news(id text primary key, tag text, sim_json text, com_json text, star text, read text)");
         } catch (Exception e){
             //Log.i(TAG, "init: ", e);
         }
@@ -36,6 +36,11 @@ public class MySqlite {
             db.execSQL("create table tags(id text primary key)");
         } catch (Exception e){
             //Log.i(TAG, "init: ", e);
+        }
+        try{
+            db.execSQL("create table blacklist(word text primary key)");
+        } catch (Exception e){
+
         }
     }
 
@@ -78,6 +83,7 @@ public class MySqlite {
         cValue.put("sim_json", jsonText);
         cValue.put("com_json", "");
         cValue.put("star", "NO");
+        cValue.put("read", "NO");
         db.insert("news", null, cValue);
     }
 
@@ -92,6 +98,7 @@ public class MySqlite {
         cValues.put("sim_json", (String)oldone.get("sim_json"));
         cValues.put("com_json", jsonText);
         cValues.put("star", "NO");
+        cValues.put("read", "NO");
         db.update("news", cValues, "id=?", new String[]{(String)newstosave.get("news_ID")});
     }
 
@@ -105,6 +112,7 @@ public class MySqlite {
         cValues.put("sim_json", (String)oldone.get("sim_json"));
         cValues.put("com_json", (String)oldone.get("com_json"));
         cValues.put("star", "YES");
+        cValues.put("read", "YES");
         db.update("news", cValues, "id=?", new String[]{news_ID});
     }
 
@@ -118,6 +126,21 @@ public class MySqlite {
         cValues.put("sim_json", (String)oldone.get("sim_json"));
         cValues.put("com_json", (String)oldone.get("com_json"));
         cValues.put("star", "NO");
+        cValues.put("read", "YES");
+        db.update("news", cValues, "id=?", new String[]{news_ID});
+    }
+
+    public void read(String news_ID){
+        if(!exists(news_ID)){
+            return;
+        }
+        Map<String, Object> oldone = get(news_ID);
+        ContentValues cValues = new ContentValues();
+        cValues.put("id", (String)oldone.get("id"));
+        cValues.put("sim_json", (String)oldone.get("sim_json"));
+        cValues.put("com_json", (String)oldone.get("com_json"));
+        cValues.put("star", (String)oldone.get("star"));
+        cValues.put("read", "YES");
         db.update("news", cValues, "id=?", new String[]{news_ID});
     }
 
@@ -128,19 +151,20 @@ public class MySqlite {
 
     Map<String, Object> get(String news_ID){
         Map<String, Object> result = new HashMap<String, Object>();
-        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star", "read"}, "id=?", new String[]{news_ID}, null, null, null);
         while(cursor.moveToNext()){
             result.put("id", cursor.getString(cursor.getColumnIndex("id")));
             result.put("sim_json", cursor.getString(cursor.getColumnIndex("sim_json")));
             result.put("com_json", cursor.getString(cursor.getColumnIndex("com_json")));
             result.put("star", cursor.getString(cursor.getColumnIndex("star")));
+            result.put("read", cursor.getString(cursor.getColumnIndex("read")));
         }
         return result;
     }
 
     public List<Map<String, Object>> getStaredNews(){
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
-        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "star=?", new String[]{"YES"}, null, null, null);
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star", "read"}, "star=?", new String[]{"YES"}, null, null, null);
         while(cursor.moveToNext()){
             String jsonText = cursor.getString(cursor.getColumnIndex("com_json"));
             try{
@@ -163,13 +187,13 @@ public class MySqlite {
     }
 
     public boolean hasRead(String news_ID){
-        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star", "read"}, "id=?", new String[]{news_ID}, null, null, null);
         if(cursor.getCount() < 1){
             return false;
         }
         while(cursor.moveToNext()){
-            String jsonText = cursor.getString(cursor.getColumnIndex("com_json"));
-            if(jsonText.equals("")){
+            String readText = cursor.getString(cursor.getColumnIndex("read"));
+            if(readText.equals("NO")){
                 return false;
             }
         }
@@ -177,7 +201,7 @@ public class MySqlite {
     }
 
     public boolean isStared(String news_ID){
-        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star", "read"}, "id=?", new String[]{news_ID}, null, null, null);
         if(cursor.getCount() < 1){
             return false;
         }
@@ -193,7 +217,7 @@ public class MySqlite {
     }
 
     public String getPicture(String news_ID) throws JSONException {
-        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star", "read"}, "id=?", new String[]{news_ID}, null, null, null);
         if(cursor.getCount() < 1){
             return null;
         }
@@ -236,6 +260,7 @@ public class MySqlite {
     void delete(){
         db.execSQL("drop table news");
         db.execSQL("drop table tags");
+        db.execSQL("drop table blacklist");
         db.close();
     }
 }

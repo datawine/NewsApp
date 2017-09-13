@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="I:\java\NewsApp\pullToRefresh\src\main\assets"/><source path="I:\java\NewsApp\pullToRefresh\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="I:\java\NewsApp\pullToRefresh\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/leavan/learn/android/NewsApp/pullToRefresh/src/main/assets"/><source path="/Users/leavan/learn/android/NewsApp/pullToRefresh/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Users/leavan/learn/android/NewsApp/pullToRefresh/src/debug/assets"/></dataSet></merger>

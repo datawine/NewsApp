@@ -75,6 +75,7 @@ public class NewsManager {
         if(mydb != null){
             if(mydb.exists(newsId)){
                 jsonText = (String)mydb.get(newsId).get("com_json");
+                mydb.read(newsId);
             }
         }
         if(jsonText == null || jsonText.equals("")){
@@ -86,20 +87,8 @@ public class NewsManager {
         return newsParser(jsonText);
     }
     public Map<String, Object> getNews(Map<String, Object> news) throws InterruptedException, JSONException {
-        String jsonText = null;
         String newsId = (String)news.get("news_ID");
-        if(mydb != null){
-            if(mydb.exists(newsId)){
-                jsonText = (String)mydb.get(newsId).get("com_json");
-            }
-        }
-        if(jsonText == null || jsonText.equals("")){
-            jsonText = getPage(baseUrl + "/detail?newsId=" + newsId);
-            if(mydb != null){
-                mydb.insertCom(jsonText);
-            }
-        }
-        return newsParser(jsonText);
+        return getNews(newsId);
     }
     public static Map<String, Object> newsParser(String jsonText) throws JSONException {
         Map<String, Object> result = new HashMap<String, Object>();
