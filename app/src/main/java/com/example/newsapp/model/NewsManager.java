@@ -43,10 +43,11 @@ public class NewsManager {
     }};
     private int[] tagPageNum = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private static final String baseUrl = "http://166.111.68.66:2042/news/action/query";
-    private static String goodUrl = "";
-    private static String goodJson = "";
+    //private static String goodUrl = "";
+    //private static String goodJson = "";
     private String targetUrl = null;
     private String jsonText = null;
+    Map<String, String> oldListJson = new HashMap<String, String>();
     MySqlite mydb = null;
 
     public NewsManager(MySqlite db){
@@ -56,7 +57,7 @@ public class NewsManager {
 
     }
 
-    public List<Map<String, Object>> getSearchedNewsList(String keyWord, int pageNum) throws InterruptedException {
+   /* public List<Map<String, Object>> __getSearchedNewsList(String keyWord, int pageNum) throws InterruptedException {
         String url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=100";
         List<Map<String, Object>> result;
         if(url.equals(goodUrl)) {
@@ -68,8 +69,48 @@ public class NewsManager {
         goodJson = getPage(goodUrl);
         newsListParserWithoutBlock(goodJson);
         return result;
+    }*/
+    public List<Map<String, Object>> getSearchedNewsList(String keyWord, int pageNum) throws InterruptedException {
+        String url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=100";
+        String jsonText;
+        if(oldListJson.containsKey(url)){
+            jsonText = oldListJson.get(url);
+        } else {
+            jsonText = getPage(url);
+            oldListJson.put(url, jsonText);
+        }
+        List<Map<String, Object>> result = newsListParser(jsonText);
+        url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + (pageNum + 1) + "&pageSize=100";
+        jsonText = getPage(url);
+        oldListJson.put(url, jsonText);
+        newsListParserWithoutBlock(jsonText);
+        return result;
     }
     public List<Map<String, Object>> getLatestNewsList(String tag) throws InterruptedException {
+        List<Map<String, Object>> result;
+        int tagInt = tag2int.get(tag);
+        tagPageNum[tagInt] += 1;
+        String url = baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100&category=" + tagInt;
+        String jsonText;
+        if(oldListJson.containsKey(url)){
+            jsonText = oldListJson.get(url);
+        } else {
+            jsonText = getPage(url);
+            oldListJson.put(url, jsonText);
+        }
+        result = newsListParser(jsonText);
+        if(jsonText == null){
+            tagPageNum[tagInt] = 1;
+            jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100&category=" + tagInt);
+            result = newsListParser(jsonText);
+        }
+        url = baseUrl + "/latest?pageNo=" + (tagPageNum[tagInt] + 1) + "&pageSize=100&category=" + tagInt;
+        jsonText = getPage(url);
+        oldListJson.put(url, jsonText);
+        newsListParserWithoutBlock(jsonText);
+        return result;
+    }
+    /*public List<Map<String, Object>> __getLatestNewsList(String tag) throws InterruptedException {
         List<Map<String, Object>> result;
         int tagInt = tag2int.get(tag);
         tagPageNum[tagInt] += 1;
@@ -92,7 +133,7 @@ public class NewsManager {
         newsListParserWithoutBlock(goodJson);
         return result;
     }
-    public List<Map<String, Object>> getLatestNewsList() throws InterruptedException{
+    public List<Map<String, Object>> __getLatestNewsList() throws InterruptedException{
         List<Map<String, Object>> result;
         int tagInt = 0;
         tagPageNum[tagInt] += 1;
@@ -116,6 +157,30 @@ public class NewsManager {
         goodJson = getPage(goodUrl);
         newsListParserWithoutBlock(goodJson);
         Log.i(TAG, "getLatestNewsList: !!!" + "success");
+        return result;
+    }*/
+    public List<Map<String, Object>> getLatestNewsList() throws InterruptedException {
+        List<Map<String, Object>> result;
+        int tagInt = 0;
+        tagPageNum[tagInt] += 1;
+        String url = baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100";
+        String jsonText;
+        if(oldListJson.containsKey(url)){
+            jsonText = oldListJson.get(url);
+        } else {
+            jsonText = getPage(url);
+            oldListJson.put(url, jsonText);
+        }
+        result = newsListParser(jsonText);
+        if(jsonText == null){
+            tagPageNum[tagInt] = 1;
+            jsonText = getPage(baseUrl + "/latest?pageNo=" + tagPageNum[tagInt] + "&pageSize=100");
+            result = newsListParser(jsonText);
+        }
+        url = baseUrl + "/latest?pageNo=" + (tagPageNum[tagInt] + 1) + "&pageSize=100";
+        jsonText = getPage(url);
+        oldListJson.put(url, jsonText);
+        newsListParserWithoutBlock(jsonText);
         return result;
     }
     public Map<String, Object> getNews(String newsId) throws InterruptedException, JSONException {
