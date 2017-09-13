@@ -25,6 +25,7 @@ public class ListViewAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<SingleListItem> listDatas;
     private ItemViewHolder viewHolder;
+    private boolean mIsRead;
 
     public ListViewAdapter(Context context, ArrayList<SingleListItem> listDatas) {
         this.listDatas = listDatas;
@@ -63,7 +64,12 @@ public class ListViewAdapter extends BaseAdapter {
         }
 
         viewHolder.ll = (LinearLayout) convertView.findViewById(R.id.info_item_layout);
-        viewHolder.ll.setBackgroundColor(viewHolder.ll.getResources().getColor(R.color.background));
+        if ((boolean) listItem.map.get("IsRead")) {
+            viewHolder.ll.setBackgroundColor(viewHolder.ll.getResources().getColor(R.color.readbackground));
+        } else {
+            viewHolder.ll.setBackgroundColor(viewHolder.ll.getResources().getColor(R.color.background));
+        }
+
 
         viewHolder.Title = (TextView) convertView.findViewById(R.id.brief_title);
         viewHolder.Title.setText(listItem.map.get("Title").toString());
@@ -76,6 +82,7 @@ public class ListViewAdapter extends BaseAdapter {
         viewHolder.Time = (TextView) convertView.findViewById(R.id.brief_time);
         viewHolder.Time.setText(listItem.map.get("Time").toString());
         viewHolder.Time.setTextColor(viewHolder.Time.getResources().getColor(R.color.secondary_text));
+
 
         return convertView;
     }
