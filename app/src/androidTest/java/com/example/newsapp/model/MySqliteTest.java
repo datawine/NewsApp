@@ -33,7 +33,6 @@ public class MySqliteTest {
         for(int i = 0; i < query.size(); ++i){
             Log.i(TAG, "initTest: " + query.get(i).get("news_Title"));
         }
-        mySqlite.delete();
     }
 
     @Test
@@ -50,7 +49,6 @@ public class MySqliteTest {
             thenews = manager.getNews(history.get(i));
             Log.i(TAG, "getNewsallTest: " + i + thenews.get("news_Content"));
         }
-        mySqlite.delete();
     }
 
     @Test
@@ -73,7 +71,6 @@ public class MySqliteTest {
         newslist = mySqlite.getStaredNews();
         Log.i(TAG, "starTest: " + mySqlite.isStared("201512280710cb9195663cd348198f7909eb91fc0156"));
         Log.i(TAG, "starTestNum: " + newslist.size());
-        mySqlite.delete();
     }
 
     @Test
@@ -85,7 +82,6 @@ public class MySqliteTest {
         Log.i(TAG, "hasReadTest: " + mySqlite.hasRead("201512280710cb9195663cd348198f7909eb91fc0156"));
         manager.getNews("201512280710cb9195663cd348198f7909eb91fc0156");
         Log.i(TAG, "hasReadTest: " + mySqlite.hasRead("201512280710cb9195663cd348198f7909eb91fc0156"));
-        mySqlite.delete();
     }
 
     @Test
@@ -97,6 +93,20 @@ public class MySqliteTest {
         Log.i(TAG, "tagTest: 2 " + mySqlite.getTags().size());
         mySqlite.delTag("教育");
         Log.i(TAG, "tagTest: 1 " + mySqlite.getTags().size());
-        mySqlite.delete();
+    }
+
+    @Test
+    public void fileTest() throws Exception{
+        File file = new File("/data/data/com.example.newsapp");
+        Log.i(TAG, "fileTest: " + file.exists());
+    }
+
+    @Test
+    public void pictureTest() throws Exception{
+        MySqlite mySqlite = new MySqlite();
+        mySqlite.init();
+        NewsManager manager = new NewsManager(mySqlite);
+        List<Map<String, Object>> newslist = manager.getSearchedNewsList("tfboys", 1);
+        Log.i(TAG, "pictureTest: " + mySqlite.getPicture("2016010607122c5799f8e0ae43019b4f1887717ec63e"));
     }
 }

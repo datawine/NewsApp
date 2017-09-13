@@ -7,6 +7,7 @@ import android.util.Log;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 public class MySqlite {
     private static final String TAG = "MySqlite";
+    private static final String basePath = "/data/data/com.example.newsapp/";
     SQLiteDatabase db = null;
 
     public MySqlite(){
@@ -180,14 +182,43 @@ public class MySqlite {
             return false;
         }
         while(cursor.moveToNext()){
-            String jsonText = cursor.getString(cursor.getColumnIndex("star"));
-            if(jsonText.equals("YES")){
+            String starText = cursor.getString(cursor.getColumnIndex("star"));
+            if(starText.equals("YES")){
                 return true;
             } else {
                 return false;
             }
         }
         return false;
+    }
+
+    public String getPicture(String news_ID) throws JSONException {
+        Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
+        if(cursor.getCount() < 1){
+            return null;
+        }
+        while(cursor.moveToNext()){
+            String jsonText = cursor.getString(cursor.getColumnIndex("sim_json"));
+            Map<String, Object> map = NewsManager.simNewsParser(jsonText);
+            String picsString = (String)map.get("news_Pictures");
+            if(picsString.equals("")){
+                return null;
+            }
+            String[] picStrings = picsString.split("[ ;]");
+            if(picStrings.length < 1){
+                return null;
+            }
+            try{
+                String fileName = basePath + news_ID + picStrings[0].substring(picStrings[0].lastIndexOf("."));
+                File picFile = new File(fileName);
+                if(picFile.exists()){
+                    return fileName;
+                }
+            } catch (Exception e){
+                Log.i(TAG, "getPicture: ", e);
+            }
+        }
+        return null;
     }
 
     public List<Map<String, Object>> getHistory(String tag) throws JSONException {
@@ -200,6 +231,7 @@ public class MySqlite {
         }
         return result;
    }
+
 
     void delete(){
         db.execSQL("drop table news");

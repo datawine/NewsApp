@@ -5,19 +5,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Looper;
 import android.util.Log;
 
+import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by leavan on 2017/9/10.
@@ -25,6 +33,7 @@ import java.util.Map;
 
 public class NewsManager {
     private static final String TAG = "newsParser";
+    private static final String basePath = "/data/data/com.example.newsapp/";
     private static final HashMap<String, Integer> tag2int = new HashMap<String, Integer>(){{
         put("推荐", 0);put("科技", 1);put("教育", 2);put("军事", 3);
         put("国内", 4);put("社会", 5);put("文化", 6);put("汽车", 7);
@@ -147,7 +156,8 @@ public class NewsManager {
         map.put("pic_Num", new Integer(pics_String.length));
         return map;
     }
-    public List<Map<String, Object>> newsListParser(String jsonText) {
+    public List<Map<String, Object>> newsListParser(String jsonText) throws InterruptedException {
+        List<Thread> downloadThreads = new ArrayList<Thread>();
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         try{
             JSONObject jsonObj = new JSONObject(jsonText);
@@ -173,13 +183,29 @@ public class NewsManager {
                     map.put(key, value);
                 }
                 String pic_String = (String)map.get("news_Pictures");
-                String[] pics_String = pic_String.split(" ");
-                map.put("pic_Num", new Integer(pics_String.length));
+                String[] pics_String = pic_String.split("[ ;]");
+                if(pic_String.equals("") || pics_String.length < 1)
+                    map.put("pic_Num", new Integer(0));
+                else {
+                    map.put("pic_Num", new Integer(pics_String.length));
+                    if(pics_String.length > 0){
+                        try {
+                            String picFileName = basePath + (String) map.get("news_ID") + pics_String[0].substring(pics_String[0].lastIndexOf("."));
+                            downloadThreads.add(getPictureThread(pics_String[0], picFileName));
+                        } catch (Exception e){
+                            Log.i(TAG, "newsListParser: ", e);
+                            Log.i(TAG, "newsListParser: " + pic_String);
+                        }
+                    }
+                }
                 result.add(map);
             }
         } catch (Exception e)
         {
             Log.i(TAG, "newsParser: ", e);
+        }
+        for(int i = 0; i < downloadThreads.size(); ++i){
+            downloadThreads.get(i).join();
         }
         return result;
     }
@@ -198,7 +224,6 @@ public class NewsManager {
     }
     Runnable runnable = new Runnable() {
         public static final String TAG = "runnable";
-
         @Override
         public void run() {
             try{
@@ -211,4 +236,39 @@ public class NewsManager {
             }
         }
     };
+    static class DownloadThread implements Runnable{
+        String tarUrl = "";
+        String tarFile = "";
+        public void setTask(String tarUrl, String tarFile){
+            this.tarUrl = tarUrl;
+            this.tarFile = tarFile;
+        }
+        public void run(){
+            if(tarUrl.equals("") || tarFile.equals("")){
+                return;
+            }
+            try {
+                URL url = new URL(tarUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                DataInputStream in = new DataInputStream(connection.getInputStream());
+                DataOutputStream out = new DataOutputStream(new FileOutputStream(tarFile));
+                byte[] buffer = new byte[4096];
+                int count = 0;
+                while((count = in.read(buffer)) > 0){
+                    out.write(buffer, 0, count);
+                }
+                out.close();
+                in.close();
+            } catch (Exception e){
+                Log.i(TAG, "runError: ", e);
+            }
+        }
+    }
+    public static Thread getPictureThread(String picUrl, String fileName){
+        DownloadThread dt = new DownloadThread();
+        dt.setTask(picUrl, fileName);
+        Thread thread = new Thread(dt);
+        thread.start();
+        return thread;
+    }
 }
