@@ -62,17 +62,20 @@ public class ListViewAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.info_item, null);
         }
 
+        viewHolder.ll = (LinearLayout) convertView.findViewById(R.id.info_item_layout);
+        viewHolder.ll.setBackgroundColor(viewHolder.ll.getResources().getColor(R.color.background));
+
         viewHolder.Title = (TextView) convertView.findViewById(R.id.brief_title);
         viewHolder.Title.setText(listItem.map.get("Title").toString());
         viewHolder.Title.setTextColor(viewHolder.Title.getResources().getColor(R.color.primary_text));
 
         viewHolder.Author = (TextView) convertView.findViewById(R.id.brief_author);
         viewHolder.Author.setText(listItem.map.get("Author").toString());
-        viewHolder.Author.setTextColor(viewHolder.Title.getResources().getColor(R.color.secondary_text));
+        viewHolder.Author.setTextColor(viewHolder.Author.getResources().getColor(R.color.secondary_text));
 
         viewHolder.Time = (TextView) convertView.findViewById(R.id.brief_time);
         viewHolder.Time.setText(listItem.map.get("Time").toString());
-        viewHolder.Time.setTextColor(viewHolder.Title.getResources().getColor(R.color.secondary_text));
+        viewHolder.Time.setTextColor(viewHolder.Time.getResources().getColor(R.color.secondary_text));
 
         return convertView;
     }

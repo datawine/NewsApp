@@ -109,22 +109,46 @@
                     android:id="@+id/padding">
 
                     <TextView
+                        android:gravity="center"
+                        android:background="@drawable/text_link_border"
+                        android:textSize="18dp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
                         android:layout_margin="20dp"
-                        android:textColor="@color/primary_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/test_link_0" />
 
                     <TextView
-                        android:layout_margin="20dp"
-                        android:textColor="@color/primary_text"
+                        android:gravity="center"
+                        android:background="@drawable/text_link_border"
+                        android:textSize="18dp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/test_link_1" />
 
                     <TextView
-                        android:layout_margin="20dp"
-                        android:textColor="@color/primary_text"
+                        android:gravity="center"
+                        android:background="@drawable/text_link_border"
+                        android:textSize="18dp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/test_link_2" />

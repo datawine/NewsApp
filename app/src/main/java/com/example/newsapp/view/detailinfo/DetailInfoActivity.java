@@ -207,6 +207,8 @@ public class DetailInfoActivity extends AppCompatActivity
         link.setLinksClickable(true);
         link.setMovementMethod(LinkMovementMethod.getInstance());
         link.setText(charSequence);
+        link.setLinkTextColor(getResources().getColor(R.color.icons));
+
 
         String html2 = "<a href='"+"https://baike.baidu.com/item/"+keyWords.get(1)+"'>"+keyWords.get(1)+"</a> ";
         CharSequence charSequence2 = Html.fromHtml(html2);
@@ -214,6 +216,7 @@ public class DetailInfoActivity extends AppCompatActivity
         link2.setLinksClickable(true);
         link2.setMovementMethod(LinkMovementMethod.getInstance());
         link2.setText(charSequence2);
+        link2.setLinkTextColor(getResources().getColor(R.color.icons));
 
         String html3 = "<a href='"+"https://baike.baidu.com/item/"+keyWords.get(2)+"'>"+keyWords.get(2)+"</a> ";
         CharSequence charSequence3 = Html.fromHtml(html3);
@@ -221,5 +224,6 @@ public class DetailInfoActivity extends AppCompatActivity
         link3.setLinksClickable(true);
         link3.setMovementMethod(LinkMovementMethod.getInstance());
         link3.setText(charSequence3);
+        link3.setLinkTextColor(getResources().getColor(R.color.icons));
     }
 }
