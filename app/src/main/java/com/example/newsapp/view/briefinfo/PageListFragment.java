@@ -24,6 +24,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.newsapp.presenter.*;
@@ -80,6 +81,7 @@ public class PageListFragment extends Fragment implements IPageListView{
 
         mAdapter = new ListViewAdapter(getActivity(), mListItems);
         mPullRefreshListView.setAdapter(mAdapter);
+
         // 设置监听事件
         mPullRefreshListView
                 .setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>()
@@ -145,41 +147,53 @@ public class PageListFragment extends Fragment implements IPageListView{
                     mListItems.add(new SingleListItem("shit", map));
         }
     }
-
-    private void updateDatas() {
-        mItemCount ++;
-        map = new HashMap<String, Object>();
-        map.put("Content", mCategory + " " + mItemCount);
-        mListItems.add(new SingleListItem("normal", map));
-    }
-
     private class GetDataTask extends AsyncTask<Void, Void, String>
     {
 
         @Override
         protected String doInBackground(Void... params)
         {
-            try
-            {
-                Thread.sleep(2000);
-            } catch (InterruptedException e)
-            {
+            MyApplication app = MyApplication.getInstance();
+
+            if(mCategory != "推荐" && mCategory != "收藏夹") {
+                app.AddTagPage(mCategory);
+
+                app.SetNewList(mCategory);
             }
-            return "" + (mItemCount++);
+
+            return "Done";
+
         }
 
         @Override
         protected void onPostExecute(String result)
         {
-            map = new HashMap<String, Object>();
-            map.put("Content", mCategory + " " + result);
-            if (mItemCount % 4 != 0)
-                mListItems.add(new SingleListItem("normal", map));
-            else
-                mListItems.add(new SingleListItem("shit", map));
-            mAdapter.notifyDataSetChanged();
-            // Call onRefreshComplete when the list has been refreshed.
-            mPullRefreshListView.onRefreshComplete();
+
+            if(mCategory != "推荐" && mCategory != "收藏夹") {
+                MyApplication app = MyApplication.getInstance();
+
+                List<Map<String, Object>> mapList = app.GetNewList();
+
+                for (int i = 0; i < mapList.size(); i++) {
+
+                    map = new HashMap<String, Object>();
+                    map.put("Title", mapList.get(i).get("news_Title"));
+                    map.put("Author", mapList.get(i).get("news_Author"));
+                    map.put("Time", mapList.get(i).get("news_Time"));
+                    map.put("Content", mapList.get(i).get("news_Title") + "\n" + mapList.get(i).get("news_Author") + "\n" + mapList.get(i).get("news_Time"));
+                    map.put("ID", mapList.get(i).get("news_ID"));
+
+                    if (mItemCount % 4 != 0)
+                        mListItems.add(new SingleListItem("normal", map));
+                    else
+                        mListItems.add(new SingleListItem("shit", map));
+
+                }
+            }
+                mAdapter.notifyDataSetChanged();
+                // Call onRefreshComplete when the list has been refreshed.
+                mPullRefreshListView.onRefreshComplete();
+
         }
     }
 

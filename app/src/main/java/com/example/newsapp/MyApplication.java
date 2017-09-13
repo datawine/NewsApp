@@ -12,6 +12,7 @@ import com.example.newsapp.view.briefinfo.PageListFragment;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,10 @@ public class MyApplication extends Application {
 
     private String query;
 
+    private List<Map<String,Object>> newList;
+
+    private Map<String , Integer>PageNum;
+
     public
     static MyApplication getInstance() {
 
@@ -48,6 +53,8 @@ public class MyApplication extends Application {
         mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         instance = this;
+
+        PageNum = new HashMap<String, Integer>();
 
         query = "";
 
@@ -102,10 +109,14 @@ public class MyApplication extends Application {
         tags.add("收藏夹");
         tags.add("搜索");
 
+        PageNum.put("搜索",1);
+
         List<String> tmp = mySqlite.getTags();
 
-        for(int i=0;i<tmp.size();i++)
-        tags.add(tmp.get(i));
+        for(int i=0;i<tmp.size();i++) {
+            tags.add(tmp.get(i));
+            PageNum.put(tmp.get(i),1);
+        }
 
         String[] tagstring = tags.toArray(new String[tags.size()]);
 
@@ -115,6 +126,8 @@ public class MyApplication extends Application {
     public void AddTag(String key)
     {
         mySqlite.addTag(key);
+
+        PageNum.put(key,1);
 
         BriefInfoActivity bri = BriefInfoActivity.getInstance();
 
@@ -138,5 +151,41 @@ public class MyApplication extends Application {
     public String GetQuery()
     {
         return this.query;
+    }
+
+    public boolean IsStared(String ID)
+    {
+        return mySqlite.isStared(ID);
+    }
+
+    public void Star(String ID)
+    {
+        mySqlite.star(ID);
+    }
+
+    public void UnStar(String ID)
+    {
+        mySqlite.unstar(ID);
+    }
+
+    public List<Map<String,Object>> GetNewList() {
+
+        return this.newList;
+    }
+
+    public void AddTagPage(String mCategory) {
+        int tmp = PageNum.get(mCategory);
+
+        PageNum.put(mCategory,tmp+1);
+
+    }
+
+    public void SetNewList(String mCategory) {
+
+        try {
+            newList = newsManager.getSearchedNewsList(mCategory,PageNum.get(mCategory));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

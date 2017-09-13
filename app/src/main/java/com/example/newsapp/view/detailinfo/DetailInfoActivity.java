@@ -1,5 +1,6 @@
 package com.example.newsapp.view.detailinfo;
 
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class DetailInfoActivity extends AppCompatActivity
 
     private IDetailPresenter iDetailPresenter;
 
+    private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,8 @@ public class DetailInfoActivity extends AppCompatActivity
         category = bundle.getString("Category");
         Author = bundle.getString("Author");
         Time = bundle.getString("Time");
+
+        Id = bundle.getString("ID");
 
         articleTitle = (TextView) findViewById(R.id.detail_bar_title);
         content = (TextView) findViewById(R.id.news_content);
@@ -78,15 +83,31 @@ public class DetailInfoActivity extends AppCompatActivity
         //浮动按钮
         FloatingActionButton fab_mac = (FloatingActionButton) findViewById(R.id.fab_mac);
         FloatingActionButton fab_star = (FloatingActionButton) findViewById(R.id.fab_star);
-        fab_mac.setOnClickListener(new View.OnClickListener() {
+
+        fab_star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+                app = MyApplication.getInstance();
+
+                if(app.IsStared(Id))
+                {
+                    app.UnStar(Id);
+                    Snackbar.make(view, "取消收藏", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                else
+                {
+                    app.Star(Id);
+                    Snackbar.make(view, "收藏成功！", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
             }
         });
 
-        fab_star.setOnClickListener(new View.OnClickListener() {
+        fab_mac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -98,7 +119,6 @@ public class DetailInfoActivity extends AppCompatActivity
 
                 //这里是数据加载
 
-        Id = bundle.getString("ID");
 
         try {
             iDetailPresenter.GetTitle(Id);
@@ -120,24 +140,6 @@ public class DetailInfoActivity extends AppCompatActivity
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-//        SpannableStringBuilder builder = new SpannableStringBuilder(
-//                charSequence);
-//        URLSpan[] urlSpans = builder.getSpans(0, charSequence.length(),
-//                URLSpan.class);
-//        for (URLSpan span : urlSpans) {
-//            int start = builder.getSpanStart(span);
-//            int end = builder.getSpanEnd(span);
-//            int flag = builder.getSpanFlags(span);
-//            final String link = span.getURL();
-//            builder.setSpan(new ClickableSpan() {
-//                @Override
-//                public void onClick(View widget) {
-//                    // 捕获<a>标签点击事件，及对应超链接link
-//                }
-//            }, start, end, flag);
-//            builder.removeSpan(span);
-//        } //
 
 
 

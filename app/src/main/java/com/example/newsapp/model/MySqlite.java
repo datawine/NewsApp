@@ -93,7 +93,7 @@ public class MySqlite {
         db.update("news", cValues, "id=?", new String[]{(String)newstosave.get("news_ID")});
     }
 
-    void star(String news_ID){
+    public void star(String news_ID){
         if(!exists(news_ID)){
             return;
         }
@@ -106,7 +106,7 @@ public class MySqlite {
         db.update("news", cValues, "id=?", new String[]{news_ID});
     }
 
-    void unstar(String news_ID){
+    public void unstar(String news_ID){
         if(!exists(news_ID)){
             return;
         }
@@ -174,7 +174,7 @@ public class MySqlite {
         return true;
     }
 
-    boolean isStared(String news_ID){
+    public boolean isStared(String news_ID){
         Cursor cursor = db.query("news", new String[]{"id", "sim_json", "com_json", "star"}, "id=?", new String[]{news_ID}, null, null, null);
         if(cursor.getCount() < 1){
             return false;
