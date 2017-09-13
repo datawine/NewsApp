@@ -30,6 +30,8 @@ import java.util.Map;
 
 import com.example.newsapp.presenter.*;
 
+import org.json.JSONException;
+
 /**
  * Created by junxian on 9/7/2017.
  */
@@ -44,6 +46,8 @@ public class PageListFragment extends Fragment implements IPageListView{
     HashMap<String, Object> map;
 
     private IPageListPresenter iPageListPresenter;
+
+    private List<String> banList;
 
     private static PageListFragment instance;
 
@@ -150,7 +154,12 @@ public class PageListFragment extends Fragment implements IPageListView{
         // 初始化数据和数据源
                 mListItems = new ArrayList<SingleListItem>();
 
+            MyApplication app = MyApplication.getInstance();
+
+            banList = app.GetBanList();
+
             for (int i = 0; i < count; i++)
+            if(CheckBanNews((String)simplenews.get(i).get("news_ID")))
             {
                 map = new HashMap<String, Object>();
                 map.put("Title", simplenews.get(i).get("news_Title"));
@@ -159,7 +168,7 @@ public class PageListFragment extends Fragment implements IPageListView{
                 map.put("Content", simplenews.get(i).get("news_Title")+"\n"+simplenews.get(i).get("news_Author")+"\n"+simplenews.get(i).get("news_Time"));
                 map.put("ID",simplenews.get(i).get("news_ID"));
 
-                MyApplication app = MyApplication.getInstance();
+                app = MyApplication.getInstance();
                 map.put("IsRead",app.IsRead((String)simplenews.get(i).get("news_ID")));
 
 
@@ -168,10 +177,36 @@ public class PageListFragment extends Fragment implements IPageListView{
                     mListItems.add(new SingleListItem("normal", map));
                 else
                     mListItems.add(new SingleListItem("shit", map));
-        }
+            }
         mAdapter = new ListViewAdapter(getActivity(), mListItems);
         mPullRefreshListView.setAdapter(mAdapter);
     }
+
+    private boolean CheckBanNews(String ID) {
+
+        MyApplication app = MyApplication.getInstance();
+        List<Map<String,Object>> keywordslist = new ArrayList<Map<String,Object>>();
+
+        try {
+           keywordslist = app.GetKeyWords(ID);
+
+
+        for(int i=0;i<banList.size();i++)
+            for(int j=0;j<keywordslist.size();j++)
+                if(banList.get(i) == keywordslist.get(j).get("Word"))
+                    return false;
+
+        return true;
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+        return false;
+
+
+    }
+
     private class GetDataTask extends AsyncTask<Void, Void, String>
     {
 
@@ -209,7 +244,9 @@ public class PageListFragment extends Fragment implements IPageListView{
 
                 List<Map<String, Object>> mapList = app.GetNewList();
 
-                for (int i = 0; i < mapList.size(); i++) {
+                for (int i = 0; i < mapList.size(); i++)
+                    if(CheckBanNews((String)mapList.get(i).get("news_ID")))
+                {
 
                     map = new HashMap<String, Object>();
                     map.put("Title", mapList.get(i).get("news_Title"));
@@ -238,7 +275,9 @@ public class PageListFragment extends Fragment implements IPageListView{
 
                     List<Map<String, Object>> mapList = app.GetNewList();
 
-                    for (int i = 0; i < mapList.size(); i++) {
+                    for (int i = 0; i < mapList.size(); i++)
+                        if(CheckBanNews((String)mapList.get(i).get("news_ID")))
+                    {
 
                         map = new HashMap<String, Object>();
                         map.put("Title", mapList.get(i).get("news_Title"));

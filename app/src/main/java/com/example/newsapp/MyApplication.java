@@ -33,6 +33,7 @@ import com.iflytek.cloud.SynthesizerListener;
 
 public class MyApplication extends Application {
     private boolean dayMode;
+    private boolean picMode;
     UiModeManager mUiModeManager;
 
     private MySqlite mySqlite;
@@ -305,5 +306,35 @@ public class MyApplication extends Application {
     public boolean IsRead(String ID) {
 
         return mySqlite.hasRead(ID);
+    }
+
+    public ArrayList<String> GetBanList()
+    {
+        ArrayList<String> list;
+
+        list = new ArrayList<String>();
+
+        //list = mySqlite.GetBanList();
+
+
+        return list;
+    }
+
+    public void AddBanWord(String word)
+    {
+        //mySqlite.AddBanWord(word);
+
+
+    }
+
+    public void DelBanWord(String word)
+    {
+//        mySqlite.DelBanWord(word);
+    }
+
+    public boolean getPicMode() {return picMode;
+    }
+
+    public void setPicMode(boolean b) {picMode = b;
     }
 }

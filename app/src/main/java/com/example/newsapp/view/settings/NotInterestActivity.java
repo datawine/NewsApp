@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
 import com.example.newsapp.adapter.NoInterestAdapter;
 
@@ -24,6 +25,8 @@ public class NotInterestActivity extends AppCompatActivity {
     private String addcontent;
     private EditText mEditText;
 
+    private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +34,10 @@ public class NotInterestActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //初始化数据
+        //--------------初始化数据
         mBanVal = new ArrayList<String>();
-        mBanVal.add("测试1");
-        mBanVal.add("测试2");
-        mBanVal.add("测试3");
+       // mBanVal = app.GetBanList();
+
         //
 
         mAddBtn = (ImageButton) findViewById(R.id.btn_nointerest_add);
@@ -50,8 +52,11 @@ public class NotInterestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 addcontent = mEditText.getText().toString();
 
-                //添加屏蔽关键词
+                //--------------添加屏蔽关键词
                 mBanVal.add(addcontent);
+
+                //app.AddBanWord(addcontent);
+
                 mAdapter.notifyDataSetChanged();
 
                 //
@@ -63,6 +68,10 @@ public class NotInterestActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 Snackbar.make(view, "删除！" + mBanVal.get(position), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+               //------------删除关键词
+                //app.DelBanWord(mBanVal.get(position));
+
                 return false;
             }
         });
