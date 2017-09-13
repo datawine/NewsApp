@@ -39,7 +39,6 @@ public class BriefInfoActivity extends FragmentActivity
     private String selectTitle;
     private String[] category;
     private int len;
-    private String[] mStrs = {"aaa", "bbb", "ccc", "airsaid"};
 
     private IBriefPresenter iBriefPresenter;
 

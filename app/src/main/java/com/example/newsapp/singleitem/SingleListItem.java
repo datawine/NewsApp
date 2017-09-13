@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class SingleListItem {
     public String type;
+    public boolean read;
     public HashMap<String, Object> map;
 
     public SingleListItem(String type, HashMap<String, Object> map) {
