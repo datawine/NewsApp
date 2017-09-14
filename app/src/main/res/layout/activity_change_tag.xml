@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.newsapp.view.settings.MySettingsActivity">
+    tools:context="com.java.team_33.view.settings.MySettingsActivity">
 
     <LinearLayout
         android:paddingLeft="20dp"

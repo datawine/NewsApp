@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp">
 
-        <com.example.newsapp.singleitem.SwitchButton
+        <com.java.team_33.singleitem.SwitchButton
             android:id="@+id/switch_button"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"

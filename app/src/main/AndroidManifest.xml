@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.newsapp">
+    package="com.java.team_33">
 
 
     <!--连接网络权限，用于执行云端语音能力 -->
@@ -30,14 +30,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MyApplication"
+        android:name="com.java.team_33.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.java.team_33.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,27 +45,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.detailinfo.DetailInfoActivity"
+            android:name="com.java.team_33.view.detailinfo.DetailInfoActivity"
             android:label="@string/title_activity_detail_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.briefinfo.BriefInfoActivity"
+            android:name="com.java.team_33.view.briefinfo.BriefInfoActivity"
             android:label="@string/title_activity_brief_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.mysplash.SplashActivity"
+            android:name="com.java.team_33.view.mysplash.SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.settings.MySettingsActivity"
+            android:name="com.java.team_33.view.settings.MySettingsActivity"
             android:label="@string/title_activity_my_settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.settings.ChangeTagActivity"
+            android:name="com.java.team_33.view.settings.ChangeTagActivity"
             android:label="@string/title_activity_change_tag"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.settings.NotInterestActivity"
+            android:name="com.java.team_33.view.settings.NotInterestActivity"
             android:label="@string/title_activity_not_interest"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
