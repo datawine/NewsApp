@@ -65,9 +65,10 @@ public class    IPageListPresenterCompl extends Activity implements IPageListPre
                 }
             }
             else {
-                if (cat == "推荐") {
+                if(cat == "推荐")
+                {
                     try {
-                        list = app.GetLatestNewsList();
+                        list = app.GetLatestNewsList(app.GetTagPage(cat));
                     } catch (InterruptedException e) {
                     }
 
@@ -77,9 +78,11 @@ public class    IPageListPresenterCompl extends Activity implements IPageListPre
                         simplenews.add(list.get(i));
 
                     }
-                } else {
+
+                }
+                else {
                     try {
-                        list = app.GetSearchNewsList(cat);
+                        list = app.GetLatestNewsList(cat);
                     } catch (InterruptedException e) {
                     }
 

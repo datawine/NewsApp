@@ -73,6 +73,8 @@ public class PageListFragment extends Fragment implements IPageListView{
         super.onCreate(savedInstanceState);
         mCategory = getArguments().getString(CATEGORY);
 
+
+
         iPageListPresenter = new IPageListPresenterCompl(this);
 
         instance = this;
@@ -83,6 +85,7 @@ public class PageListFragment extends Fragment implements IPageListView{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_page_list, container, false);
         mPullRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
+
 
         iPageListPresenter.GetInitDatas(mCategory);
 
@@ -219,6 +222,19 @@ public class PageListFragment extends Fragment implements IPageListView{
 
     }
 
+    public void InitSearch() {
+
+
+        BriefInfoActivity bri = BriefInfoActivity.getInstance();
+
+        bri.SetViewPager(2);
+
+
+        MyApplication app = MyApplication.getInstance();
+        app.SetHeaderorFooter(false);
+        new GetDataTask().execute();
+    }
+
     private class GetDataTask extends AsyncTask<Void, Void, String>
     {
 
@@ -227,18 +243,13 @@ public class PageListFragment extends Fragment implements IPageListView{
         {
             MyApplication app = MyApplication.getInstance();
 
-            if(mCategory != "推荐" && mCategory != "收藏夹") {
+            if( mCategory != "收藏夹") {
                 app.AddTagPage(mCategory);
 
                 app.SetNewList(mCategory);
             }
             else
-            {
-                if(mCategory == "推荐")
-                {
-                    app.SetNewList(mCategory);
-                }
-            }
+                app.SetNewList(mCategory);
 
             return "Done";
 
@@ -252,7 +263,7 @@ public class PageListFragment extends Fragment implements IPageListView{
 
             boolean flag = app.GetFlag();
 
-            if(mCategory != "推荐" && mCategory != "收藏夹" && flag) {
+            if(mCategory != "收藏夹" && flag) {
                 app = MyApplication.getInstance();
 
                 List<Map<String, Object>> mapList = app.GetNewList();
@@ -285,7 +296,7 @@ public class PageListFragment extends Fragment implements IPageListView{
             }
             else
             {
-                if(mCategory != "收藏夹" && !flag )
+                if(!flag )
                 {
                     mListItems .clear();
 
@@ -323,15 +334,17 @@ public class PageListFragment extends Fragment implements IPageListView{
 
                 //mAdapter = new ListViewAdapter(getActivity(), mListItems);
                 //mPullRefreshListView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
+
                 // Call onRefreshComplete when the list has been refreshed.
                 //mPullRefreshListView.onRefreshComplete();
-
+            mAdapter.notifyDataSetChanged();
                 mPullRefreshListView.onRefreshComplete();
 
 
         }
     }
+
+
 
 }
 

@@ -95,9 +95,9 @@ public class BriefInfoActivity extends FragmentActivity
 
                 app.SetSearchText(query);
 
-                BriefInfoActivity bri = BriefInfoActivity.getInstance();
-
-                bri.onResume();
+//                BriefInfoActivity bri = BriefInfoActivity.getInstance();
+//
+//                bri.onResume();
 
                 return false;
             }
@@ -153,6 +153,11 @@ public class BriefInfoActivity extends FragmentActivity
     public void SetViewPager()
     {
         viewPager.setCurrentItem(0);
+    }
+
+    public void SetViewPager(int i)
+    {
+        viewPager.setCurrentItem(i);
     }
 
     public void GetActivityStart(Intent intent)

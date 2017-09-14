@@ -160,9 +160,19 @@ public class MyApplication extends Application {
         return newsManager.getLatestNewsList();
     }
 
+    public List<Map<String, Object>> GetLatestNewsList(String tag) throws InterruptedException
+    {
+        return newsManager.getLatestNewsList(tag);
+    }
+
+    public List<Map<String, Object>> GetLatestNewsList(int page) throws InterruptedException
+    {
+        return newsManager.getLatestNewsList(page);
+    }
+
     public List<Map<String, Object>> GetSearchNewsList(String tag)  throws InterruptedException
     {
-        return newsManager.getSearchedNewsList(tag,1);
+        return newsManager.getSearchedNewsList(tag,GetTagPage("搜索"));
     }
 
     public Map<String,Object> GetNews(String ID) throws InterruptedException, JSONException
@@ -189,6 +199,7 @@ public class MyApplication extends Application {
         tags.add("搜索");
 
         PageNum.put("搜索",1);
+        PageNum.put("推荐",1);
 
         List<String> tmp = mySqlite.getTags();
 
@@ -225,6 +236,16 @@ public class MyApplication extends Application {
     public void SetSearchText(String query)
     {
         this.query = query;
+
+
+
+        PageListFragment page = PageListFragment.getInstance();
+
+
+        PageNum.put("搜索",1);
+
+        page.InitSearch();
+
     }
 
     public String GetQuery()
@@ -259,22 +280,44 @@ public class MyApplication extends Application {
 
     }
 
+    public int GetTagPage(String tag)
+    {
+        return PageNum.get(tag);
+    }
+
     public void SetNewList(String mCategory) {
 
-        if(mCategory == "推荐")
+        if(mCategory == "收藏夹")
         {
-            try {
-                newList = newsManager.getLatestNewsList();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            newList = mySqlite.getStaredNews();
 
         }
         else {
-            try {
-                newList = newsManager.getSearchedNewsList(mCategory, PageNum.get(mCategory));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+            if(mCategory == "搜索")
+            {
+                try {
+                    newList = this.GetSearchNewsList(this.query);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            else {
+                if (mCategory == "推荐") {
+                    try {
+                        newList = newsManager.getLatestNewsList(PageNum.get(mCategory));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    try {
+                        newList = newsManager.getLatestNewsList(mCategory, PageNum.get(mCategory));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
