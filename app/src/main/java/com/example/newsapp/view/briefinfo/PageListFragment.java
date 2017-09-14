@@ -304,6 +304,8 @@ public class PageListFragment extends Fragment implements IPageListView{
 
                     List<Map<String, Object>> mapList = app.GetNewList();
 
+
+                    try{
                     for (int i = 0; i < mapList.size(); i++)
                         if(CheckBanNews((String)mapList.get(i).get("news_ID")))
                     {
@@ -328,6 +330,8 @@ public class PageListFragment extends Fragment implements IPageListView{
                         else
                             mListItems.add(new SingleListItem("pic", map));
 
+                    }}catch (Exception e){
+                        Log.i("aaa", "onPostExecute: ", e);
                     }
                 }
             }

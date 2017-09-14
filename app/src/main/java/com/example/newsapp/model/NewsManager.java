@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -78,7 +79,7 @@ public class NewsManager {
         return result;
     }*/
     public List<Map<String, Object>> getSearchedNewsList(String keyWord, int pageNum) throws InterruptedException {
-        String url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=100";
+        String url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + pageNum + "&pageSize=20";
         String jsonText;
         if(oldListJson.containsKey(url)){
             jsonText = oldListJson.get(url);
@@ -86,11 +87,28 @@ public class NewsManager {
             jsonText = getPage(url);
             oldListJson.put(url, jsonText);
         }
-        List<Map<String, Object>> result = newsListParser(jsonText);
-        url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + (pageNum + 1) + "&pageSize=100";
+        if(jsonText == null){
+            if(pageNum <= 1 || keyWord.equals("")){
+                return null;
+            }
+            //Random random = new Random();
+            //return getSearchedNewsList(keyWord, random.nextInt(pageNum - 1) + 1);
+            //return getSearchedNewsList(keyWord, pageNum - 1);
+        }
+        List<Map<String, Object>> result = newsListParserWithoutBlock(jsonText);
+        Log.i(TAG, "getSearchedNewsList: " + jsonText);
+        url = baseUrl + "/search?keyword=" + keyWord + "&pageNo=" + (pageNum + 1) + "&pageSize=20";
         jsonText = getPage(url);
         oldListJson.put(url, jsonText);
         newsListParserWithoutBlock(jsonText);
+        Log.i(TAG, "getSearchedNewsList: " + "success");
+        Random random = new Random();
+        if(result.size() < 1){
+            if(pageNum == 1){
+                return null;
+            }
+            return getSearchedNewsList(keyWord, random.nextInt(pageNum - 1) + 1);
+        }
         return result;
     }
     public List<Map<String, Object>> getLatestNewsList(String tag) throws InterruptedException {
@@ -362,8 +380,7 @@ public class NewsManager {
             downloadThreads.get(i).join();
         }
         return result;
-    }
-    public List<Map<String, Object>> newsListParserWithoutBlock(String jsonText) throws InterruptedException {
+    }public List<Map<String, Object>> newsListParserWithoutBlock(String jsonText) throws InterruptedException {
         List<Thread> downloadThreads = new ArrayList<Thread>();
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         try{
@@ -416,6 +433,57 @@ public class NewsManager {
         }
         return result;
     }
+    public List<Map<String, Object>> newsListParserWithoutDownload(String jsonText) throws InterruptedException {
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+        try{
+            JSONObject jsonObj = new JSONObject(jsonText);
+            JSONArray listObj = jsonObj.getJSONArray("list");
+            for(int i = 0; i < listObj.length(); ++i)
+            {
+                Map<String, Object> map = new HashMap<String, Object>();
+                JSONObject newsObj = listObj.getJSONObject(i);
+                if(mydb != null){
+                    try {
+                        mydb.insert(newsObj.toString());
+                    } catch (Exception e){
+                        Log.i(TAG, "newsListParser: ", e);
+                    }
+                }
+                Iterator<String> keys = newsObj.keys();
+                String key = null;
+                String value = null;
+                while(keys.hasNext())
+                {
+                    key = keys.next();
+                    value = newsObj.getString(key);
+                    map.put(key, value);
+                }
+                String pic_String = (String)map.get("news_Pictures");
+                String[] pics_String = pic_String.split("[ ;]");
+                if(pic_String.equals("") || pics_String.length < 1)
+                    map.put("pic_Num", new Integer(0));
+                else {
+                    map.put("pic_Num", new Integer(pics_String.length));
+                    if(pics_String.length > 0){
+                        try {
+                        } catch (Exception e){
+                            Log.i(TAG, "newsListParser: ", e);
+                            Log.i(TAG, "newsListParser: " + pic_String);
+                        }
+                    }
+                }
+                result.add(map);
+                if(result.size() >= 10){
+                    break;
+                }
+            }
+        } catch (Exception e)
+        {
+            Log.i(TAG, "newsParser: ", e);
+        }
+        return result;
+    }
+
     public String getPage(String targetUrl) throws InterruptedException {
         this.targetUrl = targetUrl;
         Thread thread = new Thread(runnable);

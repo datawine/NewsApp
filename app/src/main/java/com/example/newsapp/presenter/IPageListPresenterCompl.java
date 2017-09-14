@@ -57,12 +57,17 @@ public class    IPageListPresenterCompl extends Activity implements IPageListPre
             } catch (InterruptedException e) {
             }
 
+            try {
                 for (int i = 0; i < list.size(); i++) {
                     count++;
 
                     simplenews.add(list.get(i));
 
                 }
+            } catch (Exception e){
+                Log.i("aaa", "GetInitDatas: ", e);
+            }
+
             }
             else {
                 if(cat == "推荐")
