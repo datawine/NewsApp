@@ -4,6 +4,7 @@ package com.example.newsapp.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -91,7 +92,11 @@ public class IDetailPresenterCompl implements IDetailPresenter {
         List<String> key = new ArrayList<String>();
 
         for (int i = 0; i < 3; i++) {
-            key.add((String) keys.get(i).get("word"));
+            try{
+                key.add((String) keys.get(i).get("word"));
+            } catch (Exception e){
+                Log.i("aaa", "GetKeyWords: ", e);
+            }
         }
 
         iDetailView.SetKeyWords(key);

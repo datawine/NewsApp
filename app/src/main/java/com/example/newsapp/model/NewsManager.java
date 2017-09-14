@@ -52,6 +52,13 @@ public class NewsManager {
 
     public NewsManager(MySqlite db){
         this.mydb = db;
+        for(int i = 1; i <= 12; ++i){
+            try {
+                newsListParserWithoutBlock(getPage(baseUrl + "/latest?pageNo=" + 1 + "&pageSize=100&category=" + i));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     public NewsManager(){
 
