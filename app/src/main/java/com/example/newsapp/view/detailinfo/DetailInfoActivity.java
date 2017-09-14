@@ -26,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.net.Uri;
 
+import java.util.*;
+
 import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
 import com.example.newsapp.WeiXinShareUtil;
@@ -37,6 +39,7 @@ import com.example.newsapp.presenter.*;
 import org.json.JSONException;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class DetailInfoActivity extends AppCompatActivity
@@ -177,7 +180,7 @@ public class DetailInfoActivity extends AppCompatActivity
             public void onClick(View view) {
                 //WeiXinShareUtil.sharePhotoToWX(DetailInfoActivity.this, title, "");
 
-                String pMessage = "测试信息";
+                //String pMessage = "测试信息";
 //
 //                Intent intent = new Intent();
 //                intent.setComponent(new ComponentName("com.tencent.mm","com.tencent.mm.ui.tools.ShareToTimeLineUI"));
@@ -196,14 +199,27 @@ public class DetailInfoActivity extends AppCompatActivity
                 intent.setComponent(componentName);
                 intent.setAction(Intent.ACTION_SEND);
 
-                intent.setType("text/*");
-                intent.putExtra("Kdescription",pMessage);
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Title");
-                intent.putExtra(Intent.EXTRA_TEXT, "Content");
-                Uri uri = Uri.parse("http://f.hiphotos.baidu.com/baike/pic/item/f31fbe096b63f624861f5c158d44ebf81a4ca362.jpg");
-                intent.putExtra(Intent.EXTRA_STREAM,uri);
-                startActivity(Intent.createChooser(intent, "分享图片"));
 
+                MyApplication ap = MyApplication.getInstance();
+
+                Map<String,Object>news = null;
+                try {
+                    news = ap.GetNews(Id);
+
+                    String title = news.get("news_Title").toString();
+                    String time = news.get("news_Time").toString();
+                    String url = news.get("news_URL").toString();
+
+                    intent.setType("text/*");
+                    //intent.putExtra("Kdescription",pMessage);
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Title");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Title: "+title+"\n"+"Time: "+time+"\n"+"URL: "+url+"\n");
+                    startActivity(Intent.createChooser(intent, "分享图片"));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
