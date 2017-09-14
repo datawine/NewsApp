@@ -21,7 +21,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.io.File;
 
-public class WeiXinShareUtil {
+public class    WeiXinShareUtil {
     public static void sharePhotoToWX(Context context, String text, String photoPath) {
         if (!uninstallSoftware(context, "com.tencent.mm")) {
             Toast.makeText(context, "微信没有安装！", Toast.LENGTH_SHORT).show();

@@ -45,9 +45,7 @@ public class PageListFragment extends Fragment implements IPageListView{
     private ArrayList<SingleListItem> mListItems;
     private PullToRefreshListView mPullRefreshListView;
     private ListViewAdapter mAdapter;
-    private int mItemCount = 9;
 
-    private int timeflag;
     HashMap<String, Object> map;
 
     private IPageListPresenter iPageListPresenter;
@@ -117,35 +115,10 @@ public class PageListFragment extends Fragment implements IPageListView{
 
                             // 模拟加载任务
 
-                            timeflag = 1;
                             final GetDataTask dataTask = new GetDataTask();
                             dataTask.execute();
 
-                            new Thread(){
-                                public void run() {
-                                    try {
-                                        /**
-                                         * 在这里你可以设置超时的时间
-                                         * 切记：这段代码必须放到线程中执行，因为不放单独的线程中执行的话该方法会冻结UI线程
-                                         * 直接导致onPreExecute()方法中的弹出框不会立即弹出。
-                                         */
-                                        dataTask.get(10000, TimeUnit.MILLISECONDS);
-                                    } catch (InterruptedException e) {
-                                    } catch (ExecutionException e) {
-                                    } catch (TimeoutException e) {
 
-                                        timeflag = 2;
-
-                                        /**
-                                         * 如果在doInbackground中的代码执行的时间超出10000秒则会出现这个异常。
-                                         * 所以这里就成为你处理异常操作的唯一途径。
-                                         *
-                                         * 备注：这里是不能够处理UI操作的，如果处理UI操作则会出现崩溃异常。
-                                         * 你可以写一个Handler，向handler发送消息然后再Handler中接收消息并处理UI更新操作。
-                                         */
-                                    }//请求超时
-                                };
-                            }.start();
 
                         }
                         else if (mPullRefreshListView.isFooterShown()){
@@ -274,8 +247,6 @@ public class PageListFragment extends Fragment implements IPageListView{
         @Override
         protected void onPostExecute(String result)
         {
-            if(timeflag == 2)
-                return;
 
             MyApplication app = MyApplication.getInstance();
 
@@ -350,21 +321,17 @@ public class PageListFragment extends Fragment implements IPageListView{
                 }
             }
 
-            if(timeflag == 1) {
                 mAdapter = new ListViewAdapter(getActivity(), mListItems);
-                mPullRefreshListView.setAdapter(mAdapter);
 
                 mAdapter.notifyDataSetChanged();
                 // Call onRefreshComplete when the list has been refreshed.
+                //mPullRefreshListView.onRefreshComplete();
+
                 mPullRefreshListView.onRefreshComplete();
-            }
+
+
         }
     }
 
-    public void Refresh()
-    {
-        mAdapter.notifyDataSetChanged();
-        mPullRefreshListView.onRefreshComplete();
-    }
 }
 

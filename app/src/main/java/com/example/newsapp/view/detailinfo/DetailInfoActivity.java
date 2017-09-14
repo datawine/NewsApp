@@ -1,6 +1,8 @@
 package com.example.newsapp.view.detailinfo;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.net.Uri;
 
 import com.example.newsapp.MyApplication;
 import com.example.newsapp.R;
@@ -34,6 +37,7 @@ import com.example.newsapp.presenter.*;
 import org.json.JSONException;
 
 import java.util.List;
+
 
 public class DetailInfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,IDetailView {
@@ -81,6 +85,10 @@ public class DetailInfoActivity extends AppCompatActivity
         mTime.setText(Time);
         mAuthor.setTextColor(getResources().getColor(R.color.secondary_text));
         mTime.setTextColor(getResources().getColor(R.color.secondary_text));
+
+
+
+
 
         //浮动按钮
         FloatingActionButton fab_mac = (FloatingActionButton) findViewById(R.id.fab_mac);
@@ -162,10 +170,39 @@ public class DetailInfoActivity extends AppCompatActivity
                 finish();
             }
         });
+
+        //分享按钮
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WeiXinShareUtil.sharePhotoToWX(DetailInfoActivity.this, title, "");
+                //WeiXinShareUtil.sharePhotoToWX(DetailInfoActivity.this, title, "");
+
+                String pMessage = "测试信息";
+//
+//                Intent intent = new Intent();
+//                intent.setComponent(new ComponentName("com.tencent.mm","com.tencent.mm.ui.tools.ShareToTimeLineUI"));
+//                intent.setAction(Intent.ACTION_SEND);
+//                intent.setType("image/*");
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intent.putExtra("Kdescription",pMessage);
+//
+//                Uri uri = Uri.parse("http://f.hiphotos.baidu.com/baike/pic/item/f31fbe096b63f624861f5c158d44ebf81a4ca362.jpg");
+//                intent.putExtra(Intent.EXTRA_STREAM,uri);
+//
+//                startActivity(intent);
+
+                Intent intent = new Intent();
+                ComponentName componentName = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
+                intent.setComponent(componentName);
+                intent.setAction(Intent.ACTION_SEND);
+
+                intent.setType("text/*");
+                intent.putExtra("Kdescription",pMessage);
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Title");
+                intent.putExtra(Intent.EXTRA_TEXT, "Content");
+                startActivity(Intent.createChooser(intent, "分享图片"));
+
+
             }
         });
     }
