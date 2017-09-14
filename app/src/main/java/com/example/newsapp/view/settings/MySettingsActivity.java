@@ -29,7 +29,7 @@ public class MySettingsActivity extends AppCompatActivity {
         boolean dayMode = parentApplication.getDayMode();
         SwitchButton switchButton = (SwitchButton) findViewById(R.id.switch_button);
 
-        switchButton.setChecked(dayMode);
+        switchButton.setChecked(!dayMode);
         switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {

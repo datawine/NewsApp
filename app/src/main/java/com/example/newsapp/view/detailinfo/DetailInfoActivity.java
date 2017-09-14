@@ -200,6 +200,8 @@ public class DetailInfoActivity extends AppCompatActivity
                 intent.putExtra("Kdescription",pMessage);
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Title");
                 intent.putExtra(Intent.EXTRA_TEXT, "Content");
+                Uri uri = Uri.parse("http://f.hiphotos.baidu.com/baike/pic/item/f31fbe096b63f624861f5c158d44ebf81a4ca362.jpg");
+                intent.putExtra(Intent.EXTRA_STREAM,uri);
                 startActivity(Intent.createChooser(intent, "分享图片"));
 
 
