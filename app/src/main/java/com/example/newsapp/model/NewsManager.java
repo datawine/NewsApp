@@ -110,6 +110,28 @@ public class NewsManager {
         newsListParserWithoutBlock(jsonText);
         return result;
     }
+    public List<Map<String, Object>> getLatestNewsList(String tag, int PageNum) throws InterruptedException {
+        List<Map<String, Object>> result;
+        int tagInt = tag2int.get(tag);
+        String url = baseUrl + "/latest?pageNo=" + PageNum + "&pageSize=100&category=" + tagInt;
+        String jsonText;
+        if(oldListJson.containsKey(url)){
+            jsonText = oldListJson.get(url);
+        } else {
+            jsonText = getPage(url);
+            oldListJson.put(url, jsonText);
+        }
+        result = newsListParser(jsonText);
+        if(jsonText == null){
+            jsonText = getPage(baseUrl + "/latest?pageNo=" + (PageNum - 1) + "&pageSize=100&category=" + tagInt);
+            result = newsListParser(jsonText);
+        }
+        url = baseUrl + "/latest?pageNo=" + (PageNum + 1) + "&pageSize=100&category=" + tagInt;
+        jsonText = getPage(url);
+        oldListJson.put(url, jsonText);
+        newsListParserWithoutBlock(jsonText);
+        return result;
+    }
     /*public List<Map<String, Object>> __getLatestNewsList(String tag) throws InterruptedException {
         List<Map<String, Object>> result;
         int tagInt = tag2int.get(tag);
@@ -178,6 +200,28 @@ public class NewsManager {
             result = newsListParser(jsonText);
         }
         url = baseUrl + "/latest?pageNo=" + (tagPageNum[tagInt] + 1) + "&pageSize=100";
+        jsonText = getPage(url);
+        oldListJson.put(url, jsonText);
+        newsListParserWithoutBlock(jsonText);
+        return result;
+    }
+    public List<Map<String, Object>> getLatestNewsList(int pageNum) throws InterruptedException {
+        List<Map<String, Object>> result;
+        int tagInt = 0;
+        String url = baseUrl + "/latest?pageNo=" + pageNum + "&pageSize=100";
+        String jsonText;
+        if(oldListJson.containsKey(url)){
+            jsonText = oldListJson.get(url);
+        } else {
+            jsonText = getPage(url);
+            oldListJson.put(url, jsonText);
+        }
+        result = newsListParser(jsonText);
+        if(jsonText == null){
+            jsonText = getPage(baseUrl + "/latest?pageNo=" + (pageNum - 1) + "&pageSize=100");
+            result = newsListParser(jsonText);
+        }
+        url = baseUrl + "/latest?pageNo=" + (pageNum + 1) + "&pageSize=100";
         jsonText = getPage(url);
         oldListJson.put(url, jsonText);
         newsListParserWithoutBlock(jsonText);

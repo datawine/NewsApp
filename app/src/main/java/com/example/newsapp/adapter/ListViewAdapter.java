@@ -103,7 +103,7 @@ public class ListViewAdapter extends BaseAdapter {
             float h = bitmap.getHeight();
 
             float centerw = w / 2;
-            float centery = h / 3;
+            float centery = h / 2;
             float cropx, cropy;
             float towidth, toheight;
             float scalex, scaley;
@@ -124,6 +124,9 @@ public class ListViewAdapter extends BaseAdapter {
             scalex = 340 / towidth;
             scaley = 210 / toheight;
 
+            if((int)towidth <= 0 || (int)toheight <= 0){
+                return convertView;
+            }
             Matrix matrix = new Matrix();
             matrix.postScale(scalex, scaley);
             Bitmap bmp = Bitmap.createBitmap(bitmap, (int)cropx, (int)cropy, (int)towidth, (int)toheight, matrix, false);
