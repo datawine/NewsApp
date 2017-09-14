@@ -287,7 +287,7 @@ public class PageListFragment extends Fragment implements IPageListView{
             {
                 if(mCategory != "收藏夹" && !flag )
                 {
-                    mListItems = new ArrayList<SingleListItem>();
+                    mListItems .clear();
 
                     app = MyApplication.getInstance();
 
@@ -321,8 +321,8 @@ public class PageListFragment extends Fragment implements IPageListView{
                 }
             }
 
-                mAdapter = new ListViewAdapter(getActivity(), mListItems);
-
+                //mAdapter = new ListViewAdapter(getActivity(), mListItems);
+                //mPullRefreshListView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
                 // Call onRefreshComplete when the list has been refreshed.
                 //mPullRefreshListView.onRefreshComplete();
